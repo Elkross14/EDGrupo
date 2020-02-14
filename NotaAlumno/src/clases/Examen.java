@@ -3,7 +3,7 @@
  *
  * Almacena todos los datos necesarios de las notas.
  * @author Pablo Durán, Héctor García
- * @version 0.0.1 
+ * @version 0.1 
  */
 package clases;
 
