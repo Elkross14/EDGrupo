@@ -7,7 +7,7 @@
  * @author Pablo Durán, Héctor García
  * @version 0.1 
  */
-package clases;
+package VariablesDelPrograma;
 
 public class ExamenClasico extends Examen{
 	

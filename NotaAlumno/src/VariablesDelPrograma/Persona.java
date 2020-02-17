@@ -6,7 +6,7 @@
  * @version 0.1 
  */
 
-package clases;
+package VariablesDelPrograma;
 
 public class Persona {
 	

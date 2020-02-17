@@ -10,14 +10,13 @@
 
 package interfaz;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import clases.Persona;
+import VariablesDelPrograma.Persona;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -76,7 +75,7 @@ public class DatosNombre extends JFrame {
 		
 		setLocationRelativeTo(null);//vista centrada
         setResizable(false);//evita que se pueda cambiar el tamaño de la ventana
-        setTitle("Notas Alumno");//pondrá titulo a la ventana
+        setTitle("Nombre Alumno");//pondrá titulo a la ventana
 	}
 	
 	/**
@@ -113,6 +112,11 @@ public class DatosNombre extends JFrame {
 		});
 		
 		btnAtras = new JButton("Atr\u00E1s");
+		btnAtras.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnAtrasActionPerformed(e);
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -161,14 +165,44 @@ public class DatosNombre extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 	}
 	
-	public void recogerDatos() {
-		persona.setNombre(textFieldNombre.getText());
-		persona.setPrimerApellido(textFieldPrimerApellido.getText());
-		persona.setSegundoApellido(textFieldSegundoApellido.getText());
-	}
-	
+
+	/**
+	 * Inicia todo el proceso para pasar los datos a la siguiente ventana (DatosNotas)
+	 * 
+	 * @param evt click izquierzo en el botón Siguiente
+	 */
 	private void btnSiguienteActionPerformed(ActionEvent evt) {
 		
+	}
+	
+	/**
+	 * Vuelve a la pantalla de Menú. Se perderán los datos introducidos.
+	 * 
+	 * @param evt click izquierzo en el botón Atrás
+	 */
+	private void btnAtrasActionPerformed(ActionEvent evt) {
+		
+	}
+	
+	/**
+	 * recoge todos los datos introducidos en los campos de esta ventana.
+	 */
+	public void recogerDatos() {
+		persona.setNombre(EliminarEspaciosSobrantes(textFieldNombre.getText()));
+		persona.setPrimerApellido(EliminarEspaciosSobrantes(textFieldPrimerApellido.getText()));
+		persona.setSegundoApellido(EliminarEspaciosSobrantes(textFieldSegundoApellido.getText()));
+	}
+	
+	/**
+	 * Elimina todos los excesos de espacios que haya en la entrada de datos.
+	 * @param cadena: String al que se le quiere eliminar el exceso de espacios
+	 * @return String con solo un espacio entre palabras y sin espacios por delante y atrás.
+	 */
+	public String EliminarEspaciosSobrantes(String cadena) {
+		
+		cadena = cadena.replaceAll(" +", " ").trim();
+		
+		return cadena;
 	}
 	
 	
