@@ -3,6 +3,11 @@
  *
  * Ventana gráfica para introducir el nombre
  * completo de la persona.
+ * 
+ * última actualización: 
+ * -Se le ha dado funciones a los botones.
+ * -Se ha creado un constructor que guarda los parámetros.
+ * 
  * @author Pablo Durán, Héctor García
  * @version 0.0.5 
  */
@@ -16,7 +21,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import VariablesDelPrograma.Examen;
 import VariablesDelPrograma.Persona;
+import clases.MensajeError;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -43,23 +50,10 @@ public class DatosNombre extends JFrame {
 	private JButton btnSiguiente;
 
 	Persona persona = new Persona();
+	Examen examen = new Examen();
+	MensajeError mensaje = new MensajeError();
 	
 	
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					DatosNombre frame = new DatosNombre();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	
 	/**
@@ -69,6 +63,18 @@ public class DatosNombre extends JFrame {
 		inicialVentana();
 	}
 	
+	/**
+	 * Constructor copia
+	 * 
+	 * @param persona: objeto de clase Persona con todas sus variables
+	 * @param examen: objeto de clase Examen con todas sus variables
+	 */
+	public DatosNombre(Persona persona, Examen examen) {
+		inicialVentana();
+		
+		this.persona = new Persona(persona);
+		this.examen = new Examen(examen);
+	}
 	
 	/**
 	 * Inicia y ajusta la ventana
@@ -176,17 +182,23 @@ public class DatosNombre extends JFrame {
 	 * @param evt click izquierzo en el botón Siguiente
 	 */
 	private void btnSiguienteActionPerformed(ActionEvent evt) {
-		
+		DatosNotas pasar = new DatosNotas(persona, examen);
+		pasar.setVisible(true);
+		dispose();
 	}
 	
 	
 	/**
-	 * Vuelve a la pantalla de Menú. Se perderán los datos introducidos.
+	 * Vuelve a la pantalla de Menu. Se perderán los datos introducidos.
 	 * 
 	 * @param evt click izquierzo en el botón Atrás
 	 */
 	private void btnAtrasActionPerformed(ActionEvent evt) {
-		
+		if (mensaje.preguntaAtras()==0) {
+			Menu pasar = new Menu();
+			pasar.setVisible(true);
+			dispose();
+		}
 	}
 	
 	

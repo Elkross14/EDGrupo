@@ -4,8 +4,11 @@
  * Clase derivada de Examen. 
  * Todo lo necesario para crear una nota de un examen clasico.
  * 
+ * Última actualización:
+ * -Se ha añadido el constructor copia
+ * 
  * @author Pablo Durán, Héctor García
- * @version 0.1 
+ * @version 0.1.1
  */
 package VariablesDelPrograma;
 
@@ -27,12 +30,24 @@ public class ExamenClasico extends Examen{
 	
 	/**
 	 * Constructor con variables de clase
+	 * 
 	 * @param nota: nota de examen clásico
 	 * @param porcNotaGlobal: porcentaje de peso del examen en la nota global
 	 */
 	public ExamenClasico(double nota, int porcNotaGlobal) {
 		this.nota=nota;
 		this.porcNotaGlobal=porcNotaGlobal;
+	}
+	
+	
+	/**
+	 * Constructor copia
+	 * 
+	 * @param examenClasico: se le pasa como variable un objeto ExamenClasico
+	 */
+	public ExamenClasico(ExamenClasico examenClasico) {
+		this.nota=examenClasico.nota;
+		this.porcNotaGlobal=examenClasico.porcNotaGlobal;
 	}
 
 	/**

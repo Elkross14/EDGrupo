@@ -4,8 +4,11 @@
  * Clase derivada de Examen. 
  * Todo lo necesario para crear una nota de un examen tipo test.
  * 
+ * Última actualización:
+ * -Se ha añadido el constructor copia
+ * 
  * @author Pablo Durán, Héctor García
- * @version 0.1
+ * @version 0.1.1
  */
 
 package VariablesDelPrograma;
@@ -35,6 +38,7 @@ public class ExamenTest extends Examen{
 	
 	/**
 	 * Constructor con variables de clase
+	 * 
 	 * @param correctas: respuestas acertadas en el examen tipo test
 	 * @param falladas: respuestas falladas en el examen tipo test
 	 * @param sinContestar: preguntas sin contestar en el examen de tipo test
@@ -51,6 +55,20 @@ public class ExamenTest extends Examen{
 		this.preguntasTotales=preguntasTotales;
 		this.nota=nota;
 		this.porcNotaGlobal=porcNotaGlobal;
+	}
+	
+	/**
+	 * Constructor copia
+	 * 
+	 * @param examenTest: se le pasa como variable un objeto ExamenTest
+	 */
+	public ExamenTest(ExamenTest examenTest) {
+		this.correctas=examenTest.correctas;
+		this.falladas=examenTest.falladas;
+		this.sinContestar=examenTest.sinContestar;
+		this.preguntasTotales=examenTest.preguntasTotales;
+		this.nota=examenTest.nota;
+		this.porcNotaGlobal=examenTest.porcNotaGlobal;
 	}
 
 	/**

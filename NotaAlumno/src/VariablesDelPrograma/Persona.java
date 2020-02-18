@@ -2,8 +2,12 @@
  *<h2> Clase Persona </h2> 
  *
  * Almacena todos los datos necesarios de la persona.
+ * 
+ * Última actualización: 
+ * -Se ha añadido el constructor copia.
+ * 
  * @author Pablo Durán, Héctor García
- * @version 0.1 
+ * @version 0.1.1
  */
 
 package VariablesDelPrograma;
@@ -35,6 +39,17 @@ public class Persona {
 		this.primerApellido=primerApellido;
 		this.primerApellido=primerApellido;
 	}
+	
+    /**
+     * Constructor copia
+     * 
+     * @param persona: se le pasa como variable un objeto Persona
+     */
+    public Persona (Persona persona){
+        this.nombre = persona.nombre;
+        this.primerApellido=persona.primerApellido;
+        this.segundoApellido=persona.segundoApellido;
+    }
 	
 	/**
 	 * @return the nombre: nombre de la persona

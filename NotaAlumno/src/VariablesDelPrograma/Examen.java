@@ -2,8 +2,12 @@
  *<h2> Clase Examen </h2> 
  *
  * Almacena todos los datos necesarios de las notas.
+ * 
+ * Última actualización:
+ * -Se ha añadido el constructor copia
+ * 
  * @author Pablo Durán, Héctor García
- * @version 0.1 
+ * @version 0.1.1
  */
 package VariablesDelPrograma;
 
@@ -44,13 +48,27 @@ public class Examen {
 	 * de peso en la nota global
 	 * @param retrasos: cantidad de restrasos de un alumno
 	 */
-	public Examen(boolean [] trabajo, ExamenClasico [] examenClasico,
+	public Examen(boolean [] trabajoEntregado, ExamenClasico [] examenClasico,
 			ExamenTest [] examenTest, int retrasos) {
 		
-		this.trabajoEntregado= trabajo;
+		this.trabajoEntregado= trabajoEntregado;
 		this.examenClasico=examenClasico;
 		this.examenTest=examenTest;
 		this.retrasos=retrasos;
+	}
+	
+	
+	/**
+	 * Constructor copia
+	 * 
+	 * @param examen: se le pasa como variable un objeto Examen
+	 */
+	public Examen(Examen examen) {
+		
+		this.trabajoEntregado= examen.trabajoEntregado;
+		this.examenClasico=examen.examenClasico;
+		this.examenTest=examen.examenTest;
+		this.retrasos=examen.retrasos;
 	}
 
 	/**

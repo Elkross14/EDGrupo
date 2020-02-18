@@ -3,8 +3,11 @@
  *
  * Ccontiene todos los métodos para hacer lamadas al servidor
  * 
+ * Última actualización:
+ * -Se ha añadido el método deleteRecord.
+ * 
  * @author Pablo Durán, Héctor García
- * @version 0.0.5
+ * @version 0.1
  */
 package clases;
 
@@ -74,14 +77,16 @@ public class MySQL {
     /**
      * Inserta los valores pasados a la tabla Alumnos de la DB NotasEntornos
      * 
+     * Comando ejemplo:  INSERT INTO Alumnos (nombre, primerApellido, segundoApellido, notaFinal)
+     * 		VALUES ("Peter", "rock", "bless", 8.40);
+     * 
      * @param nombre: Nombre de la persona
      * @param primerApellido: primerApellido de la persona
      * @param segundoApellido: segundoApellido de la persona
      * @param notaFinal: notaFinal de la persona(dos decimales)
      */
     public void insertarDatos( String nombre, String primerApellido,String segundoApellido, double notaFinal) {
-        /*INSERT INTO Alumnos (nombre, primerApellido, segundoApellido, notaFinal)
-            VALUES ("Peter", "rock", "bless", 8.40);*/
+       
         try {
             String Query = "INSERT INTO Alumnos (nombre, primerApellido, "
             		+ "segundoApellido, notaFinal) VALUES ("
@@ -95,11 +100,11 @@ public class MySQL {
             Statement st = conexion.createStatement();
             st.executeUpdate(Query);
             
-            JOptionPane.showMessageDialog(null, "Datos almacenados de forma exitosa");
+            mensaje.envioCorrecto();
             
         } catch (SQLException ex) {
         	
-            JOptionPane.showMessageDialog(null, "Error en el almacenamiento de datos");
+        	mensaje.envioIncorrecto();
         }
     }
     
@@ -107,15 +112,16 @@ public class MySQL {
     /**
      * Recogerá todos los datos de la tabla del servidor
      * 
+     * Comando ejemplo:  SELECT * FROM Alumnos
+     * 
      * @return devolverá una cadena String con todos los datos separados por /
      */
     public String getValues() {
-        //SELECT * FROM datos_persona
     	
         String datos="";
         
         try {
-            String Query = "SELECT * FROM  Alumnos";
+            String Query = "SELECT * FROM  Alumnos;";
             
             //lanzamos el comando al servidor
             Statement st = conexion.createStatement();
@@ -136,10 +142,46 @@ public class MySQL {
         }
         return datos;
     }
-
-    public void deleteRecord(String table_name, String ID) {
+    
+    
+    /**
+     * Le pedimos al servidor que nos diga la cantidad total de filas que tiene una determinada tabla
+     * 
+     *  Comando ejemplo:  SELECT * FROM Alumnos
+     * 
+     * @param table_name: tabla de la que se quiere saber la cantidad de lineas
+     * @return devolverá un número entero con la cantidad de lineas
+     */
+    public int totalRows(String table_name) {
+    	
+        int totalRows=0;
+        
         try {
-            String Query = "DELETE FROM " + table_name + " WHERE ID = \"" + ID + "\"";
+            String Query = "SELECT COUNT(*) FROM " + table_name;//comando lanzado al servidor
+            
+            //lanzamos el comando al servidor
+            Statement st = conexion.createStatement();
+            java.sql.ResultSet resultSet;
+            resultSet = st.executeQuery(Query);
+            
+            while (resultSet.next()) {
+                totalRows=resultSet.getInt(1);//recoge el dato pedido al servidor
+            }
+
+        } catch (SQLException ex) {
+             mensaje.errorPedirDatos();//saltará en el caso de que haya algún tipo de error a la hora de pedir los datos al servidor
+        }
+        return totalRows;
+    }
+
+    /**
+     * Elimina una linea de la tabla Alumno de la base de datos 
+     * 
+     * @param ID: identificador de la persona que se quiere eliminar
+     */
+    public void deleteRecord( String ID) {
+        try {
+            String Query = "DELETE FROM Alumnos WHERE idAlumno = \"" + ID + "\"";
             Statement st = conexion.createStatement();
             st.executeUpdate(Query);
 

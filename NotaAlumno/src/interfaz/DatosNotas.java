@@ -3,6 +3,10 @@
  *
  * Ventana gráfica para introducir las notas y otros
  * datos necesarios.
+ * 
+ * última actualización: 
+ * -Se han creado todos los metodos existententes
+ * 
  * @author Pablo Durán, Héctor García
  * @version 0.0.1 
  */
@@ -14,6 +18,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import VariablesDelPrograma.Examen;
+import VariablesDelPrograma.Persona;
+
+import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JScrollPane;
@@ -46,27 +55,73 @@ public class DatosNotas extends JFrame {
 	private JRadioButton rdbtnNoEntregadoTrabajo3;
 	private JButton btnAtras;
 	private JButton btnFinalizar;
+	
+	
+	Persona persona = new Persona();
+	Examen examen = new Examen();
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					DatosNotas frame = new DatosNotas();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
 	public DatosNotas() {
+		inicialVentana();
+	}
+	
+	
+	/**
+	 * Constructor copia
+	 * 
+	 * @param persona: objeto de clase Persona con todas sus variables
+	 * @param examen: objeto de clase Examen con todas sus variables
+	 */
+	public DatosNotas(Persona persona, Examen examen) {
+		inicialVentana();
+		
+		this.persona = new Persona(persona);
+		this.examen = new Examen(examen);
+	}
+	
+	
+	/**
+	 * Inicia y ajusta la ventana
+	 */
+	public void inicialVentana() {
+		iniciarComponentes();
+		agruparJRadioButton();
+		
+		setLocationRelativeTo(null);//vista centrada
+        setResizable(false);//evita que se pueda cambiar el tamaño de la ventana
+        setTitle("Nombre Alumno");//pondrá titulo a la ventana
+	}
+	
+
+	/**
+	 * Agrupa los jRadioButton en sus grupos correspondientes
+	 */
+	public void agruparJRadioButton() {
+		//primer trabajo
+		ButtonGroup grupo1 = new ButtonGroup();
+		grupo1.add(rdbtnEntregadoTrabajo1);
+		grupo1.add(rdbtnNoEntregadoTrabajo1);
+		
+		//segundo trabajo
+		ButtonGroup grupo2 = new ButtonGroup();
+		grupo2.add(rdbtnEntregadoTrabajo2);
+		grupo2.add(rdbtnNoEntregadoTrabajo2);
+		
+		//tercer trabajo
+		ButtonGroup grupo3 = new ButtonGroup();
+		grupo3.add(rdbtnEntregadoTrabajo3);
+		grupo3.add(rdbtnNoEntregadoTrabajo3);
+	}
+	
+	
+	
+	/**
+	 * Inicia las caracteristicas gráficas básicas de la ventana
+	 */
+	public void iniciarComponentes() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 543);
 		contentPane = new JPanel();
@@ -336,6 +391,8 @@ public class DatosNotas extends JFrame {
 	 * @param evt click izquierzo en el botón Atrás
 	 */
 	private void btnAtrasActionPerformed(ActionEvent evt) {
-		
+		DatosNombre pasar = new DatosNombre(persona, examen);
+		pasar.setVisible(true);
+		dispose();
 	}
 }
