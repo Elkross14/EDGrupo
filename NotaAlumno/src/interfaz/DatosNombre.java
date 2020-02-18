@@ -44,6 +44,7 @@ public class DatosNombre extends JFrame {
 
 	Persona persona = new Persona();
 	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -60,12 +61,14 @@ public class DatosNombre extends JFrame {
 		});
 	}
 
+	
 	/**
 	 * Create the frame.
 	 */
 	public DatosNombre() {
 		inicialVentana();
 	}
+	
 	
 	/**
 	 * Inicia y ajusta la ventana
@@ -77,6 +80,7 @@ public class DatosNombre extends JFrame {
         setResizable(false);//evita que se pueda cambiar el tamaño de la ventana
         setTitle("Nombre Alumno");//pondrá titulo a la ventana
 	}
+	
 	
 	/**
 	 * Inicia las caracteristicas gráficas básicas de la ventana
@@ -175,6 +179,7 @@ public class DatosNombre extends JFrame {
 		
 	}
 	
+	
 	/**
 	 * Vuelve a la pantalla de Menú. Se perderán los datos introducidos.
 	 * 
@@ -184,6 +189,7 @@ public class DatosNombre extends JFrame {
 		
 	}
 	
+	
 	/**
 	 * recoge todos los datos introducidos en los campos de esta ventana.
 	 */
@@ -192,6 +198,7 @@ public class DatosNombre extends JFrame {
 		persona.setPrimerApellido(EliminarEspaciosSobrantes(textFieldPrimerApellido.getText()));
 		persona.setSegundoApellido(EliminarEspaciosSobrantes(textFieldSegundoApellido.getText()));
 	}
+	
 	
 	/**
 	 * Elimina todos los excesos de espacios que haya en la entrada de datos.
@@ -204,6 +211,15 @@ public class DatosNombre extends JFrame {
 		
 		return cadena;
 	}
+	
+	
+	/**
+	 * Verificará todos los campos de datos a introducir para saber si es correcto el dato
+	 */
+	public void verificaDatos () {
+		
+	}
+	
 	
 	
 }
