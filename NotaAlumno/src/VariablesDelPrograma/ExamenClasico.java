@@ -5,14 +5,15 @@
  * Todo lo necesario para crear una nota de un examen clasico.
  * 
  * Última actualización:
- * -Se ha añadido el constructor copia
+ * -Se ha cambiado en el constructor vacio de 0 a 0.0
+ * -Se ha eliminado el extends
  * 
  * @author Pablo Durán, Héctor García
  * @version 0.1.1
  */
 package VariablesDelPrograma;
 
-public class ExamenClasico extends Examen{
+public class ExamenClasico {
 	
 	/**
 	 * variables de clase
@@ -24,7 +25,7 @@ public class ExamenClasico extends Examen{
 	 * Constructor vacio
 	 */
 	public ExamenClasico() {
-		nota=0;
+		nota=0.0;
 		porcNotaGlobal=0;
 	}
 	

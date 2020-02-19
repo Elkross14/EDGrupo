@@ -5,15 +5,16 @@
  * Todo lo necesario para crear una nota de un examen tipo test.
  * 
  * Última actualización:
- * -Se ha añadido el constructor copia
+ * -Se ha cambiado en el constructor vacio de 0 a 0.0
+ * -Se ha eliminado el extends
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.1.1
+ * @version 0.1.2
  */
 
 package VariablesDelPrograma;
 
-public class ExamenTest extends Examen{
+public class ExamenTest {
 	/**
 	 * variables de clase
 	 */
@@ -32,7 +33,7 @@ public class ExamenTest extends Examen{
 		falladas=0;
 		sinContestar=0;
 		preguntasTotales=0;
-		nota=0;
+		nota=0.0;
 		porcNotaGlobal=0;
 	}
 	

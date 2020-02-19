@@ -4,10 +4,10 @@
  * Almacena todos los datos necesarios de las notas.
  * 
  * Última actualización:
- * -Se ha añadido el constructor copia
+ * -Se ha indicado la longitud de las arrays
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.1.1
+ * @version 0.1.2
  */
 package VariablesDelPrograma;
 
@@ -20,8 +20,8 @@ public class Examen {
 	private final int PORCENTAJE25 =25;
 	
 	private boolean trabajoEntregado [];
-	private ExamenClasico examenClasico[];
-	private ExamenTest examenTest [];
+	private ExamenClasico examenClasico[] = new ExamenClasico[3];
+	private ExamenTest examenTest [] = new ExamenTest[2];
 	
 	private int retrasos;
 	
@@ -51,10 +51,10 @@ public class Examen {
 	public Examen(boolean [] trabajoEntregado, ExamenClasico [] examenClasico,
 			ExamenTest [] examenTest, int retrasos) {
 		
-		this.trabajoEntregado= trabajoEntregado;
-		this.examenClasico=examenClasico;
-		this.examenTest=examenTest;
-		this.retrasos=retrasos;
+		this.trabajoEntregado = trabajoEntregado;
+		this.examenClasico = examenClasico;
+		this.examenTest = examenTest;
+		this.retrasos = retrasos;
 	}
 	
 	
