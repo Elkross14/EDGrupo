@@ -5,10 +5,12 @@
  * datos necesarios.
  * 
  * última actualización: 
- * -Se han creado todos los metodos existententes
+ * -Añadido la llamada a la clase VerificarDatos
+ * -Añadido la llamada a la clase MensajeError
+ * -Creado de forma parcial el metodo recogerDatos
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.0.1 
+ * @version 0.0.5.1
  */
 package interfaz;
 
@@ -20,7 +22,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import VariablesDelPrograma.Examen;
+import VariablesDelPrograma.ExamenClasico;
 import VariablesDelPrograma.Persona;
+import clases.MensajeError;
+import clases.VerificarDatos;
 
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
@@ -59,6 +64,9 @@ public class DatosNotas extends JFrame {
 	
 	Persona persona = new Persona();
 	Examen examen = new Examen();
+	ExamenClasico examenClasico = new ExamenClasico();
+	MensajeError mensaje = new MensajeError();
+	VerificarDatos verifica = new VerificarDatos();
 
 
 	/**
@@ -395,4 +403,21 @@ public class DatosNotas extends JFrame {
 		pasar.setVisible(true);
 		dispose();
 	}
+	
+	
+	/**
+	 * recoge todos los datos introducidos en los campos de esta ventana.
+	 */
+	public void recogerDatos() {
+		double [] examenClasico = new double [examen.getNUM_EXAMENES_CLASICOS()];
+		examenClasico[0] =Double.parseDouble(textFieldClasico1.getText());
+		examenClasico[1] =Double.parseDouble(textFieldClasico2.getText());
+		examenClasico[2] =Double.parseDouble(textFieldClasico3.getText());	
+		
+	}
+	
+	
+	
 }
+
+

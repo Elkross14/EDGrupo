@@ -5,6 +5,8 @@
  * 
  * Última actualización:
  * -Se ha indicado la longitud de las arrays
+ * -Se ha añadido el método setNotaExamenClasico
+ * -Se han creado las constantes NUM_EXAMENES_CLASICOS y NUM_EXAMENES_TEST para mayor adaptabilidad del código
  * 
  * @author Pablo Durán, Héctor García
  * @version 0.1.2
@@ -19,11 +21,15 @@ public class Examen {
 	private final int PORCENTAJE20 =20;
 	private final int PORCENTAJE25 =25;
 	
+	private final int NUM_EXAMENES_CLASICOS = 3;
+	private final int NUM_EXAMENES_TEST = 2;
+	
 	private boolean trabajoEntregado [];
-	private ExamenClasico examenClasico[] = new ExamenClasico[3];
-	private ExamenTest examenTest [] = new ExamenTest[2];
+	private ExamenClasico examenClasico[] = new ExamenClasico[NUM_EXAMENES_CLASICOS];
+	private ExamenTest examenTest [] = new ExamenTest[NUM_EXAMENES_TEST];
 	
 	private int retrasos;
+	
 	
 	/**
 	 * Constructor vacio
@@ -37,6 +43,7 @@ public class Examen {
 		examenTest [1] = new ExamenTest(0, 0, 0, 0, 0, PORCENTAJE25);
 		retrasos=0;
 	}
+	
 	
 	/**
 	 * Constructor con variables de clase
@@ -71,6 +78,7 @@ public class Examen {
 		this.retrasos=examen.retrasos;
 	}
 
+	
 	/**
 	 * @return Array de trabajos entregados
 	 */
@@ -78,6 +86,7 @@ public class Examen {
 		return trabajoEntregado;
 	}
 
+	
 	/**
 	 * @return objeto de ExamenClasico (double nota, int porcNotaGlobal)
 	 */
@@ -85,6 +94,7 @@ public class Examen {
 		return examenClasico;
 	}
 
+	
 	/**
 	 * @return objeto de ExamenTest (int correctas, int falladas, int sinContestar, 
 	 * int preguntasTotales, double nota, int porcNotaGlobal)
@@ -93,6 +103,7 @@ public class Examen {
 		return examenTest;
 	}
 
+	
 	/**
 	 * @return cantidad de restrasos de un alumno
 	 */
@@ -100,6 +111,23 @@ public class Examen {
 		return retrasos;
 	}
 
+	
+	/**
+	 * @return la cantidad de examenes clásicos que hace cada persona
+	 */
+	public int getNUM_EXAMENES_CLASICOS() {
+		return NUM_EXAMENES_CLASICOS;
+	}
+
+	
+	/**
+	 * @return la cantidad de examenes tipo test que hace cada persona
+	 */
+	public int getNUM_EXAMENES_TEST() {
+		return NUM_EXAMENES_TEST;
+	}
+
+	
 	/**
 	 * @param trabajoEntregado: boolean array que guarda los trabajos entregados
 	 */
@@ -107,6 +135,7 @@ public class Examen {
 		this.trabajoEntregado = trabajoEntregado;
 	}
 
+	
 	/**
 	 * @param examenClasico: objeto ExamenClasico Array
 	 */
@@ -114,6 +143,7 @@ public class Examen {
 		this.examenClasico = examenClasico;
 	}
 
+	
 	/**
 	 * @param examenTest: objeto ExamenTest Array
 	 */
@@ -121,11 +151,24 @@ public class Examen {
 		this.examenTest = examenTest;
 	}
 
+	
 	/**
 	 * @param retrasos: cantidad de retrasos que tiene la persona
 	 */
 	public void setRetrasos(int retrasos) {
 		this.retrasos = retrasos;
+	}
+	
+	
+	/**
+	 * Nos pasa los datos de las notas a los examenes clásicos
+	 * 
+	 * @param NotaExamenClasico: Array double con las notas de todos los examenes clásicos
+	 */
+	public void setNotaExamenClasico (double NotaExamenClasico[]) {
+		for (int i=0; i<examenClasico.length;i++) {
+			examenClasico[i].setNota(NotaExamenClasico[i]);
+		}
 	}
 	
 

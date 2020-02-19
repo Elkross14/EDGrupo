@@ -5,11 +5,14 @@
  * completo de la persona.
  * 
  * última actualización: 
- * -Se le ha dado funciones a los botones.
- * -Se ha creado un constructor que guarda los parámetros.
+ * -Añadido la llamada a la clase VerificarDatos
+ * -Añadido el método verificaNombre()
+ * -Añadido el método verificaPrimerApellido()
+ * -Añadido el método verificaSegudnoApellido()
+ * -Terminado el método verificaDatos()
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.0.5 
+ * @version 0.1
  */
 
 
@@ -24,6 +27,7 @@ import javax.swing.border.EmptyBorder;
 import VariablesDelPrograma.Examen;
 import VariablesDelPrograma.Persona;
 import clases.MensajeError;
+import clases.VerificarDatos;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -52,6 +56,7 @@ public class DatosNombre extends JFrame {
 	Persona persona = new Persona();
 	Examen examen = new Examen();
 	MensajeError mensaje = new MensajeError();
+	VerificarDatos verifica = new VerificarDatos();
 	
 	
 
@@ -182,9 +187,16 @@ public class DatosNombre extends JFrame {
 	 * @param evt click izquierzo en el botón Siguiente
 	 */
 	private void btnSiguienteActionPerformed(ActionEvent evt) {
-		DatosNotas pasar = new DatosNotas(persona, examen);
-		pasar.setVisible(true);
-		dispose();
+		
+		if(verificaDatos()) {
+			
+			recogerDatos();
+			
+			DatosNotas pasar = new DatosNotas(persona, examen);
+			pasar.setVisible(true);
+			dispose();
+		}
+		
 	}
 	
 	
@@ -214,6 +226,7 @@ public class DatosNombre extends JFrame {
 	
 	/**
 	 * Elimina todos los excesos de espacios que haya en la entrada de datos.
+	 * 
 	 * @param cadena: String al que se le quiere eliminar el exceso de espacios
 	 * @return String con solo un espacio entre palabras y sin espacios por delante y atrás.
 	 */
@@ -228,10 +241,72 @@ public class DatosNombre extends JFrame {
 	/**
 	 * Verificará todos los campos de datos a introducir para saber si es correcto el dato
 	 */
-	public void verificaDatos () {
+	public boolean verificaDatos () {
 		
+		if(!verificaNombre()) {
+			return false;
+		}
+		else if(!verificaPrimerApellido()) {
+			return false;
+		}
+		else if(!verificaSegundoApellido()) {
+			return false;
+		}
+		return true;
 	}
 	
+	/**
+	 * Verifica que el nombre esté relleno y que no tenga números ni caracteres extraños
+	 * 
+	 * @return true en caso de estár todo correcto
+	 */
+	public boolean verificaNombre() {
+		if(verifica.campoRelleno(textFieldNombre.getText())){
+            mensaje.vacioCampo("Nombre");
+            return false;
+        }
+		else if (verifica.correctoString(textFieldNombre.getText())){
+            mensaje.errorString("Nombre");
+            return false;
+        }
+		return true;
+	}
+	
+	
+	/**
+	 * Verifica que el primer apellido esté relleno y que no tenga números ni caracteres extraños
+	 * 
+	 * @return true en caso de estár todo correcto
+	 */
+	public boolean verificaPrimerApellido() {
+		if(verifica.campoRelleno(textFieldPrimerApellido.getText())){
+            mensaje.vacioCampo("Primer Apellido");
+            return false;
+        }
+		else if (verifica.correctoString(textFieldPrimerApellido.getText())){
+            mensaje.errorString("Primer Apellido");
+            return false;
+        }
+		return true;
+	}
+	
+	
+	/**
+	 * Verifica que el primer apellido esté relleno y que no tenga números ni caracteres extraños
+	 * 
+	 * @return true en caso de estár todo correcto
+	 */
+	public boolean verificaSegundoApellido() {
+		if(verifica.campoRelleno(textFieldSegundoApellido.getText())){
+            mensaje.vacioCampo("Segundo Apellido");
+            return false;
+        }
+		else if (verifica.correctoString(textFieldSegundoApellido.getText())){
+            mensaje.errorString("Segundo Apellido");
+            return false;
+        }
+		return true;
+	}
 	
 	
 }
