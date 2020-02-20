@@ -62,9 +62,9 @@ public class Menu extends JFrame {
 	public void inicialVentana() {
 		iniciarComponentes();
 		
-		setLocationRelativeTo(null);//vista centrada
-        setResizable(false);//evita que se pueda cambiar el tamaño de la ventana
-        setTitle("Menu");//pondrá titulo a la ventana
+		setLocationRelativeTo(null);	//vista centrada
+        setResizable(false);	//evita que se pueda cambiar el tamaño de la ventana
+        setTitle("Menu");	//pondrá titulo a la ventana
 	}
 	
 	

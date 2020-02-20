@@ -45,7 +45,7 @@ public class Persona {
      * 
      * @param persona: se le pasa como variable un objeto Persona
      */
-    public Persona (Persona persona){
+    public Persona(Persona persona) {
         this.nombre = persona.nombre;
         this.primerApellido = persona.primerApellido;
         this.segundoApellido = persona.segundoApellido;

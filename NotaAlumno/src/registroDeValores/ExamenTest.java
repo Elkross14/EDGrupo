@@ -13,6 +13,7 @@
 package registroDeValores;
 
 public class ExamenTest {
+	
 	/**
 	 * variables de clase
 	 */
@@ -69,6 +70,7 @@ public class ExamenTest {
 		this.nota = examenTest.nota;
 		this.porcNotaGlobal = examenTest.porcNotaGlobal;
 	}
+	
 
 	/**
 	 * @return  respuestas acertadas en el notaTotal tipo test
@@ -77,12 +79,14 @@ public class ExamenTest {
 		return correctas;
 	}
 
+	
 	/**
 	 * @return respuestas falladas en el notaTotal tipo test
 	 */
 	public int getFalladas() {
 		return falladas;
 	}
+	
 
 	/**
 	 * @return preguntas sin contestar en el notaTotal de tipo test
@@ -91,6 +95,7 @@ public class ExamenTest {
 		return sinContestar;
 	}
 	
+	
 	/**
 	 * @return cantidad total de preguntas en el notaTotal de tipo test
 	 */
@@ -98,12 +103,14 @@ public class ExamenTest {
 		return preguntasTotales;
 	}
 	
+	
 	/**
 	 * @return nota de notaTotal tipo test
 	 */
 	public double getNota() {
 		return nota;
 	}
+	
 
 	/**
 	 * @return porcentaje de peso del notaTotal en la nota global
@@ -111,6 +118,7 @@ public class ExamenTest {
 	public int getPorcNotaGlobal() {
 		return porcNotaGlobal;
 	}
+	
 
 	/**
 	 * @param correctas: respuestas acertadas en el notaTotal tipo test
@@ -118,6 +126,7 @@ public class ExamenTest {
 	public void setCorrectas(int correctas) {
 		this.correctas = correctas;
 	}
+	
 
 	/**
 	 * @param falladas: respuestas falladas en el notaTotal tipo test
@@ -125,6 +134,7 @@ public class ExamenTest {
 	public void setFalladas(int falladas) {
 		this.falladas = falladas;
 	}
+	
 
 	/**
 	 * @param sinContestar: preguntas sin contestar en el notaTotal de tipo test
@@ -133,12 +143,14 @@ public class ExamenTest {
 		this.sinContestar = sinContestar;
 	}
 	
+	
 	/**
 	 * @param preguntasTotales: cantidad total de preguntas en el notaTotal de tipo test
 	 */
 	public void preguntasTotales(int preguntasTotales) {
 		this.preguntasTotales = preguntasTotales;
 	}
+	
 
 	/**
 	 * @param nota: nota de notaTotal tipo test
@@ -146,6 +158,7 @@ public class ExamenTest {
 	public void setNota(double nota) {
 		this.nota = nota;
 	}
+	
 	
 	/**
 	 * @param porcNotaGlobal: porcentaje de peso del notaTotal en la nota global
