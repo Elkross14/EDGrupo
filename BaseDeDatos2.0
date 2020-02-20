@@ -1,0 +1,18 @@
+CREATE DATABASE NotasEntornos;
+
+USE NotasEntornos;
+
+-- DROP TABLE Alumnos;
+CREATE TABLE Alumnos (
+	idAlumno INT UNIQUE NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(51),
+    primerApellido VARCHAR(51),
+	segundoApellido VARCHAR(51),
+    notaFinal DECIMAL(4,2),
+    CONSTRAINT pk_alu_idAlu PRIMARY KEY (idAlumno) 
+);
+
+INSERT INTO Alumnos (nombre, primerApellido, segundoApellido, notaFinal)
+            VALUES ("Peter", "rock", "bless", 8.40);
+
+SELECT * FROM Alumnos;
