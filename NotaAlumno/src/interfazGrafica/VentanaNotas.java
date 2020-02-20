@@ -1,16 +1,16 @@
 /** 
- *<h2> Clase DatoNotas </h2> 
+ *<h2> Clase VentanaNotas </h2> 
  *
  * Ventana gráfica para introducir las notas y otros
  * datos necesarios.
  * 
  * última actualización: 
- * -Añadido el método recogerTrabajos
+ * -Se ha mejorado la legibilidad
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.0.5.2
+ * @version 0.0.5.3
  */
-package interfaz;
+package interfazGrafica;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -19,11 +19,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import VariablesDelPrograma.Examen;
-import VariablesDelPrograma.ExamenClasico;
-import VariablesDelPrograma.Persona;
 import clases.MensajeError;
-import clases.VerificarDatos;
+import clases.VerificacionDeDatos;
+import registroDeValores.NotaTotal;
+import registroDeValores.ExamenClasico;
+import registroDeValores.Persona;
 
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
@@ -37,7 +37,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class DatosNotas extends JFrame {
+public class VentanaNotas extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldClasico1;
@@ -64,16 +64,16 @@ public class DatosNotas extends JFrame {
 	
 	
 	Persona persona = new Persona();
-	Examen examen = new Examen();
+	NotaTotal notaTotal = new NotaTotal();
 	ExamenClasico examenClasico = new ExamenClasico();
 	MensajeError mensaje = new MensajeError();
-	VerificarDatos verifica = new VerificarDatos();
+	VerificacionDeDatos verifica = new VerificacionDeDatos();
 
 
 	/**
 	 * Create the frame.
 	 */
-	public DatosNotas() {
+	public VentanaNotas() {
 		inicialVentana();
 	}
 	
@@ -82,13 +82,13 @@ public class DatosNotas extends JFrame {
 	 * Constructor copia
 	 * 
 	 * @param persona: objeto de clase Persona con todas sus variables
-	 * @param examen: objeto de clase Examen con todas sus variables
+	 * @param notaTotal: objeto de clase NotaTotal con todas sus variables
 	 */
-	public DatosNotas(Persona persona, Examen examen) {
+	public VentanaNotas(Persona persona, NotaTotal notaTotal) {
 		inicialVentana();
 		
 		this.persona = new Persona(persona);
-		this.examen = new Examen(examen);
+		this.notaTotal = new NotaTotal(notaTotal);
 	}
 	
 	
@@ -99,9 +99,9 @@ public class DatosNotas extends JFrame {
 		iniciarComponentes();
 		agruparJRadioButton();
 		
-		setLocationRelativeTo(null);//vista centrada
-        setResizable(false);//evita que se pueda cambiar el tamaño de la ventana
-        setTitle("Nombre Alumno");//pondrá titulo a la ventana
+		setLocationRelativeTo(null);	//vista centrada
+        setResizable(false);	//evita que se pueda cambiar el tamaño de la ventana
+        setTitle("Nombre Alumno");	//pondrá titulo a la ventana
 	}
 	
 
@@ -137,17 +137,17 @@ public class DatosNotas extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JLabel lblClasico1 = new JLabel("Examen Cl\u00E1sico 1:");
+		JLabel lblClasico1 = new JLabel("NotaTotal Cl\u00E1sico 1:");
 		
 		textFieldClasico1 = new JTextField();
 		textFieldClasico1.setColumns(10);
 		
-		JLabel lblClasico2 = new JLabel("Examen Cl\u00E1sico 2:");
+		JLabel lblClasico2 = new JLabel("NotaTotal Cl\u00E1sico 2:");
 		
 		textFieldClasico2 = new JTextField();
 		textFieldClasico2.setColumns(10);
 		
-		JLabel lblClasico3 = new JLabel("Examen Cl\u00E1sico 3:");
+		JLabel lblClasico3 = new JLabel("NotaTotal Cl\u00E1sico 3:");
 		
 		textFieldClasico3 = new JTextField();
 		textFieldClasico3.setColumns(10);
@@ -407,6 +407,7 @@ public class DatosNotas extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 	}
 	
+	
 	/**
 	 * Inicia todo el proceso para pasar los datos al servidor
 	 * 
@@ -416,14 +417,15 @@ public class DatosNotas extends JFrame {
 		
 	}
 	
+	
 	/**
-	 * Vuelve a la pantalla de DatosNombre. Si se ha rellenado
+	 * Vuelve a la pantalla de VentanaNombre. Si se ha rellenado
 	 * algún campo se guardará temporalmente.
 	 * 
 	 * @param evt click izquierzo en el botón Atrás
 	 */
 	private void btnAtrasActionPerformed(ActionEvent evt) {
-		DatosNombre pasar = new DatosNombre(persona, examen);
+		VentanaNombre pasar = new VentanaNombre(persona, notaTotal);
 		pasar.setVisible(true);
 		dispose();
 	}
@@ -444,9 +446,9 @@ public class DatosNotas extends JFrame {
 	 */
 	public void recogerDatosExamenesTest() {
 		
-		int [] correctasExamenTest = new int [examen.getNUM_EXAMENES_TEST()];
-		int [] falladasExamenTest = new int [examen.getNUM_EXAMENES_TEST()];
-		int [] sinContestarExamenTest = new int [examen.getNUM_EXAMENES_TEST()];
+		int [] correctasExamenTest = new int [notaTotal.getNUM_EXAMENES_TEST()];
+		int [] falladasExamenTest = new int [notaTotal.getNUM_EXAMENES_TEST()];
+		int [] sinContestarExamenTest = new int [notaTotal.getNUM_EXAMENES_TEST()];
 		
 		correctasExamenTest[0] = Integer.parseInt(fieldCorrectasTest1.getText());
 		falladasExamenTest[0] = Integer.parseInt(fieldFalladasTest1.getText());
@@ -456,7 +458,7 @@ public class DatosNotas extends JFrame {
 		falladasExamenTest[1] = Integer.parseInt(fieldFalladasTest2.getText());
 		sinContestarExamenTest[1] = Integer.parseInt(fieldSinContestarTest2.getText());
 		
-		examen.setRespuestasExamenTest(correctasExamenTest, falladasExamenTest, sinContestarExamenTest);
+		notaTotal.setRespuestasExamenTest(correctasExamenTest, falladasExamenTest, sinContestarExamenTest);
 		
 	}
 	
@@ -466,55 +468,55 @@ public class DatosNotas extends JFrame {
 	 */
 	public void recogerDatosExamenesClasicos() {
 		
-		double [] NotaExamenClasico = new double [examen.getNUM_EXAMENES_CLASICOS()];
+		double [] NotaExamenClasico = new double [notaTotal.getNUM_EXAMENES_CLASICOS()];
 		
 		NotaExamenClasico[0] = Double.parseDouble(textFieldClasico1.getText());
 		NotaExamenClasico[1] = Double.parseDouble(textFieldClasico2.getText());
 		NotaExamenClasico[2] = Double.parseDouble(textFieldClasico3.getText());	
 		
-		examen.setNotaExamenClasico(NotaExamenClasico);
+		notaTotal.setNotaExamenClasico(NotaExamenClasico);
 	}
 
 	
 	public void recogerTrabajos() {
 		
-		int entregado;
+		int entregado = 0;
 		int diasDeRetraso;
-		int [][] trabajos = new int [examen.getNUM_TRABAJOS()][1];
+		int [][] trabajos = new int [notaTotal.getNUM_TRABAJOS()][1];
 		
-		entregado=0;
 		diasDeRetraso = Integer.parseInt(fieldRetrasos1.getText());
-		if(diasDeRetraso<=5 && rdbtnNoEntregadoTrabajo1.isSelected()) {
-			entregado = 1;//1 = true (trabajo entregado)
+		if(diasDeRetraso <= 5 && rdbtnNoEntregadoTrabajo1.isSelected()) {
+			entregado = 1;	//1 = true (trabajo entregado)
 		}
 		
 		trabajos[0][0] = entregado;
 		trabajos[0][1] = diasDeRetraso;
 		
 		
-		entregado=0;
+		entregado = 0;
 		diasDeRetraso = Integer.parseInt(fieldRetrasos2.getText());
-		if(diasDeRetraso<=5 && rdbtnNoEntregadoTrabajo2.isSelected()) {
-			entregado = 1;//1 = true (trabajo entregado)
+		if(diasDeRetraso <= 5 && rdbtnNoEntregadoTrabajo2.isSelected()) {
+			entregado = 1;	//1 = true (trabajo entregado)
 		}
 		
 		trabajos[1][0] = entregado;
 		trabajos[1][1] = diasDeRetraso;
 		
 		
-		entregado=0;
+		entregado = 0;
 		diasDeRetraso = Integer.parseInt(fieldRetrasos3.getText());
-		if(diasDeRetraso<=5 && rdbtnNoEntregadoTrabajo3.isSelected()) {
-			entregado = 1;//1 = true (trabajo entregado)
+		if(diasDeRetraso <= 5 && rdbtnNoEntregadoTrabajo3.isSelected()) {
+			entregado = 1;	//1 = true (trabajo entregado)
 		}
 		
 		trabajos[2][0] = entregado;
 		trabajos[2][1] = diasDeRetraso;
 		
 		
-		examen.setTrabajoEntregado(trabajos);
+		notaTotal.setTrabajoEntregado(trabajos);
 		
 	}
+	
 	
 }
 
