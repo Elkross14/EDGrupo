@@ -84,9 +84,9 @@ public class VentanaNombre extends JFrame {
 	public void iniciarVentana() {
 		iniciarComponentes();
 		
-		setLocationRelativeTo(null);//vista centrada
-        setResizable(false);//evita que se pueda cambiar el tamaño de la ventana
-        setTitle("Nombre Alumno");//pondrá titulo a la ventana
+		setLocationRelativeTo(null);	//vista centrada
+        setResizable(false);	//evita que se pueda cambiar el tamaño de la ventana
+        setTitle("Nombre Alumno");	//pondrá titulo a la ventana
 	}
 	
 	

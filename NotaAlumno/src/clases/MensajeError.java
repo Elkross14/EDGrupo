@@ -26,7 +26,7 @@ public class MensajeError extends javax.swing.JFrame {
 	 */
     public void vacioCampo(String campo) {
         JOptionPane.showMessageDialog(this,
-            "No se ha rellenado el campo "+campo+".",
+            "No se ha rellenado el campo " + campo + ".",
             "Campo vacio",
             JOptionPane.WARNING_MESSAGE);
     }
@@ -39,7 +39,7 @@ public class MensajeError extends javax.swing.JFrame {
      */
     public void vacioRadio(String grupo) {
         JOptionPane.showMessageDialog(this,
-            "No se ha seleccionado ninguna opción de "+grupo+".",
+            "No se ha seleccionado ninguna opción de " + grupo + ".",
             "Radio vacio",
             JOptionPane.WARNING_MESSAGE);
     }
@@ -65,7 +65,7 @@ public class MensajeError extends javax.swing.JFrame {
      */
     public void errorNumEnt(String campo) {
         JOptionPane.showMessageDialog(this,
-            "No es valido nada que no sea numeros enteros en "+campo,
+            "No es valido nada que no sea numeros enteros en " + campo,
             "Error numerico Entero",
             JOptionPane.ERROR_MESSAGE);
     }
@@ -78,7 +78,7 @@ public class MensajeError extends javax.swing.JFrame {
      */
     public void errorString(String campo) {
         JOptionPane.showMessageDialog(this,
-            "No se puede introducir numeros\nni caracteres extraños en "+campo,
+            "No se puede introducir numeros\nni caracteres extraños en " + campo,
             "Error String",
             JOptionPane.ERROR_MESSAGE);
     }
@@ -92,7 +92,7 @@ public class MensajeError extends javax.swing.JFrame {
     public int preguntaAtras() {
         return JOptionPane.showConfirmDialog(null, 
             "Si vuelve atrás se perderán todos los datos\n"
-                +"¿Quieres contiunar?", 
+                + "¿Quieres contiunar?", 
             "Confirmar atras",JOptionPane.YES_NO_OPTION);
     }
     

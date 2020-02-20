@@ -125,7 +125,7 @@ public class VerificacionDeDatos {
      */
     public boolean rangoNotaEx(String sNota) {
         double nota = Double.valueOf(sNota);
-        if(nota<0||10<nota) {
+        if(nota < 0 || 10 < nota) {
             return true;	//el valor introducido no está dentro de rango
         }
         return false;
