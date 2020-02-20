@@ -3,8 +3,11 @@
  *
  * Contiene todos los mensajes de error que usará el programa
  * 
+ * Última actualización:
+ * -Se ha mejorado la legibilidad
+ * 
  * @author Pablo Durán, Héctor García
- * @version 0.1
+ * @version 0.1.1
  */
 
 package clases;
@@ -13,7 +16,7 @@ package clases;
 import javax.swing.JOptionPane;
 
 
-public class MensajeError extends javax.swing.JFrame{
+public class MensajeError extends javax.swing.JFrame {
     
 	
 	/**
@@ -21,7 +24,7 @@ public class MensajeError extends javax.swing.JFrame{
 	 * 
 	 * @param campo: Nombre del campo a rellenar.
 	 */
-    public void vacioCampo(String campo){
+    public void vacioCampo(String campo) {
         JOptionPane.showMessageDialog(this,
             "No se ha rellenado el campo "+campo+".",
             "Campo vacio",
@@ -34,7 +37,7 @@ public class MensajeError extends javax.swing.JFrame{
      * 
      * @param grupo: grupo de jradio sin opción seleccionada
      */
-    public void vacioRadio(String grupo){
+    public void vacioRadio(String grupo) {
         JOptionPane.showMessageDialog(this,
             "No se ha seleccionado ninguna opción de "+grupo+".",
             "Radio vacio",
@@ -60,7 +63,7 @@ public class MensajeError extends javax.swing.JFrame{
      * 
      * @param campo: nombre del campo con el error de entrada de número entero
      */
-    public void errorNumEnt(String campo){
+    public void errorNumEnt(String campo) {
         JOptionPane.showMessageDialog(this,
             "No es valido nada que no sea numeros enteros en "+campo,
             "Error numerico Entero",
@@ -73,7 +76,7 @@ public class MensajeError extends javax.swing.JFrame{
      * 
      * @param campo: nombre del campo con caracteres no ingleses o españoles
      */
-    public void errorString (String campo){
+    public void errorString(String campo) {
         JOptionPane.showMessageDialog(this,
             "No se puede introducir numeros\nni caracteres extraños en "+campo,
             "Error String",
@@ -86,7 +89,7 @@ public class MensajeError extends javax.swing.JFrame{
      * 
      * @return devolverá cero en el caso de confirmar
      */
-    public int preguntaAtras(){
+    public int preguntaAtras() {
         return JOptionPane.showConfirmDialog(null, 
             "Si vuelve atrás se perderán todos los datos\n"
                 +"¿Quieres contiunar?", 
@@ -97,7 +100,7 @@ public class MensajeError extends javax.swing.JFrame{
     /**
      * Saltará un INFORMATION_MESSAGE en caso de haber enviado los datos al servidor
      */
-    public void envioCorrecto(){
+    public void envioCorrecto() {
         JOptionPane.showMessageDialog(this,
             "Datos enviados correctamente",
             "Envio de datos",
@@ -108,7 +111,7 @@ public class MensajeError extends javax.swing.JFrame{
     /**
      * Saltará un ERROR_MESSAGE en caso de no poder enviar los mensajes al servidor
      */
-    public void envioIncorrecto(){
+    public void envioIncorrecto() {
         JOptionPane.showMessageDialog(this,
             "No se han podido enviar los datos al servidor.",
             "Envio de datos",
@@ -119,7 +122,7 @@ public class MensajeError extends javax.swing.JFrame{
     /**
      * Saltará un ERROR_MESSAGE en el caso de que haya un error en la petición de datos al servidor
      */
-    public void errorPedirDatos(){
+    public void errorPedirDatos() {
         JOptionPane.showMessageDialog(this,
             "No se han podido recibir los datos del servidor.",
             "Recepción de datos",
@@ -130,7 +133,7 @@ public class MensajeError extends javax.swing.JFrame{
     /**
      * Saltará un ERROR_MESSAGE en el caso de que no se haya podido borrar el dato en el servidor
      */
-    public void errorBorrado(){
+    public void errorBorrado() {
         JOptionPane.showMessageDialog(this,
             "Ha surgido un error en el borrado del dato.",
             "Error de borrado",

@@ -1,46 +1,42 @@
 /** 
- *<h2> Clase Examen </h2> 
+ *<h2> Clase NotaTotal </h2> 
  *
  * Almacena todos los datos necesarios de las notas.
  * 
  * Última actualización:
- * -Se ha creado el método setRespuestasExamenTest
- * Se ha creado la constante  NUM_TRABAJOS
- * -Se ha eliminado la variable retraso
- * -Se ha modificado trabajoEntregado de Array a vector
+ * -Se ha mejorado la legibilidad
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.1.2
+ * @version 0.1.3
  */
-package VariablesDelPrograma;
+package registroDeValores;
 
 
 
-public class Examen {
+public class NotaTotal extends Trabajo {
 
-	private final int PORCENTAJE10 =10;
-	private final int PORCENTAJE20 =20;
-	private final int PORCENTAJE25 =25;
+	private final int PORCENTAJE10 = 10;
+	private final int PORCENTAJE20 = 20;
+	private final int PORCENTAJE25 = 25;
 	
 	private final int NUM_EXAMENES_CLASICOS = 3;
 	private final int NUM_EXAMENES_TEST = 2;
 	private final int NUM_TRABAJOS = 3;
 	
-	private int trabajoEntregado [][];
-	private ExamenClasico examenClasico[] = new ExamenClasico[NUM_EXAMENES_CLASICOS];
-	private ExamenTest examenTest [] = new ExamenTest[NUM_EXAMENES_TEST];
+	private ExamenClasico examenClasicoArray[] = new ExamenClasico[NUM_EXAMENES_CLASICOS];
+	private ExamenTest examenTestArray[] = new ExamenTest[NUM_EXAMENES_TEST];
 	
 	
 	/**
 	 * Constructor vacio
 	 */
-	public Examen() {
-		trabajoEntregado= new int[NUM_TRABAJOS][2];
-		examenClasico[0]= new ExamenClasico(0, PORCENTAJE10);
-		examenClasico[1]= new ExamenClasico(0, PORCENTAJE20);
-		examenClasico[2]= new ExamenClasico(0, PORCENTAJE20);
-		examenTest [0] = new ExamenTest(0, 0, 0, 0, 0, PORCENTAJE25);
-		examenTest [1] = new ExamenTest(0, 0, 0, 0, 0, PORCENTAJE25);
+	public NotaTotal() {
+		trabajosEntregados = new int[NUM_TRABAJOS][2];
+		examenClasicoArray[0] = new ExamenClasico(0, PORCENTAJE10);
+		examenClasicoArray[1] = new ExamenClasico(0, PORCENTAJE20);
+		examenClasicoArray[2] = new ExamenClasico(0, PORCENTAJE20);
+		examenTestArray[0] = new ExamenTest(0, 0, 0, 0, 0, PORCENTAJE25);
+		examenTestArray[1] = new ExamenTest(0, 0, 0, 0, 0, PORCENTAJE25);
 	}
 	
 	
@@ -54,25 +50,25 @@ public class Examen {
 	 * de peso en la nota global
 	 * @param retrasos: cantidad de restrasos de un alumno
 	 */
-	public Examen(int [][] trabajoEntregado, ExamenClasico [] examenClasico,
+	public NotaTotal(int [][] trabajoEntregado, ExamenClasico [] examenClasico,
 			ExamenTest [] examenTest, int retrasos) {
 		
-		this.trabajoEntregado = trabajoEntregado;
-		this.examenClasico = examenClasico;
-		this.examenTest = examenTest;
+		this.trabajosEntregados = trabajoEntregado;
+		this.examenClasicoArray = examenClasico;
+		this.examenTestArray = examenTest;
 	}
 	
 	
 	/**
 	 * Constructor copia
 	 * 
-	 * @param examen: se le pasa como variable un objeto Examen
+	 * @param notaTotal: se le pasa como variable un objeto NotaTotal
 	 */
-	public Examen(Examen examen) {
+	public NotaTotal(NotaTotal notaTotal) {
 		
-		this.trabajoEntregado= examen.trabajoEntregado;
-		this.examenClasico=examen.examenClasico;
-		this.examenTest=examen.examenTest;
+		this.trabajosEntregados = notaTotal.trabajosEntregados;
+		this.examenClasicoArray = notaTotal.examenClasicoArray;
+		this.examenTestArray = notaTotal.examenTestArray;
 	}
 
 	
@@ -80,7 +76,7 @@ public class Examen {
 	 * @return Array de trabajos entregados
 	 */
 	public int[][] getTrabajoEntregado() {
-		return trabajoEntregado;
+		return trabajosEntregados;
 	}
 
 	
@@ -88,7 +84,7 @@ public class Examen {
 	 * @return objeto de ExamenClasico (double nota, int porcNotaGlobal)
 	 */
 	public ExamenClasico[] getExamenClasico() {
-		return examenClasico;
+		return examenClasicoArray;
 	}
 
 	
@@ -97,7 +93,7 @@ public class Examen {
 	 * int preguntasTotales, double nota, int porcNotaGlobal)
 	 */
 	public ExamenTest[] getExamenTest() {
-		return examenTest;
+		return examenTestArray;
 	}
 
 	
@@ -126,7 +122,7 @@ public class Examen {
 	 * @param trabajoEntregado: boolean array que guarda los trabajos entregados
 	 */
 	public void setTrabajoEntregado(int[][] trabajoEntregado) {
-		this.trabajoEntregado = trabajoEntregado;
+		this.trabajosEntregados = trabajoEntregado;
 	}
 
 	
@@ -134,7 +130,7 @@ public class Examen {
 	 * @param examenClasico: objeto ExamenClasico Array
 	 */
 	public void setExamenClasico(ExamenClasico[] examenClasico) {
-		this.examenClasico = examenClasico;
+		this.examenClasicoArray = examenClasico;
 	}
 
 	
@@ -142,7 +138,7 @@ public class Examen {
 	 * @param examenTest: objeto ExamenTest Array
 	 */
 	public void setExamenTest(ExamenTest[] examenTest) {
-		this.examenTest = examenTest;
+		this.examenTestArray = examenTest;
 	}
 	
 	
@@ -151,9 +147,9 @@ public class Examen {
 	 * 
 	 * @param NotaExamenClasico: Array double con las notas de todos los examenes clásicos
 	 */
-	public void setNotaExamenClasico (double NotaExamenClasico[]) {
-		for (int i=0; i<NUM_EXAMENES_CLASICOS;i++) {
-			examenClasico[i].setNota(NotaExamenClasico[i]);
+	public void setNotaExamenClasico(double NotaExamenClasico[]) {
+		for (int i = 0; i < NUM_EXAMENES_CLASICOS; i++) {
+			examenClasicoArray[i].setNota(NotaExamenClasico[i]);
 		}
 	}
 	
@@ -161,16 +157,16 @@ public class Examen {
 	/**
 	 * Nos pasa las respuestas recogidas por una clase a la clase ExamenTest
 	 * 
-	 * @param correctas: respuestas acertadas en un examen tipo test
-	 * @param falladas: respuestas falladas en un examen tipo test
-	 * @param sinContestar: respuesta no contestasdas en un examen tipo test
+	 * @param correctas: respuestas acertadas en un notaTotal tipo test
+	 * @param falladas: respuestas falladas en un notaTotal tipo test
+	 * @param sinContestar: respuesta no contestasdas en un notaTotal tipo test
 	 */
 	public void setRespuestasExamenTest(int correctas[], int falladas[],
 			int sinContestar[]) {
-		for (int i=0; i< NUM_EXAMENES_TEST;i++) {
-			examenTest[i].setCorrectas(correctas[i]);
-			examenTest[i].setFalladas(falladas[i]);
-			examenTest[i].setSinContestar(sinContestar[i]);
+		for (int i = 0; i < NUM_EXAMENES_TEST; i++) {
+			examenTestArray[i].setCorrectas(correctas[i]);
+			examenTestArray[i].setFalladas(falladas[i]);
+			examenTestArray[i].setSinContestar(sinContestar[i]);
 		}
 	}
 	

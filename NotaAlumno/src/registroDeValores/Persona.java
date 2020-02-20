@@ -10,7 +10,7 @@
  * @version 0.1.1
  */
 
-package VariablesDelPrograma;
+package registroDeValores;
 
 public class Persona {
 	
@@ -22,10 +22,10 @@ public class Persona {
 	/**
 	 * Constructor vacio
 	 */
-	public Persona () {
-		nombre="Sin nombre";
-		primerApellido="Sin Primer apellido";
-		segundoApellido="Sin segundo apellido";
+	public Persona() {
+		nombre = "Sin nombre";
+		primerApellido = "Sin Primer apellido";
+		segundoApellido = "Sin segundo apellido";
 	}
 	
 	/**
@@ -34,8 +34,8 @@ public class Persona {
 	 * @param primerApellido: Primer apellido de la persona
 	 * @param segundoApellido: Segundo apellido de la persona
 	 */
-	public Persona (String nombre, String primerApellido,String segundoApellido) {
-		this.nombre=nombre;
+	public Persona(String nombre, String primerApellido,String segundoApellido) {
+		this.nombre = nombre;
 		this.primerApellido=primerApellido;
 		this.primerApellido=primerApellido;
 	}
@@ -47,8 +47,8 @@ public class Persona {
      */
     public Persona (Persona persona){
         this.nombre = persona.nombre;
-        this.primerApellido=persona.primerApellido;
-        this.segundoApellido=persona.segundoApellido;
+        this.primerApellido = persona.primerApellido;
+        this.segundoApellido = persona.segundoApellido;
     }
 	
 	/**

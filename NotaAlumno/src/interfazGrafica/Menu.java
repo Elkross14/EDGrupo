@@ -4,13 +4,13 @@
  * Ventana gráfica para elegir entre varias funciones.
  * 
  * última actualización: 
- * -Se ha creado la clase
+ * -Se ha mejorado la legibilidad
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.0.5 
+ * @version 0.0.5.1
  */
 
-package interfaz;
+package interfazGrafica;
 
 import java.awt.EventQueue;
 
@@ -46,6 +46,7 @@ public class Menu extends JFrame {
 			}
 		});
 	}
+	
 
 	/**
 	 * Create the frame.
@@ -122,16 +123,18 @@ public class Menu extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 	}
 	
+	
 	/**
-	 * Llama a la clase DatosNombre en el caso de que haya conexión con el servidor
+	 * Llama a la clase VentanaNombre en el caso de que haya conexión con el servidor
 	 * 
 	 * @param e: click izquierzo en el botón Siguiente
 	 */
 	public void btnAñadirAlumnoActionPerformed(ActionEvent e) {
-		DatosNombre pasar = new DatosNombre();
+		VentanaNombre pasar = new VentanaNombre();
 		pasar.setVisible(true);
 		dispose();
 	}
+	
 	
 	/**
 	 * Llama a la clase VerTabla para visualizar los datos introducidos
@@ -141,13 +144,16 @@ public class Menu extends JFrame {
 	public void btnVerTablaActionPerformed(ActionEvent e) {
 		
 	}
+	
 
-/**
- * Cerrará el programa
- * 
- * @param e: click izquierzo en el botón Siguiente
- */
+	/**
+	 * Cerrará el programa
+	 * 
+	 * @param e: click izquierzo en el botón Siguiente
+	 */
 	public void btnCerrarProgramaActionPerformed(ActionEvent e) {
 		System.exit(0);;
 	}
+	
+	
 }

@@ -4,10 +4,10 @@
  * Ccontiene todos los métodos para hacer lamadas al servidor
  * 
  * Última actualización:
- * -Se ha añadido el método deleteRecord.
+ * -Se ha mejorado la legibilidad
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.1
+ * @version 0.1.1
  */
 package clases;
 
@@ -49,7 +49,7 @@ public class MySQL {
         try{
             
             Class.forName(DRIVER);
-            conexion= (Connection) DriverManager.getConnection(URL, USER, PASS);
+            conexion = (Connection) DriverManager.getConnection(URL, USER, PASS);
             verificar = true;
         }
         catch (ClassNotFoundException | SQLException e){
@@ -85,7 +85,7 @@ public class MySQL {
      * @param segundoApellido: segundoApellido de la persona
      * @param notaFinal: notaFinal de la persona(dos decimales)
      */
-    public void insertarDatos( String nombre, String primerApellido,String segundoApellido, double notaFinal) {
+    public void insertarDatos(String nombre, String primerApellido,String segundoApellido, double notaFinal) {
        
         try {
             String Query = "INSERT INTO Alumnos (nombre, primerApellido, "
@@ -130,11 +130,11 @@ public class MySQL {
 
             //recogerá todos los datos enviados por el servidor mientras haya.
             while (resultSet.next()) {
-                datos+=resultSet.getString("idAlumno") + "/"
+                datos += resultSet.getString("idAlumno") + "/"
                         + resultSet.getString("nombre") + "/" 
                         + resultSet.getString("primerApellido") + "/"
-                        + resultSet.getString("segundoApellido")+"/"
-                        + resultSet.getString("notaFinal")+"/";
+                        + resultSet.getString("segundoApellido") + "/"
+                        + resultSet.getString("notaFinal") + "/";
             }
 
         } catch (SQLException ex) {
@@ -154,10 +154,10 @@ public class MySQL {
      */
     public int totalRows(String table_name) {
     	
-        int totalRows=0;
+        int totalRows = 0;
         
         try {
-            String Query = "SELECT COUNT(*) FROM " + table_name;//comando lanzado al servidor
+            String Query = "SELECT COUNT(*) FROM " + table_name;	//comando lanzado al servidor
             
             //lanzamos el comando al servidor
             Statement st = conexion.createStatement();
@@ -165,15 +165,16 @@ public class MySQL {
             resultSet = st.executeQuery(Query);
             
             while (resultSet.next()) {
-                totalRows=resultSet.getInt(1);//recoge el dato pedido al servidor
+                totalRows=resultSet.getInt(1);	//recoge el dato pedido al servidor
             }
 
         } catch (SQLException ex) {
-             mensaje.errorPedirDatos();//saltará en el caso de que haya algún tipo de error a la hora de pedir los datos al servidor
+             mensaje.errorPedirDatos();	//saltará en el caso de que haya algún tipo de error a la hora de pedir los datos al servidor
         }
         return totalRows;
     }
 
+    
     /**
      * Elimina una linea de la tabla Alumno de la base de datos 
      * 
@@ -190,4 +191,6 @@ public class MySQL {
             JOptionPane.showMessageDialog(null, "Error borrando el registro especificado");
         }
     }
+    
+    
 }

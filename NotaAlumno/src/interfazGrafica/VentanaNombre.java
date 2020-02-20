@@ -1,22 +1,18 @@
 /** 
- *<h2> Clase DatosNombre </h2> 
+ *<h2> Clase VentanaNombre </h2> 
  *
  * Ventana gráfica para introducir el nombre
  * completo de la persona.
  * 
  * última actualización: 
- * -Añadido la llamada a la clase VerificarDatos
- * -Añadido el método verificaNombre()
- * -Añadido el método verificaPrimerApellido()
- * -Añadido el método verificaSegudnoApellido()
- * -Terminado el método verificaDatos()
+ * -Mejora de legibilidad
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.1
+ * @version 0.1.1
  */
 
 
-package interfaz;
+package interfazGrafica;
 
 import java.awt.EventQueue;
 
@@ -24,10 +20,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import VariablesDelPrograma.Examen;
-import VariablesDelPrograma.Persona;
 import clases.MensajeError;
-import clases.VerificarDatos;
+import clases.VerificacionDeDatos;
+import registroDeValores.NotaTotal;
+import registroDeValores.Persona;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -38,7 +34,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class DatosNombre extends JFrame {
+public class VentanaNombre extends JFrame {
 
 	/**
 	 * Variables gráficas
@@ -54,9 +50,9 @@ public class DatosNombre extends JFrame {
 	private JButton btnSiguiente;
 
 	Persona persona = new Persona();
-	Examen examen = new Examen();
+	NotaTotal notaTotal = new NotaTotal();
 	MensajeError mensaje = new MensajeError();
-	VerificarDatos verifica = new VerificarDatos();
+	VerificacionDeDatos verifica = new VerificacionDeDatos();
 	
 	
 
@@ -64,27 +60,28 @@ public class DatosNombre extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DatosNombre() {
-		inicialVentana();
+	public VentanaNombre() {
+		iniciarVentana();
 	}
 	
 	/**
 	 * Constructor copia
 	 * 
 	 * @param persona: objeto de clase Persona con todas sus variables
-	 * @param examen: objeto de clase Examen con todas sus variables
+	 * @param notaTotal: objeto de clase NotaTotal con todas sus variables
 	 */
-	public DatosNombre(Persona persona, Examen examen) {
-		inicialVentana();
+	public VentanaNombre(Persona persona, NotaTotal notaTotal) {
+		iniciarVentana();
 		
 		this.persona = new Persona(persona);
-		this.examen = new Examen(examen);
+		this.notaTotal = new NotaTotal(notaTotal);
 	}
+	
 	
 	/**
 	 * Inicia y ajusta la ventana
 	 */
-	public void inicialVentana() {
+	public void iniciarVentana() {
 		iniciarComponentes();
 		
 		setLocationRelativeTo(null);//vista centrada
@@ -182,7 +179,7 @@ public class DatosNombre extends JFrame {
 	
 
 	/**
-	 * Inicia todo el proceso para pasar los datos a la siguiente ventana (DatosNotas)
+	 * Inicia todo el proceso para pasar los datos a la siguiente ventana (VentanaNotas)
 	 * 
 	 * @param evt click izquierzo en el botón Siguiente
 	 */
@@ -192,7 +189,7 @@ public class DatosNombre extends JFrame {
 			
 			recogerDatos();
 			
-			DatosNotas pasar = new DatosNotas(persona, examen);
+			VentanaNotas pasar = new VentanaNotas(persona, notaTotal);
 			pasar.setVisible(true);
 			dispose();
 		}
@@ -206,7 +203,7 @@ public class DatosNombre extends JFrame {
 	 * @param evt click izquierzo en el botón Atrás
 	 */
 	private void btnAtrasActionPerformed(ActionEvent evt) {
-		if (mensaje.preguntaAtras()==0) {
+		if (mensaje.preguntaAtras() == 0) {
 			Menu pasar = new Menu();
 			pasar.setVisible(true);
 			dispose();
@@ -254,6 +251,7 @@ public class DatosNombre extends JFrame {
 		}
 		return true;
 	}
+	
 	
 	/**
 	 * Verifica que el nombre esté relleno y que no tenga números ni caracteres extraños
