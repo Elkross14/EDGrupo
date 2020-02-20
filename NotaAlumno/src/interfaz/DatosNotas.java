@@ -5,12 +5,10 @@
  * datos necesarios.
  * 
  * última actualización: 
- * -Añadido la llamada a la clase VerificarDatos
- * -Añadido la llamada a la clase MensajeError
- * -Creado de forma parcial el metodo recogerDatos
+ * -Añadido el método recogerTrabajos
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.0.5.1
+ * @version 0.0.5.2
  */
 package interfaz;
 
@@ -46,12 +44,14 @@ public class DatosNotas extends JFrame {
 	private JTextField textFieldClasico2;
 	private JTextField textFieldClasico3;
 	private JTextField fieldCorrectasTest1;
-	private JTextField fieldIncorrectasTest1;
+	private JTextField fieldFalladasTest1;
 	private JTextField fieldSinContestarTest1;
 	private JTextField fieldSinContestarTest2;
-	private JTextField fieldIncorrectasTest2;
+	private JTextField fieldFalladasTest2;
 	private JTextField fieldCorrectasTest2;
-	private JTextField textFieldNumFaltas;
+	private JTextField fieldRetrasos1;
+	private JTextField fieldRetrasos2;
+	private JTextField fieldRetrasos3;
 	private JRadioButton rdbtnEntregadoTrabajo1;
 	private JRadioButton rdbtnEntregadoTrabajo2;
 	private JRadioButton rdbtnEntregadoTrabajo3;
@@ -60,6 +60,7 @@ public class DatosNotas extends JFrame {
 	private JRadioButton rdbtnNoEntregadoTrabajo3;
 	private JButton btnAtras;
 	private JButton btnFinalizar;
+	
 	
 	
 	Persona persona = new Persona();
@@ -131,7 +132,7 @@ public class DatosNotas extends JFrame {
 	 */
 	public void iniciarComponentes() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 543);
+		setBounds(100, 100, 486, 502);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -160,8 +161,8 @@ public class DatosNotas extends JFrame {
 		
 		JLabel lblNewLabel_1 = new JLabel("Incorrectas:");
 		
-		fieldIncorrectasTest1 = new JTextField();
-		fieldIncorrectasTest1.setColumns(10);
+		fieldFalladasTest1 = new JTextField();
+		fieldFalladasTest1.setColumns(10);
 		
 		JLabel lblSinContestar = new JLabel("Sin contestar:");
 		
@@ -175,8 +176,8 @@ public class DatosNotas extends JFrame {
 		
 		JLabel label_1 = new JLabel("Incorrectas:");
 		
-		fieldIncorrectasTest2 = new JTextField();
-		fieldIncorrectasTest2.setColumns(10);
+		fieldFalladasTest2 = new JTextField();
+		fieldFalladasTest2.setColumns(10);
 		
 		fieldCorrectasTest2 = new JTextField();
 		fieldCorrectasTest2.setColumns(10);
@@ -184,11 +185,6 @@ public class DatosNotas extends JFrame {
 		JLabel label_2 = new JLabel("Correctas:");
 		
 		JLabel lblExTest = new JLabel("Ex. Test 2: (total max. 30)");
-		
-		JLabel lblNewLabel_2 = new JLabel("N\u00FAmero de faltas:");
-		
-		textFieldNumFaltas = new JTextField();
-		textFieldNumFaltas.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("Trabajo de la evaluaci\u00F3n 1:");
 		
@@ -221,6 +217,21 @@ public class DatosNotas extends JFrame {
 				btnAtrasActionPerformed(e);
 			}
 		});
+		
+		JLabel lblNewLabel_2 = new JLabel("Dias de retraso:");
+		
+		fieldRetrasos1 = new JTextField();
+		fieldRetrasos1.setColumns(10);
+		
+		JLabel label_3 = new JLabel("Dias de retraso:");
+		
+		fieldRetrasos2 = new JTextField();
+		fieldRetrasos2.setColumns(10);
+		
+		JLabel label_4 = new JLabel("Dias de retraso:");
+		
+		fieldRetrasos3 = new JTextField();
+		fieldRetrasos3.setColumns(10);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -228,86 +239,124 @@ public class DatosNotas extends JFrame {
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblNewLabel_1)
-									.addGap(18)
-									.addComponent(fieldIncorrectasTest1, GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(lblTest1)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblNewLabel)
-									.addGap(26)
-									.addComponent(fieldCorrectasTest1, GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(lblSinContestar)
 									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(fieldSinContestarTest1, GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)))
-							.addGap(36)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblExTest, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
-									.addGap(26)
-									.addComponent(fieldCorrectasTest2, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+									.addComponent(fieldSinContestarTest1))
+								.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+									.addComponent(lblNewLabel_1)
 									.addGap(18)
-									.addComponent(fieldIncorrectasTest2, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-									.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(btnAtras)
-										.addPreferredGap(ComponentPlacement.UNRELATED)
-										.addComponent(btnFinalizar))
-									.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(label, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
-										.addGap(10)
-										.addComponent(fieldSinContestarTest2, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE))))
-							.addGap(16))
+									.addComponent(fieldFalladasTest1))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(lblNewLabel)
+									.addGap(26)
+									.addComponent(fieldCorrectasTest1, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)))
+							.addPreferredGap(ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addComponent(btnAtras)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(btnFinalizar)
+									.addGap(16))
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addComponent(lblExTest, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
+										.addGroup(gl_contentPane.createSequentialGroup()
+											.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
+											.addGap(26)
+											.addComponent(fieldCorrectasTest2, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE))
+										.addGroup(gl_contentPane.createSequentialGroup()
+											.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
+											.addGap(18)
+											.addComponent(fieldFalladasTest2, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE))
+										.addGroup(gl_contentPane.createSequentialGroup()
+											.addComponent(label, GroupLayout.PREFERRED_SIZE, 67, GroupLayout.PREFERRED_SIZE)
+											.addGap(10)
+											.addComponent(fieldSinContestarTest2, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)))
+									.addContainerGap())))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addComponent(lblClasico1)
-									.addGap(18)
-									.addComponent(textFieldClasico1, GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
+									.addGap(18))
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblClasico2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addGap(18)
-									.addComponent(textFieldClasico2, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE))
+									.addComponent(lblClasico2, GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED))
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblNewLabel_2)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(textFieldNumFaltas, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(lblClasico3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addGap(18)
-									.addComponent(textFieldClasico3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+									.addComponent(lblClasico3, GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED)))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(textFieldClasico3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+								.addComponent(textFieldClasico2, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+								.addComponent(textFieldClasico1, GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE))
 							.addGap(223))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblNewLabel_3)
-								.addComponent(lblTrabajoDeLa, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblTrabajoDeLa_1, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE))
-							.addGap(51)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(rdbtnEntregadoTrabajo3, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(rdbtnNoEntregadoTrabajo3, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(rdbtnEntregadoTrabajo2, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(rdbtnNoEntregadoTrabajo2, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(rdbtnEntregadoTrabajo1)
-									.addGap(18)
-									.addComponent(rdbtnNoEntregadoTrabajo1)))
-							.addContainerGap(49, Short.MAX_VALUE))))
+							.addComponent(lblNewLabel_3)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(rdbtnEntregadoTrabajo1)
+							.addGap(18)
+							.addComponent(rdbtnNoEntregadoTrabajo1)
+							.addGap(18)
+							.addComponent(lblNewLabel_2)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(fieldRetrasos1, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(81, Short.MAX_VALUE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblTrabajoDeLa, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(rdbtnEntregadoTrabajo2, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(rdbtnNoEntregadoTrabajo2, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(label_3, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(fieldRetrasos2, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblTrabajoDeLa_1, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(rdbtnEntregadoTrabajo3, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(rdbtnNoEntregadoTrabajo3, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
+							.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(fieldRetrasos3, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblTest1)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblNewLabel)
+								.addComponent(fieldCorrectasTest1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblNewLabel_1)
+								.addComponent(fieldFalladasTest1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblSinContestar)
+								.addComponent(fieldSinContestarTest1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(55)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblClasico1)
+								.addComponent(textFieldClasico1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblClasico2)
+								.addComponent(textFieldClasico2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblClasico3)
+								.addComponent(textFieldClasico3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(lblExTest)
 							.addGap(11)
@@ -321,60 +370,35 @@ public class DatosNotas extends JFrame {
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addGap(3)
 									.addComponent(label_1))
-								.addComponent(fieldIncorrectasTest2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addComponent(fieldFalladasTest2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addGap(3)
 									.addComponent(label))
-								.addComponent(fieldSinContestarTest2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblTest1)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNewLabel)
-								.addComponent(fieldCorrectasTest1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNewLabel_1)
-								.addComponent(fieldIncorrectasTest1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblSinContestar)
-								.addComponent(fieldSinContestarTest1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-					.addGap(55)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblClasico1)
-						.addComponent(textFieldClasico1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblClasico2)
-						.addComponent(textFieldClasico2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblClasico3)
-						.addComponent(textFieldClasico3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(41)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_2)
-						.addComponent(textFieldNumFaltas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(32)
+								.addComponent(fieldSinContestarTest2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+					.addGap(42)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel_3)
 						.addComponent(rdbtnEntregadoTrabajo1)
+						.addComponent(lblNewLabel_2)
+						.addComponent(fieldRetrasos1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(rdbtnNoEntregadoTrabajo1))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblTrabajoDeLa)
 						.addComponent(rdbtnEntregadoTrabajo2)
-						.addComponent(rdbtnNoEntregadoTrabajo2))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(rdbtnNoEntregadoTrabajo2)
+						.addComponent(label_3)
+						.addComponent(fieldRetrasos2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblTrabajoDeLa_1)
 						.addComponent(rdbtnEntregadoTrabajo3)
-						.addComponent(rdbtnNoEntregadoTrabajo3))
-					.addPreferredGap(ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+						.addComponent(rdbtnNoEntregadoTrabajo3)
+						.addComponent(label_4)
+						.addComponent(fieldRetrasos3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnFinalizar)
 						.addComponent(btnAtras))
@@ -409,14 +433,88 @@ public class DatosNotas extends JFrame {
 	 * recoge todos los datos introducidos en los campos de esta ventana.
 	 */
 	public void recogerDatos() {
-		double [] examenClasico = new double [examen.getNUM_EXAMENES_CLASICOS()];
-		examenClasico[0] =Double.parseDouble(textFieldClasico1.getText());
-		examenClasico[1] =Double.parseDouble(textFieldClasico2.getText());
-		examenClasico[2] =Double.parseDouble(textFieldClasico3.getText());	
+		recogerDatosExamenesTest();
+		recogerDatosExamenesClasicos();
 		
 	}
 	
 	
+	/**
+	 * Recoge todos los parámetos de los examenes tipo test
+	 */
+	public void recogerDatosExamenesTest() {
+		
+		int [] correctasExamenTest = new int [examen.getNUM_EXAMENES_TEST()];
+		int [] falladasExamenTest = new int [examen.getNUM_EXAMENES_TEST()];
+		int [] sinContestarExamenTest = new int [examen.getNUM_EXAMENES_TEST()];
+		
+		correctasExamenTest[0] = Integer.parseInt(fieldCorrectasTest1.getText());
+		falladasExamenTest[0] = Integer.parseInt(fieldFalladasTest1.getText());
+		sinContestarExamenTest[0] = Integer.parseInt(fieldSinContestarTest1.getText());
+		
+		correctasExamenTest[1] = Integer.parseInt(fieldCorrectasTest2.getText());
+		falladasExamenTest[1] = Integer.parseInt(fieldFalladasTest2.getText());
+		sinContestarExamenTest[1] = Integer.parseInt(fieldSinContestarTest2.getText());
+		
+		examen.setRespuestasExamenTest(correctasExamenTest, falladasExamenTest, sinContestarExamenTest);
+		
+	}
+	
+	
+	/**
+	 * Recoge las notas de los examenes clásicos
+	 */
+	public void recogerDatosExamenesClasicos() {
+		
+		double [] NotaExamenClasico = new double [examen.getNUM_EXAMENES_CLASICOS()];
+		
+		NotaExamenClasico[0] = Double.parseDouble(textFieldClasico1.getText());
+		NotaExamenClasico[1] = Double.parseDouble(textFieldClasico2.getText());
+		NotaExamenClasico[2] = Double.parseDouble(textFieldClasico3.getText());	
+		
+		examen.setNotaExamenClasico(NotaExamenClasico);
+	}
+
+	
+	public void recogerTrabajos() {
+		
+		int entregado;
+		int diasDeRetraso;
+		int [][] trabajos = new int [examen.getNUM_TRABAJOS()][1];
+		
+		entregado=0;
+		diasDeRetraso = Integer.parseInt(fieldRetrasos1.getText());
+		if(diasDeRetraso<=5 && rdbtnNoEntregadoTrabajo1.isSelected()) {
+			entregado = 1;//1 = true (trabajo entregado)
+		}
+		
+		trabajos[0][0] = entregado;
+		trabajos[0][1] = diasDeRetraso;
+		
+		
+		entregado=0;
+		diasDeRetraso = Integer.parseInt(fieldRetrasos2.getText());
+		if(diasDeRetraso<=5 && rdbtnNoEntregadoTrabajo2.isSelected()) {
+			entregado = 1;//1 = true (trabajo entregado)
+		}
+		
+		trabajos[1][0] = entregado;
+		trabajos[1][1] = diasDeRetraso;
+		
+		
+		entregado=0;
+		diasDeRetraso = Integer.parseInt(fieldRetrasos3.getText());
+		if(diasDeRetraso<=5 && rdbtnNoEntregadoTrabajo3.isSelected()) {
+			entregado = 1;//1 = true (trabajo entregado)
+		}
+		
+		trabajos[2][0] = entregado;
+		trabajos[2][1] = diasDeRetraso;
+		
+		
+		examen.setTrabajoEntregado(trabajos);
+		
+	}
 	
 }
 
