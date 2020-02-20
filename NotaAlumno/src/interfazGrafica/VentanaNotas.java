@@ -482,38 +482,8 @@ public class VentanaNotas extends JFrame {
 		
 		int entregado = 0;
 		int diasDeRetraso;
-		int [][] trabajos = new int [notaTotal.getNUM_TRABAJOS()][1];
-		
-		diasDeRetraso = Integer.parseInt(fieldRetrasos1.getText());
-		if(diasDeRetraso <= 5 && rdbtnNoEntregadoTrabajo1.isSelected()) {
-			entregado = 1;	//1 = true (trabajo entregado)
-		}
-		
-		trabajos[0][0] = entregado;
-		trabajos[0][1] = diasDeRetraso;
 		
 		
-		entregado = 0;
-		diasDeRetraso = Integer.parseInt(fieldRetrasos2.getText());
-		if(diasDeRetraso <= 5 && rdbtnNoEntregadoTrabajo2.isSelected()) {
-			entregado = 1;	//1 = true (trabajo entregado)
-		}
-		
-		trabajos[1][0] = entregado;
-		trabajos[1][1] = diasDeRetraso;
-		
-		
-		entregado = 0;
-		diasDeRetraso = Integer.parseInt(fieldRetrasos3.getText());
-		if(diasDeRetraso <= 5 && rdbtnNoEntregadoTrabajo3.isSelected()) {
-			entregado = 1;	//1 = true (trabajo entregado)
-		}
-		
-		trabajos[2][0] = entregado;
-		trabajos[2][1] = diasDeRetraso;
-		
-		
-		notaTotal.setTrabajoEntregado(trabajos);
 		
 	}
 	

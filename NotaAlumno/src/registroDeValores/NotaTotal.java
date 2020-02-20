@@ -4,10 +4,11 @@
  * Almacena todos los datos necesarios de las notas.
  * 
  * Última actualización:
- * -Se ha mejorado la legibilidad
+ * -Se ha añadido el array trabajoArray
+ * -Se ha añadido el método setTrabajoArray
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.1.3
+ * @version 0.1.4
  */
 package registroDeValores;
 
@@ -25,13 +26,18 @@ public class NotaTotal extends Trabajo {
 	
 	private ExamenClasico examenClasicoArray[] = new ExamenClasico[NUM_EXAMENES_CLASICOS];
 	private ExamenTest examenTestArray[] = new ExamenTest[NUM_EXAMENES_TEST];
+	private Trabajo trabajoArray[] = new Trabajo[NUM_TRABAJOS];
 	
 	
 	/**
 	 * Constructor vacio
 	 */
 	public NotaTotal() {
-		trabajosEntregados = new int[NUM_TRABAJOS][2];
+		
+		for (int i = 0; i < NUM_TRABAJOS; i++) {
+			trabajoArray[i] = new Trabajo(true, 0);
+		}
+		
 		examenClasicoArray[0] = new ExamenClasico(0, PORCENTAJE10);
 		examenClasicoArray[1] = new ExamenClasico(0, PORCENTAJE20);
 		examenClasicoArray[2] = new ExamenClasico(0, PORCENTAJE20);
@@ -50,10 +56,10 @@ public class NotaTotal extends Trabajo {
 	 * de peso en la nota global
 	 * @param retrasos: cantidad de restrasos de un alumno
 	 */
-	public NotaTotal(int [][] trabajoEntregado, ExamenClasico [] examenClasico,
+	public NotaTotal(Trabajo [] trabajoArray, ExamenClasico [] examenClasico,
 			ExamenTest [] examenTest, int retrasos) {
 		
-		this.trabajosEntregados = trabajoEntregado;
+		this.trabajoArray = trabajoArray;
 		this.examenClasicoArray = examenClasico;
 		this.examenTestArray = examenTest;
 	}
@@ -66,17 +72,9 @@ public class NotaTotal extends Trabajo {
 	 */
 	public NotaTotal(NotaTotal notaTotal) {
 		
-		this.trabajosEntregados = notaTotal.trabajosEntregados;
+		this.trabajoArray = notaTotal.trabajoArray;
 		this.examenClasicoArray = notaTotal.examenClasicoArray;
 		this.examenTestArray = notaTotal.examenTestArray;
-	}
-
-	
-	/**
-	 * @return Array de trabajos entregados
-	 */
-	public int[][] getTrabajoEntregado() {
-		return trabajosEntregados;
 	}
 
 	
@@ -117,14 +115,6 @@ public class NotaTotal extends Trabajo {
 		return NUM_TRABAJOS;
 	}
 
-
-	/**
-	 * @param trabajoEntregado: boolean array que guarda los trabajos entregados
-	 */
-	public void setTrabajoEntregado(int[][] trabajoEntregado) {
-		this.trabajosEntregados = trabajoEntregado;
-	}
-
 	
 	/**
 	 * @param examenClasico: objeto ExamenClasico Array
@@ -143,11 +133,11 @@ public class NotaTotal extends Trabajo {
 	
 	
 	/**
-	 * Nos pasa los datos de las notas a los examenes clásicos
+	 * pasamos los valores de las notas del examen clásico al array de tipo ExamenClasico
 	 * 
 	 * @param NotaExamenClasico: Array double con las notas de todos los examenes clásicos
 	 */
-	public void setNotaExamenClasico(double NotaExamenClasico[]) {
+	public void setNotaExamenClasico(double [] NotaExamenClasico) {
 		for (int i = 0; i < NUM_EXAMENES_CLASICOS; i++) {
 			examenClasicoArray[i].setNota(NotaExamenClasico[i]);
 		}
@@ -155,18 +145,32 @@ public class NotaTotal extends Trabajo {
 	
 	
 	/**
-	 * Nos pasa las respuestas recogidas por una clase a la clase ExamenTest
+	 * pasamos los valores de las respuesta del examen tipo test al array de tipo ExamenTest
 	 * 
 	 * @param correctas: respuestas acertadas en un notaTotal tipo test
 	 * @param falladas: respuestas falladas en un notaTotal tipo test
 	 * @param sinContestar: respuesta no contestasdas en un notaTotal tipo test
 	 */
-	public void setRespuestasExamenTest(int correctas[], int falladas[],
-			int sinContestar[]) {
+	public void setRespuestasExamenTest(int [] correctas, int [] falladas,
+			int [] sinContestar) {
 		for (int i = 0; i < NUM_EXAMENES_TEST; i++) {
 			examenTestArray[i].setCorrectas(correctas[i]);
 			examenTestArray[i].setFalladas(falladas[i]);
 			examenTestArray[i].setSinContestar(sinContestar[i]);
+		}
+	}
+	
+	
+	/**
+	 * Pasamos los valores de los trabajos al array de tipo Trabajo
+	 * 
+	 * @param entregado: es de tipo boolean. true equivale a que se ha entregado el trabajo
+	 * @param diasDeRetraso: es la cantidad de días que se tarda en entregar el trabajo
+	 */
+	public void setTrabajoArray(boolean [] entregado, int [] diasDeRetraso) {
+		for (int i = 0; i < NUM_TRABAJOS; i++) {
+			trabajoArray[i].setDiasDeRetraso(diasDeRetraso[i]);
+			trabajoArray[i].setEntregado(entregado[i]);
 		}
 	}
 	
