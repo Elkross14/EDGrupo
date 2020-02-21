@@ -4,10 +4,10 @@
  * Contiene todos los mensajes de error que usará el programa
  * 
  * Última actualización:
- * -Se ha mejorado la legibilidad
+ * -Se ha añadido el método errorNumDouble
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.1.1
+ * @version 0.1.2
  */
 
 package clases;
@@ -68,6 +68,19 @@ public class MensajeError extends javax.swing.JFrame {
             "No es valido nada que no sea numeros enteros en " + campo,
             "Error numerico Entero",
             JOptionPane.ERROR_MESSAGE);
+    }
+    
+    
+    /**
+     * Saltará un ERROR_MESSAGE en caso de que no sea un número decimal
+     * 
+     * @param campo: nombre del campo con el error de entrada de número decimal
+     */
+    public void errorNumDouble(String campo) {
+        JOptionPane.showMessageDialog(this,
+                "No es valido nada que no sea numeros en el campo " + campo + ".",
+                "Error numerico",
+                JOptionPane.ERROR_MESSAGE);
     }
     
     
