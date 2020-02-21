@@ -5,16 +5,12 @@
  * datos necesarios.
  * 
  * última actualización: 
- * -Añadido el método verificarEntradaInt
- * -Añadido el método verificarEntradaDouble
+ * -Casi terminado el sistema de verificación
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.0.5.5
+ * @version 0.0.5.6
  */
 package interfazGrafica;
-
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -27,12 +23,8 @@ import registroDeValores.ExamenClasico;
 import registroDeValores.Persona;
 
 import javax.swing.ButtonGroup;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -78,7 +70,7 @@ public class VentanaNotas extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaNotas() {
-		inicialVentana();
+		iniciarVentana();
 	}
 	
 	
@@ -89,7 +81,7 @@ public class VentanaNotas extends JFrame {
 	 * @param notaTotal: objeto de clase NotaTotal con todas sus variables
 	 */
 	public VentanaNotas(Persona persona, NotaTotal notaTotal) {
-		inicialVentana();
+		iniciarVentana();
 		
 		this.persona = new Persona(persona);
 		this.notaTotal = new NotaTotal(notaTotal);
@@ -99,13 +91,13 @@ public class VentanaNotas extends JFrame {
 	/**
 	 * Inicia y ajusta la ventana
 	 */
-	public void inicialVentana() {
+	public void iniciarVentana() {
 		iniciarComponentes();
 		agruparJRadioButton();
 		
 		setLocationRelativeTo(null);	//vista centrada
         setResizable(false);	//evita que se pueda cambiar el tamaño de la ventana
-        setTitle("Nombre Alumno");	//pondrá titulo a la ventanag
+        setTitle("Notas");	//pondrá titulo a la ventanag
 	}
 	
 
@@ -164,7 +156,7 @@ public class VentanaNotas extends JFrame {
 		fieldClasico3.setBounds(145, 243, 86, 20);
 		fieldClasico3.setColumns(10);
 		
-		JLabel lblTest1 = new JLabel("Ex. Test 1: (total max. 30)");
+		JLabel lblTest1 = new JLabel("Ex. Test 1: (total max. "+notaTotal.getNUM_PREGUNTAS_TEST()+")");
 		lblTest1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblTest1.setBounds(15, 19, 160, 14);
 		
@@ -216,7 +208,7 @@ public class VentanaNotas extends JFrame {
 		label_2.setFont(new Font("Tahoma", Font.BOLD, 11));
 		label_2.setBounds(294, 44, 86, 14);
 		
-		JLabel lblExTest = new JLabel("Ex. Test 2: (total max. 30)");
+		JLabel lblExTest = new JLabel("Ex. Test 2: (total max. "+notaTotal.getNUM_PREGUNTAS_TEST()+")");
 		lblExTest.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblExTest.setBounds(294, 19, 160, 14);
 		
@@ -316,7 +308,7 @@ public class VentanaNotas extends JFrame {
 			}
 		});
 		
-		JLabel lblNewLabel_2 = new JLabel("Dias de retraso:");
+		JLabel lblNewLabel_2 = new JLabel("D\u00EDas de retraso:");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel_2.setBounds(387, 306, 91, 14);
 		
@@ -324,17 +316,17 @@ public class VentanaNotas extends JFrame {
 		fieldRetrasos1.setBounds(488, 305, 34, 20);
 		fieldRetrasos1.setColumns(10);
 		
-		JLabel label_3 = new JLabel("Dias de retraso:");
-		label_3.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_3.setBounds(387, 347, 91, 14);
+		JLabel lblDasDeRetraso = new JLabel("D\u00EDas de retraso:");
+		lblDasDeRetraso.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblDasDeRetraso.setBounds(387, 347, 91, 14);
 		
 		fieldRetrasos2 = new JTextField();
 		fieldRetrasos2.setBounds(488, 346, 34, 20);
 		fieldRetrasos2.setColumns(10);
 		
-		JLabel label_4 = new JLabel("Dias de retraso:");
-		label_4.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_4.setBounds(387, 388, 91, 14);
+		JLabel lblDasDeRetraso_1 = new JLabel("D\u00EDas de retraso:");
+		lblDasDeRetraso_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblDasDeRetraso_1.setBounds(387, 388, 91, 14);
 		
 		fieldRetrasos3 = new JTextField();
 		fieldRetrasos3.setBounds(488, 387, 34, 20);
@@ -370,12 +362,12 @@ public class VentanaNotas extends JFrame {
 		contentPane.add(lblTrabajoDeLa);
 		contentPane.add(rdbtnEntregadoTrabajo2);
 		contentPane.add(rdbtnNoEntregadoTrabajo2);
-		contentPane.add(label_3);
+		contentPane.add(lblDasDeRetraso);
 		contentPane.add(fieldRetrasos2);
 		contentPane.add(lblTrabajoDeLa_1);
 		contentPane.add(rdbtnEntregadoTrabajo3);
 		contentPane.add(rdbtnNoEntregadoTrabajo3);
-		contentPane.add(label_4);
+		contentPane.add(lblDasDeRetraso_1);
 		contentPane.add(fieldRetrasos3);
 	}
 	
@@ -386,6 +378,14 @@ public class VentanaNotas extends JFrame {
 	 * @param evt click izquierzo en el botón Finalizar
 	 */
 	private void btnFinalizarActionPerformed(ActionEvent evt) {
+		if(verificarEntradaDatos()) {
+			recogerEntradaDatos();
+			
+			System.out.println("hola");
+			System.out.println(notaTotal.calcularNotaGlobal());
+			mensaje.envioCorrecto();
+		}
+		mensaje.envioIncorrecto();
 		
 	}
 	
@@ -417,7 +417,6 @@ public class VentanaNotas extends JFrame {
 	 * Recoge todos los parámetos de los examenes tipo test
 	 */
 	public void recogerDatosExamenesTest() {
-		
 		int [] correctasExamenTest = new int [notaTotal.getNUM_EXAMENES_TEST()];
 		int [] falladasExamenTest = new int [notaTotal.getNUM_EXAMENES_TEST()];
 		int [] sinContestarExamenTest = new int [notaTotal.getNUM_EXAMENES_TEST()];
@@ -439,7 +438,6 @@ public class VentanaNotas extends JFrame {
 	 * Recoge las notas de los examenes clásicos
 	 */
 	public void recogerDatosExamenesClasicos() {
-		
 		double [] NotaExamenClasico = new double [notaTotal.getNUM_EXAMENES_CLASICOS()];
 		
 		NotaExamenClasico[0] = Double.parseDouble(fieldClasico1.getText());
@@ -454,7 +452,6 @@ public class VentanaNotas extends JFrame {
 	 * Recoge los datos de los trabajos. Trabajos entregados y dias de retraso
 	 */
 	public void recogerTrabajos() {
-		
 		boolean [] entregadoTrabajo = new boolean [notaTotal.getNUM_TRABAJOS()];
 		int [] diasDeRetrasoTrabajo = new int [notaTotal.getNUM_TRABAJOS()];
 		
@@ -494,22 +491,92 @@ public class VentanaNotas extends JFrame {
 	
 	/**
 	 * Verifica toda la información recogida por esta ventana 
+	 * 
+	 * @return devolverá true en el caso de estar todo correcto
 	 */
-	public void verificarEntradaDatos() {
-		
-		verificarEntradaInt(fieldCorrectasTest1.getText(), "Correctas Test 1");
-		verificarEntradaInt(fieldFalladasTest1.getText(), "Falladas Test 1");
-		verificarEntradaInt(fieldSinContestarTest1.getText(), "Sin Contestar Test 1");
-		
-		verificarEntradaInt(fieldCorrectasTest2.getText(), "Correctas Test 2");
-		verificarEntradaInt(fieldFalladasTest2.getText(), "Falladas Test 2");
-		verificarEntradaInt(fieldSinContestarTest2.getText(), "Sin Contestar Test 2");
-		
-		verificarEntradaDouble(fieldClasico1.getText(), "Examen clásico 1");
-		verificarEntradaDouble(fieldClasico2.getText(), "Examen clásico 2");
-		verificarEntradaDouble(fieldClasico3.getText(), "Examen clásico 3");
-		
-		
+	public boolean verificarEntradaDatos() {
+		if(verificarEntradaExTest()) {
+			return false;
+		}
+		else if(verificarEntradaExClasico()) {
+			return false;
+		}
+		else if(verificarEntradaTrabajo()) {
+			return false;
+		}
+		return true;
+	}
+	
+	
+	/**
+	 * Verifica todas las entradas de datos de los examenes de tipo test
+	 * 
+	 * @return devolverá false en el caso de estar todo correcto
+	 */
+	public boolean verificarEntradaExTest() {
+		if(verificarEntradaInt(fieldCorrectasTest1.getText(), "Correctas Test 1")) {
+			return true;
+		} 
+		else if (verificarEntradaInt(fieldFalladasTest1.getText(), "Falladas Test 1")){
+			return true;
+		} 
+		else if (verificarEntradaInt(fieldSinContestarTest1.getText(), "Sin Contestar Test 1")) {
+			return true;
+		}
+		else if(verificarEntradaInt(fieldCorrectasTest2.getText(), "Correctas Test 2")) {
+			return true;
+		}
+		else if (verificarEntradaInt(fieldFalladasTest2.getText(), "Falladas Test 2")){
+			return true;
+		}
+		else if (verificarEntradaInt(fieldSinContestarTest2.getText(), "Sin Contestar Test 2")) {
+			return true;
+		}
+		return false;
+	}
+	
+	
+	/**
+	 * Verifica todas las entradas de datos de los examenes clásicos
+	 * 
+	 * @returndevolverá false en el caso de que estar todo correcto
+	 */
+	public boolean verificarEntradaExClasico() {
+		if(verificarEntradaDouble(fieldClasico1.getText(), "Examen clásico 1")) {
+			return true;
+		} 
+		else if(verificarEntradaDouble(fieldClasico2.getText(), "Examen clásico 2")) {
+			return true;
+		} 
+		else if(verificarEntradaDouble(fieldClasico3.getText(), "Examen clásico 3")) {
+			return true;
+		}
+		return false;
+	}
+	
+	
+	/**
+	 * Verifica todas las entradas de datos de los trabajos
+	 * 
+	 * @return devolverá false en el caso de estar todo correcto
+	 */
+	public boolean verificarEntradaTrabajo() {
+		if(rdbtnEntregadoTrabajo1.isSelected()) {
+			if(verificarEntradaInt(fieldRetrasos1.getText(), "Días de retraso (Trabajo de la evaluación 1")) {
+				return true;
+			}
+		} 
+		else if(rdbtnEntregadoTrabajo2.isSelected()) {
+			if(verificarEntradaInt(fieldRetrasos2.getText(), "Días de retraso (Trabajo de la evaluación 2")) {
+				return true;
+			}
+		} 
+		else if(rdbtnEntregadoTrabajo3.isSelected()) {
+			if(verificarEntradaInt(fieldRetrasos3.getText(), "Días de retraso (Trabajo de la evaluación 3")) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	
@@ -536,8 +603,8 @@ public class VentanaNotas extends JFrame {
 	/**
 	 * Verifica que cualquier dato de tipo double que se introduzca cumpla las condiciones que queremos
 	 * 
-	 * @param cadena: el texto que ha introducido el usuario
-	 * @param campo: que campo se está verificando 
+	 * @param cadena el texto que ha introducido el usuario
+	 * @param campo que campo se está verificando 
 	 * @return devolverá false en caso de estar todo correcto
 	 */
 	public boolean verificarEntradaDouble(String cadena, String campo) {

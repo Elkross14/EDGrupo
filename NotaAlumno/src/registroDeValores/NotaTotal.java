@@ -4,11 +4,10 @@
  * Almacena todos los datos necesarios de las notas.
  * 
  * Última actualización:
- * -Se ha añadido el array trabajoArray
- * -Se ha añadido el método setTrabajoArray
+ * -Añadido los metodos que calculan la nota final
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.1.4
+ * @version 0.1.5
  */
 package registroDeValores;
 
@@ -23,6 +22,7 @@ public class NotaTotal extends Trabajo {
 	private final int NUM_EXAMENES_CLASICOS = 3;
 	private final int NUM_EXAMENES_TEST = 2;
 	private final int NUM_TRABAJOS = 3;
+	private final int NUM_PREGUNTAS_TEST=30;
 	
 	private ExamenClasico examenClasicoArray[] = new ExamenClasico[NUM_EXAMENES_CLASICOS];
 	private ExamenTest examenTestArray[] = new ExamenTest[NUM_EXAMENES_TEST];
@@ -41,8 +41,8 @@ public class NotaTotal extends Trabajo {
 		examenClasicoArray[0] = new ExamenClasico(0, PORCENTAJE10);
 		examenClasicoArray[1] = new ExamenClasico(0, PORCENTAJE20);
 		examenClasicoArray[2] = new ExamenClasico(0, PORCENTAJE20);
-		examenTestArray[0] = new ExamenTest(0, 0, 0, 0, 0, PORCENTAJE25);
-		examenTestArray[1] = new ExamenTest(0, 0, 0, 0, 0, PORCENTAJE25);
+		examenTestArray[0] = new ExamenTest(0, 0, 0, NUM_PREGUNTAS_TEST, 0, PORCENTAJE25);
+		examenTestArray[1] = new ExamenTest(0, 0, 0, NUM_PREGUNTAS_TEST, 0, PORCENTAJE25);
 	}
 	
 	
@@ -81,7 +81,7 @@ public class NotaTotal extends Trabajo {
 	/**
 	 * @return objeto de ExamenClasico (double nota, int porcNotaGlobal)
 	 */
-	public ExamenClasico[] getExamenClasico() {
+	public ExamenClasico[] getExamenClasicoArray() {
 		return examenClasicoArray;
 	}
 
@@ -90,13 +90,13 @@ public class NotaTotal extends Trabajo {
 	 * @return objeto de ExamenTest (int correctas, int falladas, int sinContestar, 
 	 * int preguntasTotales, double nota, int porcNotaGlobal)
 	 */
-	public ExamenTest[] getExamenTest() {
+	public ExamenTest[] getExamenTestArray() {
 		return examenTestArray;
 	}
 
 	
 	/**
-	 * @return la cantidad de examenes clásicos que hace cada persona
+	 * @return devuelve la cantidad de examenes clásicos que hace cada persona
 	 */
 	public int getNUM_EXAMENES_CLASICOS() {
 		return NUM_EXAMENES_CLASICOS;
@@ -104,22 +104,34 @@ public class NotaTotal extends Trabajo {
 
 	
 	/**
-	 * @return la cantidad de examenes tipo test que hace cada persona
+	 * @return devuelve la cantidad de examenes tipo test que hace cada persona
 	 */
 	public int getNUM_EXAMENES_TEST() {
 		return NUM_EXAMENES_TEST;
 	}
 
 	
+	/**
+	 * @return devuelve el número de trabajos
+	 */
 	public int getNUM_TRABAJOS() {
 		return NUM_TRABAJOS;
 	}
 
 	
 	/**
+	 * 
+	 * @return devuelve el número de preguntas que tiene cada examen tipo test
+	 */
+	public int getNUM_PREGUNTAS_TEST() {
+		return NUM_PREGUNTAS_TEST;
+	}
+
+
+	/**
 	 * @param examenClasico: objeto ExamenClasico Array
 	 */
-	public void setExamenClasico(ExamenClasico[] examenClasico) {
+	public void setExamenClasicoArray(ExamenClasico[] examenClasico) {
 		this.examenClasicoArray = examenClasico;
 	}
 
@@ -127,7 +139,7 @@ public class NotaTotal extends Trabajo {
 	/**
 	 * @param examenTest: objeto ExamenTest Array
 	 */
-	public void setExamenTest(ExamenTest[] examenTest) {
+	public void setExamenTestArray(ExamenTest[] examenTest) {
 		this.examenTestArray = examenTest;
 	}
 	
@@ -172,6 +184,101 @@ public class NotaTotal extends Trabajo {
 			trabajoArray[i].setDiasDeRetraso(diasDeRetraso[i]);
 			trabajoArray[i].setEntregado(entregado[i]);
 		}
+	}
+	
+	
+	/**
+	 * Calcula la nota global
+	 * 
+	 * @return devolverá la nota global
+	 */
+	public double calcularNotaGlobal() {
+		double notaGlobal;
+		
+		if(getTrabajosEntregadosATiempo()) {
+			notaGlobal = 3;
+		}
+		else {
+			notaGlobal = calcularNotaTotalExText() + calcularNotaTotalExClasico();
+		}
+		
+		return notaGlobal;
+	}
+	
+
+	/**
+	 * Calcula la nota total que se consigue juntando todos los examenes tipo test
+	 * y su porcentaje de peso en la nota final
+	 * 
+	 * @return devolverá la nota de los examenes tipo test con decimales
+	 */
+	public double calcularNotaTotalExText() {
+		double notaTotalExText = 0.0;
+		double notaExTest;
+		double porcentajeNotaGlobal;
+		
+		for (int i = 0; i < NUM_EXAMENES_TEST; i++) {
+			
+			notaExTest = examenTestArray[i].getNota();
+			porcentajeNotaGlobal = examenTestArray[i].getPorcNotaGlobal();
+			
+			notaTotalExText += notaExTest * (porcentajeNotaGlobal / 100);
+		}
+		return notaTotalExText;
+	}
+	
+	
+	/**
+	 * Calcula la nota de cada examen tipo test teniendo encuenta las respuestas
+	 * acertadas, las falladas y el total de preguntas.
+	 */
+	public void calcularNotaExTest() {
+		double acertadas;
+		
+		for (int i = 0; i <NUM_EXAMENES_TEST; i++) {
+			 acertadas = examenTestArray[i].getCorrectas() - 
+					 (examenTestArray[i].getFalladas() / 3);
+			 double notaTest = (acertadas * 10)/ NUM_EXAMENES_TEST;
+			 examenTestArray[i].setNota(notaTest);
+		}
+	}
+	
+	
+	/**
+	 * Calcula la nota total que se consigue juntando todos los examenes clasicos
+	 * y su porcentaje de peso en la nota final
+	 * 
+	 * @return devolverá la nota de los examenes clásicos con decimales
+	 */
+	public double calcularNotaTotalExClasico() {
+		double notaTotalExClasico = 0.0;
+		double notaExClasico;
+		double porcentajeNotaGlobal;
+		
+		for (int i = 0; i < NUM_EXAMENES_CLASICOS; i++) {
+			
+			notaExClasico = examenClasicoArray[i].getNota();
+			porcentajeNotaGlobal = examenClasicoArray[i].getPorcNotaGlobal();
+			
+			notaTotalExClasico += notaExClasico * (porcentajeNotaGlobal / 100);
+		}
+		return notaTotalExClasico;
+	}
+	
+	
+	/**
+	 * Nos dirá si todos los trabajos han sido entregado y si ha sido dentro del plazo
+	 * de 5 dias como máximo de retraso
+	 * 
+	 * @return devolverá false en caso de que se hayan entregado todos los trabajos a tiempo
+	 */
+	public boolean getTrabajosEntregadosATiempo() {
+		for (int i = 0; i < NUM_TRABAJOS; i++) {
+			if(!trabajoArray[i].isEntregado() || trabajoArray[i].getDiasDeRetraso()>=5) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 
