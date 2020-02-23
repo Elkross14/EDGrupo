@@ -5,10 +5,11 @@
  * datos necesarios.
  * 
  * última actualización: 
- * -Casi terminado el sistema de verificación
+ * -Conectado con el servidor para enviar datos
+ * -Arreglo de fallos en el sistema de verificación
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.0.5.6
+ * @version 0.1
  */
 package interfazGrafica;
 
@@ -17,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import clases.MensajeError;
+import clases.MySQL;
 import clases.VerificacionDeDatos;
 import registroDeValores.NotaTotal;
 import registroDeValores.ExamenClasico;
@@ -64,6 +66,7 @@ public class VentanaNotas extends JFrame {
 	ExamenClasico examenClasico = new ExamenClasico();
 	MensajeError mensaje = new MensajeError();
 	VerificacionDeDatos verifica = new VerificacionDeDatos();
+	MySQL conexion = new MySQL();
 
 
 	/**
@@ -381,12 +384,12 @@ public class VentanaNotas extends JFrame {
 		if(verificarEntradaDatos()) {
 			recogerEntradaDatos();
 			
-			System.out.println("hola");
-			System.out.println(notaTotal.calcularNotaGlobal());
-			mensaje.envioCorrecto();
+			notaTotal.calcularNotaGlobal();
+			conexion.insertarDatos(persona, notaTotal);
 		}
-		mensaje.envioIncorrecto();
-		
+		else {
+			mensaje.envioIncorrecto();
+		}
 	}
 	
 	
@@ -517,19 +520,19 @@ public class VentanaNotas extends JFrame {
 		if(verificarEntradaInt(fieldCorrectasTest1.getText(), "Correctas Test 1")) {
 			return true;
 		} 
-		else if (verificarEntradaInt(fieldFalladasTest1.getText(), "Falladas Test 1")){
+		else if(verificarEntradaInt(fieldFalladasTest1.getText(), "Falladas Test 1")){
 			return true;
 		} 
-		else if (verificarEntradaInt(fieldSinContestarTest1.getText(), "Sin Contestar Test 1")) {
+		else if(verificarEntradaInt(fieldSinContestarTest1.getText(), "Sin Contestar Test 1")) {
 			return true;
 		}
 		else if(verificarEntradaInt(fieldCorrectasTest2.getText(), "Correctas Test 2")) {
 			return true;
 		}
-		else if (verificarEntradaInt(fieldFalladasTest2.getText(), "Falladas Test 2")){
+		else if(verificarEntradaInt(fieldFalladasTest2.getText(), "Falladas Test 2")){
 			return true;
 		}
-		else if (verificarEntradaInt(fieldSinContestarTest2.getText(), "Sin Contestar Test 2")) {
+		else if(verificarEntradaInt(fieldSinContestarTest2.getText(), "Sin Contestar Test 2")) {
 			return true;
 		}
 		return false;
@@ -590,13 +593,13 @@ public class VentanaNotas extends JFrame {
 	public boolean verificarEntradaInt(String cadena, String campo) {
 		if(verifica.campoRelleno(cadena)) {
 			mensaje.vacioCampo(campo);
-			return false;
+			return true;
 		}
 		else if(verifica.correctoInt(cadena)) {
 			mensaje.errorNumEnt(campo);
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 	
 	
@@ -610,13 +613,13 @@ public class VentanaNotas extends JFrame {
 	public boolean verificarEntradaDouble(String cadena, String campo) {
 		if(verifica.campoRelleno(cadena)) {
 			mensaje.vacioCampo(campo);
-			return false;
+			return true;
 		}
 		else if(verifica.correctoDouble(cadena)) {
 			mensaje.errorNumDouble(campo);
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 	
 }

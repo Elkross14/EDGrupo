@@ -5,16 +5,14 @@
  * completo de la persona.
  * 
  * última actualización: 
- * -Mejora de legibilidad
+ * -Eliminado un import no usado
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.1.1
+ * @version 0.1.2
  */
 
 
 package interfazGrafica;
-
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

@@ -28,6 +28,8 @@ public class NotaTotal extends Trabajo {
 	private ExamenTest examenTestArray[] = new ExamenTest[NUM_EXAMENES_TEST];
 	private Trabajo trabajoArray[] = new Trabajo[NUM_TRABAJOS];
 	
+	private double notaGlobal;
+	
 	
 	/**
 	 * Constructor vacio
@@ -128,6 +130,16 @@ public class NotaTotal extends Trabajo {
 	}
 
 
+	public double getNotaGlobal() {
+		return notaGlobal;
+	}
+
+
+	public void setNotaGlobal(double notaGlobal) {
+		this.notaGlobal = notaGlobal;
+	}
+
+
 	/**
 	 * @param examenClasico: objeto ExamenClasico Array
 	 */
@@ -192,17 +204,16 @@ public class NotaTotal extends Trabajo {
 	 * 
 	 * @return devolverá la nota global
 	 */
-	public double calcularNotaGlobal() {
-		double notaGlobal;
+	public void calcularNotaGlobal() {
+		double notaExamenes;
 		
 		if(getTrabajosEntregadosATiempo()) {
 			notaGlobal = 3;
 		}
 		else {
-			notaGlobal = calcularNotaTotalExText() + calcularNotaTotalExClasico();
+			notaExamenes = calcularNotaTotalExText() + calcularNotaTotalExClasico();
+			notaGlobal = notaExamenes - getTotalDiasRetraso()*0.1;
 		}
-		
-		return notaGlobal;
 	}
 	
 
@@ -279,6 +290,21 @@ public class NotaTotal extends Trabajo {
 			}
 		}
 		return false;
+	}
+	
+	
+	/**
+	 * Sumará la cantidad total de dias de retraso en la entraga de los trabajos
+	 * 
+	 * @return devolverá la cantidad total de dias de retraso de todos los tabajos 
+	 */
+	public int getTotalDiasRetraso() {
+		int diasDeRetraso = 0;
+		
+		for (int i = 0; i < NUM_TRABAJOS; i++) {
+			diasDeRetraso = trabajoArray[i].getDiasDeRetraso();
+		}
+		return diasDeRetraso;
 	}
 	
 

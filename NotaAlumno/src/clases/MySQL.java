@@ -4,7 +4,8 @@
  * Ccontiene todos los métodos para hacer lamadas al servidor
  * 
  * Última actualización:
- * -Se ha mejorado la legibilidad
+ * -Se ha modificado el método totalRows
+ * -Se ha modificado el método getValues
  * 
  * @author Pablo Durán, Héctor García
  * @version 0.1.1
@@ -20,6 +21,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
+import registroDeValores.NotaTotal;
+import registroDeValores.Persona;
+
 public class MySQL {
 
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -27,37 +31,31 @@ public class MySQL {
     private static final String PASS = "alumno";
     private static final String HOST = "localhost";
     private static final int PORT = 3308;
-    private static final String DB = "NotasEntornos";
+    private static final String DB = "notasentornos";
     private static final String URL = String.format("jdbc:mysql://%s:%d/%s?useSSL=false&serverTimezone=UTC", HOST, PORT, DB);
 
-    private static boolean verificar;
     private static Connection conexion;
     
     
+    Persona persona = new Persona();
+	NotaTotal notaTotal = new NotaTotal();
     MensajeError mensaje = new MensajeError();
     
     
     /**
      * Crea la conexión con la base de datos introducida
-     * 
-     * @return devolverá true en caso de establecer la conexión
      */
-    public boolean MySQLConnection() {
-        
-        verificar = false;
-        
-        try{
+    public void MySQLConnection() {
+    	try{
             
             Class.forName(DRIVER);
-            conexion = (Connection) DriverManager.getConnection(URL, USER, PASS);
-            verificar = true;
+            conexion= (Connection) DriverManager.getConnection(URL, USER, PASS);// Nos conectamos a la bd
+            System.out.println("Conectado");
         }
-        catch (ClassNotFoundException | SQLException e){
+        catch (ClassNotFoundException | SQLException e){// Si la conexion NO fue exitosa mostramos un mensaje de error
             
             System.out.println("Error de conexion: " + e);
         }
-        
-        return verificar;
     }
 
 
@@ -80,21 +78,22 @@ public class MySQL {
      * Comando ejemplo:  INSERT INTO Alumnos (nombre, primerApellido, segundoApellido, notaFinal)
      * 		VALUES ("Peter", "rock", "bless", 8.40);
      * 
-     * @param nombre: Nombre de la persona
-     * @param primerApellido: primerApellido de la persona
-     * @param segundoApellido: segundoApellido de la persona
-     * @param notaFinal: notaFinal de la persona(dos decimales)
+     * @param persona: objeto de tipo persona para pasarle los datos de esta clase
+     * @param notaTotal: objeto de tipo NotaTotal para obtener la nota
      */
-    public void insertarDatos(String nombre, String primerApellido,String segundoApellido, double notaFinal) {
-       
+    public void insertarDatos(Persona persona, NotaTotal notaTotal) {       
+    	MySQLConnection();
+    	
         try {
+        	
             String Query = "INSERT INTO Alumnos (nombre, primerApellido, "
             		+ "segundoApellido, notaFinal) VALUES ("
-                    + "\"" + nombre + "\", "
-                    + "\"" + primerApellido + "\", "
-                    + "\"" + segundoApellido + "\","
-                    + notaFinal + ");";
+                    + "\"" + persona.getNombre() + "\", "
+                    + "\"" + persona.getPrimerApellido() + "\", "
+                    + "\"" + persona.getSegundoApellido() + "\","
+                    + notaTotal.getNotaGlobal() + ");";
             
+            System.out.println(Query);
             //lanzamos el comando al servidor
             Statement st = conexion.createStatement();
             st.executeUpdate(Query);
@@ -105,6 +104,8 @@ public class MySQL {
         	
         	mensaje.envioIncorrecto();
         }
+        
+        closeConnection();
     }
     
     
@@ -116,6 +117,7 @@ public class MySQL {
      * @return devolverá una cadena String con todos los datos separados por /
      */
     public String getValues() {
+    	MySQLConnection();
     	
         String datos="";
         
@@ -134,11 +136,13 @@ public class MySQL {
                         + resultSet.getString("primerApellido") + "/"
                         + resultSet.getString("segundoApellido") + "/"
                         + resultSet.getString("notaFinal") + "/";
-            }
+           }
 
         } catch (SQLException ex) {
+        	System.out.println("Excepción encontrada: "+ ex);
             mensaje.errorPedirDatos();
         }
+        closeConnection();
         return datos;
     }
     
@@ -152,11 +156,12 @@ public class MySQL {
      * @return devolverá un número entero con la cantidad de lineas
      */
     public int totalRows(String table_name) {
+    	MySQLConnection();
     	
         int totalRows = 0;
         
         try {
-            String Query = "SELECT COUNT(*) FROM " + table_name;	//comando lanzado al servidor
+            String Query = "SELECT COUNT(*) FROM " + table_name;
             
             //lanzamos el comando al servidor
             Statement st = conexion.createStatement();
@@ -168,8 +173,9 @@ public class MySQL {
             }
 
         } catch (SQLException ex) {
-             mensaje.errorPedirDatos();	//saltará en el caso de que haya algún tipo de error a la hora de pedir los datos al servidor
+             mensaje.errorPedirDatos();
         }
+        closeConnection();
         return totalRows;
     }
 

@@ -4,10 +4,11 @@
  * Ventana gráfica para elegir entre varias funciones.
  * 
  * última actualización: 
- * -Se ha mejorado la legibilidad
+ * -Se ha eliminado el botón cerrar
+ * -Se ha añadido función al botón VerTabla
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.0.5.1
+ * @version 0.1.1
  */
 
 package interfazGrafica;
@@ -29,7 +30,6 @@ public class Menu extends JFrame {
 	private JPanel contentPane;
 	private JButton btnAñadirAlumno;
 	private JButton btnVerTabla;
-	private JButton btnCerrarPrograma;
 
 	/**
 	 * Launch the application.
@@ -73,7 +73,7 @@ public class Menu extends JFrame {
 	 */
 	public void iniciarComponentes() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 350, 200);
+		setBounds(100, 100, 350, 151);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -91,23 +91,15 @@ public class Menu extends JFrame {
 				btnVerTablaActionPerformed(e);
 			}
 		});
-		
-		btnCerrarPrograma = new JButton("Cerrar Programa");
-		btnCerrarPrograma.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnCerrarProgramaActionPerformed(e);
-			}
-		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(97)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-						.addComponent(btnAñadirAlumno, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnVerTabla, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnCerrarPrograma))
-					.addContainerGap(114, Short.MAX_VALUE))
+					.addGap(112)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(btnVerTabla, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnAñadirAlumno, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap(121, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -116,9 +108,7 @@ public class Menu extends JFrame {
 					.addComponent(btnAñadirAlumno)
 					.addGap(18)
 					.addComponent(btnVerTabla)
-					.addGap(18)
-					.addComponent(btnCerrarPrograma)
-					.addContainerGap(26, Short.MAX_VALUE))
+					.addContainerGap(28, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
@@ -142,17 +132,9 @@ public class Menu extends JFrame {
 	 * @param e: click izquierzo en el botón Siguiente
 	 */
 	public void btnVerTablaActionPerformed(ActionEvent e) {
-		
-	}
-	
-
-	/**
-	 * Cerrará el programa
-	 * 
-	 * @param e: click izquierzo en el botón Siguiente
-	 */
-	public void btnCerrarProgramaActionPerformed(ActionEvent e) {
-		System.exit(0);;
+		VentanaTabla pasar = new VentanaTabla();
+		pasar.setVisible(true);
+		dispose();
 	}
 	
 	
