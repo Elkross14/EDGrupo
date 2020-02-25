@@ -5,6 +5,7 @@
  * 
  * Última actualización:
  * - Arreglo del calculo de la nota
+ * - Arreglo del calculo de días de retraso de los trabajos
  * 
  * @author Pablo Durán, Héctor García
  * @version 0.2.1
