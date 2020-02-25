@@ -386,6 +386,10 @@ public class VentanaNotas extends JFrame {
 			
 			notaTotal.calcularNotaGlobal();
 			conexion.insertarDatos(persona, notaTotal);
+			
+			Menu pasar = new Menu();
+			pasar.setVisible(true);
+			dispose();
 		}
 		else {
 			mensaje.envioIncorrecto();

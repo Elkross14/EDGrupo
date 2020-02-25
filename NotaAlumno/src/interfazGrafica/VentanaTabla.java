@@ -4,11 +4,10 @@
  * Ventana gráfica para visualizar los datos de la base de datos.
  * 
  * última actualización: 
- * -Creación de la clase
- * -falta la opción de eliminar alumno
+ * -Funcionalidad de eliminar personas de la base de datos
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.0.5
+ * @version 0.1
  */
 
 package interfazGrafica;
@@ -21,13 +20,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import clases.MensajeError;
 import clases.MySQL;
+import clases.VerificacionDeDatos;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class VentanaTabla extends JFrame {
@@ -38,8 +42,12 @@ public class VentanaTabla extends JFrame {
 	private JTable table;
 	private JButton btnBorrarAlumno;
 	private JButton btnAtras;
+	
+	private String idSeleccionado = null;
 
 	MySQL conexion = new MySQL();
+	VerificacionDeDatos verifica = new VerificacionDeDatos();
+	MensajeError mensaje = new MensajeError();
 	
 	
 	/**
@@ -82,6 +90,11 @@ public class VentanaTabla extends JFrame {
 		});
 		
 		btnBorrarAlumno = new JButton("Borrar Alumno");
+		btnBorrarAlumno.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnBorrarAlumnoActionPerformed(e);	
+			}
+		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -105,6 +118,12 @@ public class VentanaTabla extends JFrame {
 		);
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tableMouseClicked(e);
+			}
+		});
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null, null},
@@ -128,6 +147,21 @@ public class VentanaTabla extends JFrame {
 	
 	
 	/**
+	 * Envía el comando de borrado al servidor y reinicia la ventana
+	 * 
+	 * @param evt  evt click izquierzo en el botón Borrar alumno
+	 */
+	private void btnBorrarAlumnoActionPerformed(ActionEvent evt) {
+		if (mensaje.preguntaAtras() == 0) {
+			conexion.deleteRecord(idSeleccionado);
+			
+			VentanaTabla pasar = new VentanaTabla();
+			pasar.setVisible(true);
+			dispose();
+	}
+	
+	
+	/**
 	 * Vuelve a la pantalla de Menú.
 	 * 
 	 * @param evt click izquierzo en el botón Atrás
@@ -136,6 +170,16 @@ public class VentanaTabla extends JFrame {
 		Menu pasar = new Menu();
 		pasar.setVisible(true);
 		dispose();
+	}
+	
+	
+	/**
+	 * Recoge el id de la fila seleccionada de la tabla
+	 * 
+	 * @param e click izquierdo en la tabla
+	 */
+	private void tableMouseClicked(MouseEvent e) {
+		idSeleccionado = (String) table.getValueAt(table.getSelectedRow(), 0);
 	}
 	
 	

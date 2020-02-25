@@ -30,7 +30,7 @@ public class MySQL {
     private static final String USER = "root";
     private static final String PASS = "alumno";
     private static final String HOST = "localhost";
-    private static final int PORT = 3308;
+    private static final int PORT = 3306;
     private static final String DB = "notasentornos";
     private static final String URL = String.format("jdbc:mysql://%s:%d/%s?useSSL=false&serverTimezone=UTC", HOST, PORT, DB);
 
@@ -185,9 +185,11 @@ public class MySQL {
      * 
      * @param ID: identificador de la persona que se quiere eliminar
      */
-    public void deleteRecord( String ID) {
+    public void deleteRecord( String id) {
+    	MySQLConnection();
+    	
         try {
-            String Query = "DELETE FROM Alumnos WHERE idAlumno = \"" + ID + "\"";
+            String Query = "DELETE FROM Alumnos WHERE idAlumno = \"" + id + "\"";
             Statement st = conexion.createStatement();
             st.executeUpdate(Query);
 
@@ -195,6 +197,7 @@ public class MySQL {
             System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(null, "Error borrando el registro especificado");
         }
+        closeConnection();
     }
     
     
