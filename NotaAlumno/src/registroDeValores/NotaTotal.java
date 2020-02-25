@@ -4,10 +4,10 @@
  * Almacena todos los datos necesarios de las notas.
  * 
  * Última actualización:
- * -Añadido los metodos que calculan la nota final
+ * - Arreglo del calculo de la nota
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.1.5
+ * @version 0.2.1
  */
 package registroDeValores;
 
@@ -209,10 +209,9 @@ public class NotaTotal extends Trabajo {
 		
 		if(getTrabajosEntregadosATiempo()) {
 			notaGlobal = 3;
-		}
-		else {
+		} else {
 			notaExamenes = calcularNotaTotalExText() + calcularNotaTotalExClasico();
-			notaGlobal = notaExamenes - getTotalDiasRetraso()*0.1;
+			notaGlobal = notaExamenes - getTotalDiasRetraso() * 0.1;
 		}
 	}
 	
@@ -227,6 +226,8 @@ public class NotaTotal extends Trabajo {
 		double notaTotalExText = 0.0;
 		double notaExTest;
 		double porcentajeNotaGlobal;
+		
+		calcularNotaExTest();
 		
 		for (int i = 0; i < NUM_EXAMENES_TEST; i++) {
 			
@@ -244,12 +245,13 @@ public class NotaTotal extends Trabajo {
 	 * acertadas, las falladas y el total de preguntas.
 	 */
 	public void calcularNotaExTest() {
-		double acertadas;
+		double puntuacion;
+		double notaTest;
 		
-		for (int i = 0; i <NUM_EXAMENES_TEST; i++) {
-			 acertadas = examenTestArray[i].getCorrectas() - 
+		for (int i = 0; i < NUM_EXAMENES_TEST; i++) {
+			 puntuacion = examenTestArray[i].getCorrectas() - 
 					 (examenTestArray[i].getFalladas() / 3);
-			 double notaTest = (acertadas * 10)/ NUM_EXAMENES_TEST;
+			 notaTest = (puntuacion * 10) / NUM_PREGUNTAS_TEST;
 			 examenTestArray[i].setNota(notaTest);
 		}
 	}
@@ -285,7 +287,7 @@ public class NotaTotal extends Trabajo {
 	 */
 	public boolean getTrabajosEntregadosATiempo() {
 		for (int i = 0; i < NUM_TRABAJOS; i++) {
-			if(!trabajoArray[i].isEntregado() || trabajoArray[i].getDiasDeRetraso()>=5) {
+			if(!trabajoArray[i].isEntregado() || trabajoArray[i].getDiasDeRetraso() >= 5) {
 				return true;
 			}
 		}
@@ -302,7 +304,7 @@ public class NotaTotal extends Trabajo {
 		int diasDeRetraso = 0;
 		
 		for (int i = 0; i < NUM_TRABAJOS; i++) {
-			diasDeRetraso = trabajoArray[i].getDiasDeRetraso();
+			diasDeRetraso = diasDeRetraso + trabajoArray[i].getDiasDeRetraso();
 		}
 		return diasDeRetraso;
 	}
