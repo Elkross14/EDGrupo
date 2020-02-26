@@ -4,10 +4,10 @@
  * Ventana gráfica para visualizar los datos de la base de datos.
  * 
  * última actualización: 
- * -Funcionalidad de eliminar personas de la base de datos
+ * -Creación de una ventana de confirmación de borrado de alumno
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.1
+ * @version 0.1.1
  */
 
 package interfazGrafica;
@@ -158,6 +158,7 @@ public class VentanaTabla extends JFrame {
 			VentanaTabla pasar = new VentanaTabla();
 			pasar.setVisible(true);
 			dispose();
+		}
 	}
 	
 	
