@@ -30,7 +30,7 @@ public class MySQL {
     private static final String USER = "root";
     private static final String PASS = "alumno";
     private static final String HOST = "localhost";
-    private static final int PORT = 3306;
+    private static final int PORT = 3308;
     private static final String DB = "notasentornos";
     private static final String URL = String.format("jdbc:mysql://%s:%d/%s?useSSL=false&serverTimezone=UTC", HOST, PORT, DB);
 
@@ -116,10 +116,10 @@ public class MySQL {
      * 
      * @return devolverá una cadena String con todos los datos separados por /
      */
-    public String getValues() {
+    public String[][] getValues() {
     	MySQLConnection();
     	
-        String datos="";
+        String [][] datos= new String [10][5];
         
         try {
             String Query = "SELECT * FROM  Alumnos;";
@@ -130,12 +130,15 @@ public class MySQL {
             resultSet = st.executeQuery(Query);
 
             //recogerá todos los datos enviados por el servidor mientras haya.
+            int fila = 0;
             while (resultSet.next()) {
-                datos += resultSet.getString("idAlumno") + "/"
-                        + resultSet.getString("nombre") + "/" 
-                        + resultSet.getString("primerApellido") + "/"
-                        + resultSet.getString("segundoApellido") + "/"
-                        + resultSet.getString("notaFinal") + "/";
+            	datos[fila][0] = resultSet.getString("idAlumno");
+            	datos[fila][1] = resultSet.getString("nombre");
+            	datos[fila][2] = resultSet.getString("primerApellido");
+            	datos[fila][3] = resultSet.getString("segundoApellido");
+            	datos[fila][4] = resultSet.getString("notaFinal");
+            	
+            	fila++;
            }
 
         } catch (SQLException ex) {

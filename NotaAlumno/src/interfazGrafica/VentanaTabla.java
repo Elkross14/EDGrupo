@@ -32,6 +32,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Dimension;
 
 
 public class VentanaTabla extends JFrame {
@@ -67,6 +68,7 @@ public class VentanaTabla extends JFrame {
 		
 		setLocationRelativeTo(null);	//vista centrada
         setTitle("Notas");	//pondrá titulo a la ventanag
+        setMinimumSize(new Dimension(500, 300));
 	}
 	
 	
@@ -118,6 +120,7 @@ public class VentanaTabla extends JFrame {
 		);
 		
 		table = new JTable();
+		
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -189,15 +192,11 @@ public class VentanaTabla extends JFrame {
 	 */
 	public void mostrarValores(){
         
-        String datosTotal = conexion.getValues();
-        String[] partes = datosTotal.split("/");
+        String datosTotal [][]= conexion.getValues();
         
-        int contador =0;
-        for (int fila = 0; fila < conexion.totalRows("alumnos"); fila++) {
+        for (int fila = 0; fila < datosTotal.length; fila++) {
             for (int columna = 0; columna < 5; columna++) {
-            	table.setValueAt(partes[contador],fila,columna);
-
-                contador++;
+            	table.setValueAt(datosTotal[fila][columna],fila,columna);
             }
         } 
     }

@@ -172,9 +172,9 @@ public class NotaTotal extends Trabajo {
 	/**
 	 * pasamos los valores de las respuesta del examen tipo test al array de tipo ExamenTest
 	 * 
-	 * @param correctas: respuestas acertadas en un notaTotal tipo test
-	 * @param falladas: respuestas falladas en un notaTotal tipo test
-	 * @param sinContestar: respuesta no contestasdas en un notaTotal tipo test
+	 * @param correctas Respuestas acertadas en un notaTotal tipo test
+	 * @param falladas Respuestas falladas en un notaTotal tipo test
+	 * @param sinContestar Respuesta no contestasdas en un notaTotal tipo test
 	 */
 	public void setRespuestasExamenTest(int [] correctas, int [] falladas,
 			int [] sinContestar) {
