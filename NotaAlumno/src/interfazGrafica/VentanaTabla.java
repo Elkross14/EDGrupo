@@ -147,7 +147,7 @@ public class VentanaTabla extends JFrame {
 		scrollPane.setViewportView(table);
 		contentPane.setLayout(gl_contentPane);
 	}
-	
+
 	
 	/**
 	 * Envía el comando de borrado al servidor y reinicia la ventana

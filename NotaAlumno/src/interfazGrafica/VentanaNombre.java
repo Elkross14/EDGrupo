@@ -5,10 +5,10 @@
  * completo de la persona.
  * 
  * última actualización: 
- * -Eliminado un import no usado
+ * -añadido el método mostrarDatos
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.1.2
+ * @version 0.1.3
  */
 
 
@@ -73,6 +73,8 @@ public class VentanaNombre extends JFrame {
 		
 		this.persona = new Persona(persona);
 		this.notaTotal = new NotaTotal(notaTotal);
+		
+		mostarDatos();
 	}
 	
 	
@@ -175,6 +177,16 @@ public class VentanaNombre extends JFrame {
 		contentPane.setLayout(gl_contentPane);
 	}
 	
+	
+	/**
+	 * Mostrará los datos que ha escrito la persona cada uno en su celda cuando vuelva
+	 * de VentanaNotas por si queire cambiar algún valor
+	 */
+	public void mostarDatos() {
+		textFieldNombre.setText(persona.getNombre());
+		textFieldPrimerApellido.setText(persona.getPrimerApellido());
+		textFieldSegundoApellido.setText(persona.getSegundoApellido());
+	}
 
 	/**
 	 * Inicia todo el proceso para pasar los datos a la siguiente ventana (VentanaNotas)

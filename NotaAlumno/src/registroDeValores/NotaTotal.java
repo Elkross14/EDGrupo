@@ -4,11 +4,10 @@
  * Almacena todos los datos necesarios de las notas.
  * 
  * Última actualización:
- * - Arreglo del calculo de la nota
- * - Arreglo del calculo de días de retraso de los trabajos
+ * - Añadido el método getRespuestasExamenTest
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.2.1
+ * @version 0.2.2
  */
 package registroDeValores;
 
@@ -131,11 +130,45 @@ public class NotaTotal extends Trabajo {
 	}
 
 
+	/**
+	 * @return Devuelve la nota global del alumno
+	 */
 	public double getNotaGlobal() {
 		return notaGlobal;
 	}
+	
+	
+	/**
+	 * @return Devuelve una matriz int con los resultados de los examenes tipo test
+	 */
+	public int[][] getRespuestasExamenTest(){
+		int[][] respuestasTest = new int [NUM_EXAMENES_TEST][3];
+		
+		for (int i = 0; i < NUM_EXAMENES_TEST; i++) {
+			respuestasTest [i][0]= examenTestArray[i].getCorrectas();
+			respuestasTest [i][1]= examenTestArray[i].getFalladas();
+			respuestasTest [i][2]= examenTestArray[i].getSinContestar();
+		}
+		return respuestasTest;
+	}
+
+	
+	/**
+	 * @return devuelve un array double con las notas de los examenes clásicos
+	 */
+	public double[] getNotaExamenClasico() {
+		double[] notaExamenClasico = new double [NUM_EXAMENES_CLASICOS];
+		
+		for (int i = 0; i < NUM_EXAMENES_CLASICOS; i++) {
+			notaExamenClasico[i] = examenClasicoArray[i].getNota();
+		}
+		return notaExamenClasico;
+	}
 
 
+	/**
+	 * @param notaGlobal Valor de tipo double
+	 */
 	public void setNotaGlobal(double notaGlobal) {
 		this.notaGlobal = notaGlobal;
 	}

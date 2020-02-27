@@ -5,11 +5,10 @@
  * datos necesarios.
  * 
  * última actualización: 
- * -Conectado con el servidor para enviar datos
- * -Arreglo de fallos en el sistema de verificación
+ * -añadido el método mostarDatos
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.1
+ * @version 0.1.1
  */
 package interfazGrafica;
 
@@ -376,6 +375,58 @@ public class VentanaNotas extends JFrame {
 	
 	
 	/**
+	 * Mostrará los datos que ha escrito la persona cada uno en su celda cuando cambia
+	 * de ventana por si quiere modificar alguno.
+	 */
+	public void mostarDatos() {
+		mostrarDatosExamenesTest();
+		mostrarDatosExamenesClasicos();
+		mostrarDatosTrabajos();
+	}
+	
+	
+	/**
+	 * Mostrará los resultados de los examenes tipo test por pantalla
+	 */
+	public void mostrarDatosExamenesTest() {
+		int[][] respuestasTest = new int [notaTotal.getNUM_EXAMENES_TEST()][3];
+		
+		respuestasTest = notaTotal.getRespuestasExamenTest();
+		
+		fieldCorrectasTest1.setText(String.valueOf(respuestasTest [0][0]));
+		fieldFalladasTest1.setText(String.valueOf(respuestasTest [0][1]));
+		fieldSinContestarTest1.setText(String.valueOf(respuestasTest [0][2]));
+			
+		fieldCorrectasTest2.setText(String.valueOf(respuestasTest [1][0]));
+		fieldFalladasTest2.setText(String.valueOf(respuestasTest [1][1]));
+		fieldSinContestarTest2.setText(String.valueOf(respuestasTest [1][2]));
+	}
+	
+	
+	/**
+	 * mostrará las notas de los examenes clasicos por pantalla
+	 */
+	public void mostrarDatosExamenesClasicos() {
+		double[] notaExamenClasico = new double[notaTotal.getNUM_EXAMENES_CLASICOS()];
+		
+		notaExamenClasico = notaTotal.getNotaExamenClasico();
+		
+		fieldClasico1.setText(String.valueOf(notaExamenClasico[0]));
+		fieldClasico2.setText(String.valueOf(notaExamenClasico[1]));
+		fieldClasico3.setText(String.valueOf(notaExamenClasico[2]));
+	}
+	
+	
+	/**
+	 * mostrará por pantalla el jradio que se había seleccionado 
+	 * y los dias de retraso si es necesario 
+	 */
+	public void mostrarDatosTrabajos() {
+		
+	}
+	
+	
+	/**
 	 * Inicia todo el proceso para pasar los datos al servidor
 	 * 
 	 * @param evt click izquierzo en el botón Finalizar
@@ -416,7 +467,7 @@ public class VentanaNotas extends JFrame {
 	public void recogerEntradaDatos() {
 		recogerDatosExamenesTest();
 		recogerDatosExamenesClasicos();
-		recogerTrabajos();
+		recogerDatosTrabajos();
 	}
 	
 	
@@ -458,7 +509,7 @@ public class VentanaNotas extends JFrame {
 	/**
 	 * Recoge los datos de los trabajos. Trabajos entregados y dias de retraso
 	 */
-	public void recogerTrabajos() {
+	public void recogerDatosTrabajos() {
 		boolean [] entregadoTrabajo = new boolean [notaTotal.getNUM_TRABAJOS()];
 		int [] diasDeRetrasoTrabajo = new int [notaTotal.getNUM_TRABAJOS()];
 		
