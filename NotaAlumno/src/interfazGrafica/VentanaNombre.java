@@ -1,13 +1,13 @@
 /** 
  *<h2> Clase VentanaNombre </h2> 
  *
- * Ventana gr·fica para introducir el nombre
+ * Ventana gr√°fica para introducir el nombre
  * completo de la persona.
  * 
- * ˙ltima actualizaciÛn: 
- * -aÒadido el mÈtodo mostrarDatos
+ * √∫ltima actualizaci√≥n: 
+ * -Correci√≥n de los comentarios
  * 
- * @author Pablo Dur·n, HÈctor GarcÌa
+ * @author Pablo Dur√°n, H√©ctor Garc√≠a
  * @version 0.1.3
  */
 
@@ -35,7 +35,7 @@ import java.awt.event.ActionEvent;
 public class VentanaNombre extends JFrame {
 
 	/**
-	 * Variables gr·ficas
+	 * Variables gr√°ficas
 	 */
 	private JPanel contentPane;
 	private JLabel lblNombre;
@@ -65,8 +65,8 @@ public class VentanaNombre extends JFrame {
 	/**
 	 * Constructor copia
 	 * 
-	 * @param persona: objeto de clase Persona con todas sus variables
-	 * @param notaTotal: objeto de clase NotaTotal con todas sus variables
+	 * @param persona Objeto de clase Persona con todas sus variables
+	 * @param notaTotal Objeto de clase NotaTotal con todas sus variables
 	 */
 	public VentanaNombre(Persona persona, NotaTotal notaTotal) {
 		iniciarVentana();
@@ -85,13 +85,13 @@ public class VentanaNombre extends JFrame {
 		iniciarComponentes();
 		
 		setLocationRelativeTo(null);	//vista centrada
-        setResizable(false);	//evita que se pueda cambiar el tamaÒo de la ventana
-        setTitle("Nombre Alumno");	//pondr· titulo a la ventana
+        setResizable(false);	//evita que se pueda cambiar el tama√±o de la ventana
+        setTitle("Nombre Alumno");	//pondr√° titulo a la ventana
 	}
 	
 	
 	/**
-	 * Inicia las caracteristicas gr·ficas b·sicas de la ventana
+	 * Inicia las caracteristicas gr√°ficas b√°sicas de la ventana
 	 */
 	public void iniciarComponentes() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -179,8 +179,8 @@ public class VentanaNombre extends JFrame {
 	
 	
 	/**
-	 * Mostrar· los datos que ha escrito la persona cada uno en su celda cuando vuelva
-	 * de VentanaNotas por si queire cambiar alg˙n valor
+	 * Mostrar√° los datos que ha escrito la persona cada uno en su celda cuando vuelva
+	 * de VentanaNotas por si queire cambiar alg√∫n valor
 	 */
 	public void mostarDatos() {
 		textFieldNombre.setText(persona.getNombre());
@@ -191,7 +191,7 @@ public class VentanaNombre extends JFrame {
 	/**
 	 * Inicia todo el proceso para pasar los datos a la siguiente ventana (VentanaNotas)
 	 * 
-	 * @param evt click izquierzo en el botÛn Siguiente
+	 * @param evt Click izquierzo en el bot√≥n Siguiente
 	 */
 	private void btnSiguienteActionPerformed(ActionEvent evt) {
 		
@@ -208,9 +208,9 @@ public class VentanaNombre extends JFrame {
 	
 	
 	/**
-	 * Vuelve a la pantalla de Menu. Se perder·n los datos introducidos.
+	 * Vuelve a la pantalla de Menu. Se perder√°n los datos introducidos.
 	 * 
-	 * @param evt click izquierzo en el botÛn Atr·s
+	 * @param evt Click izquierzo en el bot√≥n Atr√°s
 	 */
 	private void btnAtrasActionPerformed(ActionEvent evt) {
 		if (mensaje.preguntaAtras() == 0) {
@@ -234,8 +234,8 @@ public class VentanaNombre extends JFrame {
 	/**
 	 * Elimina todos los excesos de espacios que haya en la entrada de datos.
 	 * 
-	 * @param cadena: String al que se le quiere eliminar el exceso de espacios
-	 * @return String con solo un espacio entre palabras y sin espacios por delante y atr·s.
+	 * @param cadena String al que se le quiere eliminar el exceso de espacios
+	 * @return String con solo un espacio entre palabras y sin espacios por delante y atr√°s.
 	 */
 	public String EliminarEspaciosSobrantes(String cadena) {
 		
@@ -246,7 +246,7 @@ public class VentanaNombre extends JFrame {
 	
 	
 	/**
-	 * Verificar· todos los campos de datos a introducir para saber si es correcto el dato
+	 * Verificar√° todos los campos de datos a introducir para saber si es correcto el dato
 	 */
 	public boolean verificaDatos () {
 		
@@ -264,9 +264,9 @@ public class VentanaNombre extends JFrame {
 	
 	
 	/**
-	 * Verifica que el nombre estÈ relleno y que no tenga n˙meros ni caracteres extraÒos
+	 * Verifica que el nombre est√© relleno y que no tenga n√∫meros ni caracteres extra√±os
 	 * 
-	 * @return true en caso de est·r todo correcto
+	 * @return true en caso de est√°r todo correcto
 	 */
 	public boolean verificaNombre() {
 		if(verifica.campoRelleno(textFieldNombre.getText())){
@@ -282,9 +282,9 @@ public class VentanaNombre extends JFrame {
 	
 	
 	/**
-	 * Verifica que el primer apellido estÈ relleno y que no tenga n˙meros ni caracteres extraÒos
+	 * Verifica que el primer apellido est√© relleno y que no tenga n√∫meros ni caracteres extra√±os
 	 * 
-	 * @return true en caso de est·r todo correcto
+	 * @return true en caso de est√°r todo correcto
 	 */
 	public boolean verificaPrimerApellido() {
 		if(verifica.campoRelleno(textFieldPrimerApellido.getText())){
@@ -300,9 +300,9 @@ public class VentanaNombre extends JFrame {
 	
 	
 	/**
-	 * Verifica que el primer apellido estÈ relleno y que no tenga n˙meros ni caracteres extraÒos
+	 * Verifica que el primer apellido est√© relleno y que no tenga n√∫meros ni caracteres extra√±os
 	 * 
-	 * @return true en caso de est·r todo correcto
+	 * @return true en caso de est√°r todo correcto
 	 */
 	public boolean verificaSegundoApellido() {
 		if(verifica.campoRelleno(textFieldSegundoApellido.getText())){
