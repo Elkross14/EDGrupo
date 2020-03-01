@@ -1,13 +1,13 @@
 /** 
  *<h2> Clase MensajeError </h2> 
  *
- * Contiene todos los mensajes de error que usar· el programa
+ * Contiene todos los mensajes de error que usar√° el programa
  * 
- * ⁄ltima actualizaciÛn:
- * -Se ha aÒadido el mÈtodo errorNumDouble
+ * √öltima actualizaci√≥n:
+ * -Correci√≥n de los comentarios
  * 
- * @author Pablo Dur·n, HÈctor GarcÌa
- * @version 0.1.2
+ * @author Pablo Dur√°n, H√©ctor Garc√≠a
+ * @version 0.1.3
  */
 
 package clases;
@@ -20,9 +20,9 @@ public class MensajeError extends javax.swing.JFrame {
     
 	
 	/**
-	 * Saltar· un WARNING_MESSAGE de campo sin rellenar.
+	 * Saltar√° un WARNING_MESSAGE de campo sin rellenar.
 	 * 
-	 * @param campo: Nombre del campo a rellenar.
+	 * @param campo Nombre del campo a rellenar.
 	 */
     public void vacioCampo(String campo) {
         JOptionPane.showMessageDialog(this,
@@ -33,22 +33,22 @@ public class MensajeError extends javax.swing.JFrame {
     
     
     /**
-     * Saltar· un WARNING_MESSAGE en caso de que no haya un jradio seleccionado
+     * Saltar√° un WARNING_MESSAGE en caso de que no haya un jradio seleccionado
      * 
-     * @param grupo: grupo de jradio sin opciÛn seleccionada
+     * @param grupo Grupo de jradio sin opci√≥n seleccionada
      */
     public void vacioRadio(String grupo) {
         JOptionPane.showMessageDialog(this,
-            "No se ha seleccionado ninguna opciÛn de " + grupo + ".",
+            "No se ha seleccionado ninguna opci√≥n de " + grupo + ".",
             "Radio vacio",
             JOptionPane.WARNING_MESSAGE);
     }
     
     
     /**
-     * Saltar· un WARNING_MESSAGE en caso de que haya m·s caracteres de los permitidos.
+     * Saltar√° un WARNING_MESSAGE en caso de que haya m√°s caracteres de los permitidos.
      * 
-     * @param campo: nombre del campo con el exceso de caracteres 
+     * @param campo Nombre del campo con el exceso de caracteres 
      */
     public void maximoCaracteres(String campo) {
         JOptionPane.showMessageDialog(this,
@@ -59,9 +59,9 @@ public class MensajeError extends javax.swing.JFrame {
 
     
     /**
-     * Saltar· un ERROR_MESSAGE en caso de que no sea un n˙mero entero
+     * Saltar√° un ERROR_MESSAGE en caso de que no sea un n√∫mero entero
      * 
-     * @param campo: nombre del campo con el error de entrada de n˙mero entero
+     * @param campo Nombre del campo con el error de entrada de n√∫mero entero
      */
     public void errorNumEnt(String campo) {
         JOptionPane.showMessageDialog(this,
@@ -72,9 +72,9 @@ public class MensajeError extends javax.swing.JFrame {
     
     
     /**
-     * Saltar· un ERROR_MESSAGE en caso de que no sea un n˙mero decimal
+     * Saltar√° un ERROR_MESSAGE en caso de que no sea un n√∫mero decimal
      * 
-     * @param campo: nombre del campo con el error de entrada de n˙mero decimal
+     * @param campo Nombre del campo con el error de entrada de n√∫mero decimal
      */
     public void errorNumDouble(String campo) {
         JOptionPane.showMessageDialog(this,
@@ -85,33 +85,33 @@ public class MensajeError extends javax.swing.JFrame {
     
     
     /**
-     * Saltar· un ERROR_MESSAGE en caso de que lo introducido no sea alfabeto ingles y espaÒol
+     * Saltar√° un ERROR_MESSAGE en caso de que lo introducido no sea alfabeto ingles y espa√±ol
      * 
-     * @param campo: nombre del campo con caracteres no ingleses o espaÒoles
+     * @param campo Nombre del campo con caracteres no ingleses o espa√±oles
      */
     public void errorString(String campo) {
         JOptionPane.showMessageDialog(this,
-            "No se puede introducir numeros\nni caracteres extraÒos en " + campo,
+            "No se puede introducir numeros\nni caracteres extra√±os en " + campo,
             "Error String",
             JOptionPane.ERROR_MESSAGE);
     }
     
     
     /**
-     * Saltar· un YES_NO_OPTION en caso de que se quiera volver atr·s y perder los datos
+     * Saltar√° un YES_NO_OPTION en caso de que se quiera volver atr√°s y perder los datos
      * 
-     * @return devolver· cero en el caso de confirmar
+     * @return devolver√° cero en el caso de confirmar
      */
     public int preguntaAtras() {
         return JOptionPane.showConfirmDialog(null, 
-            "Si vuelve atr·s se perder·n todos los datos\n"
-                + "øQuieres contiunar?", 
+            "Si vuelve atr√°s se perder√°n todos los datos\n"
+                + "¬øQuieres contiunar?", 
             "Confirmar atras",JOptionPane.YES_NO_OPTION);
     }
     
     
     /**
-     * Saltar· un INFORMATION_MESSAGE en caso de haber enviado los datos al servidor
+     * Saltar√° un INFORMATION_MESSAGE en caso de haber enviado los datos al servidor
      */
     public void envioCorrecto() {
         JOptionPane.showMessageDialog(this,
@@ -122,7 +122,7 @@ public class MensajeError extends javax.swing.JFrame {
     
     
     /**
-     * Saltar· un ERROR_MESSAGE en caso de no poder enviar los mensajes al servidor
+     * Saltar√° un ERROR_MESSAGE en caso de no poder enviar los mensajes al servidor
      */
     public void envioIncorrecto() {
         JOptionPane.showMessageDialog(this,
@@ -133,18 +133,18 @@ public class MensajeError extends javax.swing.JFrame {
     
     
     /**
-     * Saltar· un ERROR_MESSAGE en el caso de que haya un error en la peticiÛn de datos al servidor
+     * Saltar√° un ERROR_MESSAGE en el caso de que haya un error en la petici√≥n de datos al servidor
      */
     public void errorPedirDatos() {
         JOptionPane.showMessageDialog(this,
             "No se han podido recibir los datos del servidor.",
-            "RecepciÛn de datos",
+            "Recepci√≥n de datos",
             JOptionPane.ERROR_MESSAGE);
     }
     
     
     /**
-     * Saltar· un ERROR_MESSAGE en el caso de que no se haya podido borrar el dato en el servidor
+     * Saltar√° un ERROR_MESSAGE en el caso de que no se haya podido borrar el dato en el servidor
      */
     public void errorBorrado() {
         JOptionPane.showMessageDialog(this,
