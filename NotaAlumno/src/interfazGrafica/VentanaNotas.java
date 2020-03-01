@@ -1,14 +1,14 @@
 /** 
  *<h2> Clase VentanaNotas </h2> 
  *
- * Ventana gr·fica para introducir las notas y otros
+ * Ventana gr√°fica para introducir las notas y otros
  * datos necesarios.
  * 
- * ˙ltima actualizaciÛn: 
- * -aÒadido el mÈtodo mostarDatos
+ * √∫ltima actualizaci√≥n: 
+ * -Correci√≥n de los cometarios
  * 
- * @author Pablo Dur·n, HÈctor GarcÌa
- * @version 0.1.1
+ * @author Pablo Dur√°n, H√©ctor Garc√≠a
+ * @version 0.1.2
  */
 package interfazGrafica;
 
@@ -79,8 +79,8 @@ public class VentanaNotas extends JFrame {
 	/**
 	 * Constructor copia
 	 * 
-	 * @param persona: objeto de clase Persona con todas sus variables
-	 * @param notaTotal: objeto de clase NotaTotal con todas sus variables
+	 * @param persona Objeto de clase Persona con todas sus variables
+	 * @param notaTotal Objeto de clase NotaTotal con todas sus variables
 	 */
 	public VentanaNotas(Persona persona, NotaTotal notaTotal) {
 		iniciarVentana();
@@ -98,8 +98,8 @@ public class VentanaNotas extends JFrame {
 		agruparJRadioButton();
 		
 		setLocationRelativeTo(null);	//vista centrada
-        setResizable(false);	//evita que se pueda cambiar el tamaÒo de la ventana
-        setTitle("Notas");	//pondr· titulo a la ventanag
+        setResizable(false);	//evita que se pueda cambiar el tama√±o de la ventana
+        setTitle("Notas");	//pondr√° titulo a la ventanag
 	}
 	
 
@@ -125,7 +125,7 @@ public class VentanaNotas extends JFrame {
 
 	
 	/**
-	 * Inicia las caracteristicas gr·ficas b·sicas de la ventana
+	 * Inicia las caracteristicas gr√°ficas b√°sicas de la ventana
 	 */
 	public void iniciarComponentes() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -375,7 +375,7 @@ public class VentanaNotas extends JFrame {
 	
 	
 	/**
-	 * Mostrar· los datos que ha escrito la persona cada uno en su celda cuando cambia
+	 * Mostrar√° los datos que ha escrito la persona cada uno en su celda cuando cambia
 	 * de ventana por si quiere modificar alguno.
 	 */
 	public void mostarDatos() {
@@ -386,7 +386,7 @@ public class VentanaNotas extends JFrame {
 	
 	
 	/**
-	 * Mostrar· los resultados de los examenes tipo test por pantalla
+	 * Mostrar√° los resultados de los examenes tipo test por pantalla
 	 */
 	public void mostrarDatosExamenesTest() {
 		int[][] respuestasTest = new int [notaTotal.getNUM_EXAMENES_TEST()][3];
@@ -404,7 +404,7 @@ public class VentanaNotas extends JFrame {
 	
 	
 	/**
-	 * mostrar· las notas de los examenes clasicos por pantalla
+	 * Mostrar√° las notas de los examenes clasicos por pantalla
 	 */
 	public void mostrarDatosExamenesClasicos() {
 		double[] notaExamenClasico = new double[notaTotal.getNUM_EXAMENES_CLASICOS()];
@@ -418,7 +418,7 @@ public class VentanaNotas extends JFrame {
 	
 	
 	/**
-	 * mostrar· por pantalla el jradio que se habÌa seleccionado 
+	 * Mostrar√° por pantalla el jradio que se hab√≠a seleccionado 
 	 * y los dias de retraso si es necesario 
 	 */
 	public void mostrarDatosTrabajos() {
@@ -429,7 +429,7 @@ public class VentanaNotas extends JFrame {
 	/**
 	 * Inicia todo el proceso para pasar los datos al servidor
 	 * 
-	 * @param evt click izquierzo en el botÛn Finalizar
+	 * @param evt Click izquierzo en el bot√≥n Finalizar
 	 */
 	private void btnFinalizarActionPerformed(ActionEvent evt) {
 		if(verificarEntradaDatos()) {
@@ -450,9 +450,9 @@ public class VentanaNotas extends JFrame {
 	
 	/**
 	 * Vuelve a la pantalla de VentanaNombre. Si se ha rellenado
-	 * alg˙n campo se guardar· temporalmente.
+	 * alg√∫n campo se guardar√° temporalmente.
 	 * 
-	 * @param evt click izquierzo en el botÛn Atr·s
+	 * @param evt Click izquierzo en el bot√≥n Atr√°s
 	 */
 	private void btnAtrasActionPerformed(ActionEvent evt) {
 		VentanaNombre pasar = new VentanaNombre(persona, notaTotal);
@@ -462,7 +462,7 @@ public class VentanaNotas extends JFrame {
 	
 	
 	/**
-	 * recoge todos los datos introducidos en los campos de esta ventana.
+	 * Recoge todos los datos introducidos en los campos de esta ventana.
 	 */
 	public void recogerEntradaDatos() {
 		recogerDatosExamenesTest();
@@ -472,7 +472,7 @@ public class VentanaNotas extends JFrame {
 	
 	
 	/**
-	 * Recoge todos los par·metos de los examenes tipo test
+	 * Recoge todos los par√°metos de los examenes tipo test
 	 */
 	public void recogerDatosExamenesTest() {
 		int [] correctasExamenTest = new int [notaTotal.getNUM_EXAMENES_TEST()];
@@ -493,7 +493,7 @@ public class VentanaNotas extends JFrame {
 	
 	
 	/**
-	 * Recoge las notas de los examenes cl·sicos
+	 * Recoge las notas de los examenes cl√°sicos
 	 */
 	public void recogerDatosExamenesClasicos() {
 		double [] NotaExamenClasico = new double [notaTotal.getNUM_EXAMENES_CLASICOS()];
@@ -548,9 +548,9 @@ public class VentanaNotas extends JFrame {
 	
 	
 	/**
-	 * Verifica toda la informaciÛn recogida por esta ventana 
+	 * Verifica toda la informaci√≥n recogida por esta ventana 
 	 * 
-	 * @return devolver· true en el caso de estar todo correcto
+	 * @return devolver√° true en el caso de estar todo correcto
 	 */
 	public boolean verificarEntradaDatos() {
 		if(verificarEntradaExTest()) {
@@ -569,7 +569,7 @@ public class VentanaNotas extends JFrame {
 	/**
 	 * Verifica todas las entradas de datos de los examenes de tipo test
 	 * 
-	 * @return devolver· false en el caso de estar todo correcto
+	 * @return devolver√° false en el caso de estar todo correcto
 	 */
 	public boolean verificarEntradaExTest() {
 		if(verificarEntradaInt(fieldCorrectasTest1.getText(), "Correctas Test 1")) {
@@ -595,18 +595,18 @@ public class VentanaNotas extends JFrame {
 	
 	
 	/**
-	 * Verifica todas las entradas de datos de los examenes cl·sicos
+	 * Verifica todas las entradas de datos de los examenes cl√°sicos
 	 * 
-	 * @returndevolver· false en el caso de que estar todo correcto
+	 * @returndevolver√° false en el caso de que estar todo correcto
 	 */
 	public boolean verificarEntradaExClasico() {
-		if(verificarEntradaDouble(fieldClasico1.getText(), "Examen cl·sico 1")) {
+		if(verificarEntradaDouble(fieldClasico1.getText(), "Examen cl√°sico 1")) {
 			return true;
 		} 
-		else if(verificarEntradaDouble(fieldClasico2.getText(), "Examen cl·sico 2")) {
+		else if(verificarEntradaDouble(fieldClasico2.getText(), "Examen cl√°sico 2")) {
 			return true;
 		} 
-		else if(verificarEntradaDouble(fieldClasico3.getText(), "Examen cl·sico 3")) {
+		else if(verificarEntradaDouble(fieldClasico3.getText(), "Examen cl√°sico 3")) {
 			return true;
 		}
 		return false;
@@ -616,21 +616,21 @@ public class VentanaNotas extends JFrame {
 	/**
 	 * Verifica todas las entradas de datos de los trabajos
 	 * 
-	 * @return devolver· false en el caso de estar todo correcto
+	 * @return devolver√° false en el caso de estar todo correcto
 	 */
 	public boolean verificarEntradaTrabajo() {
 		if(rdbtnEntregadoTrabajo1.isSelected()) {
-			if(verificarEntradaInt(fieldRetrasos1.getText(), "DÌas de retraso (Trabajo de la evaluaciÛn 1")) {
+			if(verificarEntradaInt(fieldRetrasos1.getText(), "D√≠as de retraso (Trabajo de la evaluaci√≥n 1")) {
 				return true;
 			}
 		} 
 		else if(rdbtnEntregadoTrabajo2.isSelected()) {
-			if(verificarEntradaInt(fieldRetrasos2.getText(), "DÌas de retraso (Trabajo de la evaluaciÛn 2")) {
+			if(verificarEntradaInt(fieldRetrasos2.getText(), "D√≠as de retraso (Trabajo de la evaluaci√≥n 2")) {
 				return true;
 			}
 		} 
 		else if(rdbtnEntregadoTrabajo3.isSelected()) {
-			if(verificarEntradaInt(fieldRetrasos3.getText(), "DÌas de retraso (Trabajo de la evaluaciÛn 3")) {
+			if(verificarEntradaInt(fieldRetrasos3.getText(), "D√≠as de retraso (Trabajo de la evaluaci√≥n 3")) {
 				return true;
 			}
 		}
@@ -641,9 +641,9 @@ public class VentanaNotas extends JFrame {
 	/**
 	 * Verifica que cualquier dato de tipo int que se introduzca cumpla las condiciones que queremos
 	 * 
-	 * @param cadena: el texto que ha introducido el usuario
-	 * @param campo: que campo se est· verificando 
-	 * @return devolver· false en caso de estar todo correcto
+	 * @param cadena El texto que ha introducido el usuario
+	 * @param campo Que campo se est√° verificando 
+	 * @return devolver√° false en caso de estar todo correcto
 	 */
 	public boolean verificarEntradaInt(String cadena, String campo) {
 		if(verifica.campoRelleno(cadena)) {
@@ -661,9 +661,9 @@ public class VentanaNotas extends JFrame {
 	/**
 	 * Verifica que cualquier dato de tipo double que se introduzca cumpla las condiciones que queremos
 	 * 
-	 * @param cadena el texto que ha introducido el usuario
-	 * @param campo que campo se est· verificando 
-	 * @return devolver· false en caso de estar todo correcto
+	 * @param cadena El texto que ha introducido el usuario
+	 * @param campo Que campo se est√° verificando 
+	 * @return devolver√° false en caso de estar todo correcto
 	 */
 	public boolean verificarEntradaDouble(String cadena, String campo) {
 		if(verifica.campoRelleno(cadena)) {
