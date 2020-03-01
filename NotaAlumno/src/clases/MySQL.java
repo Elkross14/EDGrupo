@@ -1,14 +1,13 @@
 /** 
  *<h2> Clase MySQL </h2> 
  *
- * Ccontiene todos los mÈtodos para hacer lamadas al servidor
+ * Ccontiene todos los m√©todos para hacer lamadas al servidor
  * 
- * ⁄ltima actualizaciÛn:
- * -Se ha modificado el mÈtodo totalRows
- * -Se ha modificado el mÈtodo getValues
+ * √öltima actualizaci√≥n:
+ * -Correcci√≥n de los comentarios
  * 
- * @author Pablo Dur·n, HÈctor GarcÌa
- * @version 0.1.1
+ * @author Pablo Dur√°n, H√©ctor Garc√≠a
+ * @version 0.1.2
  */
 package clases;
 
@@ -43,7 +42,7 @@ public class MySQL {
     
     
     /**
-     * Crea la conexiÛn con la base de datos introducida
+     * Crea la conexi√≥n con la base de datos introducida
      */
     public void MySQLConnection() {
     	try{
@@ -60,12 +59,12 @@ public class MySQL {
 
 
     /**
-     * Cierra la conexiÛn con el servidor
+     * Cierra la conexi√≥n con el servidor
      */
     public void closeConnection() {
         try {
             conexion.close();
-            System.out.println("Se ha finalizado la conexiÛn con el servidor");
+            System.out.println("Se ha finalizado la conexi√≥n con el servidor");
         } catch (SQLException ex) {
             Logger.getLogger(MySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -78,8 +77,8 @@ public class MySQL {
      * Comando ejemplo:  INSERT INTO Alumnos (nombre, primerApellido, segundoApellido, notaFinal)
      * 		VALUES ("Peter", "rock", "bless", 8.40);
      * 
-     * @param persona: objeto de tipo persona para pasarle los datos de esta clase
-     * @param notaTotal: objeto de tipo NotaTotal para obtener la nota
+     * @param persona Objeto de tipo persona para pasarle los datos de esta clase
+     * @param notaTotal Objeto de tipo NotaTotal para obtener la nota
      */
     public void insertarDatos(Persona persona, NotaTotal notaTotal) {       
     	MySQLConnection();
@@ -110,11 +109,11 @@ public class MySQL {
     
     
     /**
-     * Recoger· todos los datos de la tabla del servidor
+     * Recoger√° todos los datos de la tabla del servidor
      * 
      * Comando ejemplo:  SELECT * FROM Alumnos
      * 
-     * @return devolver· una cadena String con todos los datos separados por /
+     * @return devolver√° una cadena String con todos los datos separados por /
      */
     public String[][] getValues() {
     	MySQLConnection();
@@ -129,7 +128,7 @@ public class MySQL {
             java.sql.ResultSet resultSet;
             resultSet = st.executeQuery(Query);
 
-            //recoger· todos los datos enviados por el servidor mientras haya.
+            //recoger√° todos los datos enviados por el servidor mientras haya.
             int fila = 0;
             while (resultSet.next()) {
             	datos[fila][0] = resultSet.getString("idAlumno");
@@ -142,7 +141,7 @@ public class MySQL {
            }
 
         } catch (SQLException ex) {
-        	System.out.println("ExcepciÛn encontrada: "+ ex);
+        	System.out.println("Excepci√≥n encontrada: "+ ex);
             mensaje.errorPedirDatos();
         }
         closeConnection();
@@ -155,8 +154,8 @@ public class MySQL {
      * 
      *  Comando ejemplo:  SELECT * FROM Alumnos
      * 
-     * @param table_name: tabla de la que se quiere saber la cantidad de lineas
-     * @return devolver· un n˙mero entero con la cantidad de lineas
+     * @param table_name Tabla de la que se quiere saber la cantidad de lineas
+     * @return devolver√° un n√∫mero entero con la cantidad de lineas
      */
     public int totalRows(String table_name) {
     	MySQLConnection();
@@ -186,7 +185,7 @@ public class MySQL {
     /**
      * Elimina una linea de la tabla Alumno de la base de datos 
      * 
-     * @param ID: identificador de la persona que se quiere eliminar
+     * @param ID Identificador de la persona que se quiere eliminar
      */
     public void deleteRecord( String id) {
     	MySQLConnection();
