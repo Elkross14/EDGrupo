@@ -1,14 +1,13 @@
 /** 
  *<h2> Clase Menu </h2> 
  *
- * Ventana gráfica para elegir entre varias funciones.
+ * Ventana grÃ¡fica para elegir entre varias funciones.
  * 
- * última actualización: 
- * -Se ha eliminado el botón cerrar
- * -Se ha añadido función al botón VerTabla
+ * Ãºltima actualizaciÃ³n: 
+ * -CorrecciÃ³n de los comentarios
  * 
- * @author Pablo Durán, Héctor García
- * @version 0.1.1
+ * @author Pablo DurÃ¡n, HÃ©ctor GarcÃ­a
+ * @version 0.1.2
  */
 
 package interfazGrafica;
@@ -28,7 +27,7 @@ import java.awt.event.ActionEvent;
 public class Menu extends JFrame {
 
 	private JPanel contentPane;
-	private JButton btnAñadirAlumno;
+	private JButton btnAÃ±adirAlumno;
 	private JButton btnVerTabla;
 
 	/**
@@ -63,13 +62,13 @@ public class Menu extends JFrame {
 		iniciarComponentes();
 		
 		setLocationRelativeTo(null);	//vista centrada
-        setResizable(false);	//evita que se pueda cambiar el tamaño de la ventana
-        setTitle("Menu");	//pondrá titulo a la ventana
+        setResizable(false);	//evita que se pueda cambiar el tamaÃ±o de la ventana
+        setTitle("Menu");	//pondrÃ¡ titulo a la ventana
 	}
 	
 	
 	/**
-	 * Inicia las caracteristicas gráficas básicas de la ventana
+	 * Inicia las caracteristicas grÃ¡ficas bÃ¡sicas de la ventana
 	 */
 	public void iniciarComponentes() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,10 +77,10 @@ public class Menu extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		btnAñadirAlumno = new JButton("A\u00F1adir Alumno");
-		btnAñadirAlumno.addActionListener(new ActionListener() {
+		btnAÃ±adirAlumno = new JButton("A\u00F1adir Alumno");
+		btnAÃ±adirAlumno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				btnAñadirAlumnoActionPerformed(e);
+				btnAÃ±adirAlumnoActionPerformed(e);
 			}
 		});
 		
@@ -98,14 +97,14 @@ public class Menu extends JFrame {
 					.addGap(112)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 						.addComponent(btnVerTabla, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnAñadirAlumno, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addComponent(btnAÃ±adirAlumno, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addContainerGap(121, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(20)
-					.addComponent(btnAñadirAlumno)
+					.addComponent(btnAÃ±adirAlumno)
 					.addGap(18)
 					.addComponent(btnVerTabla)
 					.addContainerGap(28, Short.MAX_VALUE))
@@ -115,11 +114,11 @@ public class Menu extends JFrame {
 	
 	
 	/**
-	 * Llama a la clase VentanaNombre en el caso de que haya conexión con el servidor
+	 * Llama a la clase VentanaNombre en el caso de que haya conexiÃ³n con el servidor
 	 * 
-	 * @param e: click izquierzo en el botón Siguiente
+	 * @param e Click izquierzo en el botÃ³n Siguiente
 	 */
-	public void btnAñadirAlumnoActionPerformed(ActionEvent e) {
+	public void btnAÃ±adirAlumnoActionPerformed(ActionEvent e) {
 		VentanaNombre pasar = new VentanaNombre();
 		pasar.setVisible(true);
 		dispose();
@@ -129,7 +128,7 @@ public class Menu extends JFrame {
 	/**
 	 * Llama a la clase VerTabla para visualizar los datos introducidos
 	 * 
-	 * @param e: click izquierzo en el botón Siguiente
+	 * @param e Click izquierzo en el botÃ³n Siguiente
 	 */
 	public void btnVerTablaActionPerformed(ActionEvent e) {
 		VentanaTabla pasar = new VentanaTabla();
