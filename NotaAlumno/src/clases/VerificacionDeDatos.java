@@ -2,9 +2,12 @@
  *<h2> Clase VerificacionDeDatos </h2> 
  *
  * Verifica todos los datos de entrada del usuario
+ *
+ * Ãšltima actualizaciÃ³n:
+ * -CorrecciÃ³n de los comentarios
  * 
- * @author Pablo Durán, Héctor García
- * @version 0.1.1
+ * @author Pablo DurÃ¡n, HÃ©ctor GarcÃ­a
+ * @version 0.1.2
  */
 package clases;
 
@@ -12,10 +15,10 @@ public class VerificacionDeDatos {
 	
 	
 	/**
-	 * Verifica que el número entero esté bien introducido
+	 * Verifica que el nÃºmero entero estÃ© bien introducido
 	 * 
-	 * @param cadena: Entrada de un supuesto número entero
-	 * @return devolverá falso en el caso de que sea un número entero
+	 * @param cadena Entrada de un supuesto nÃºmero entero
+	 * @return devolverÃ¡ falso en el caso de que sea un nÃºmero entero
 	 */
     public boolean correctoInt(String cadena) {
 		try {
@@ -29,10 +32,10 @@ public class VerificacionDeDatos {
     
     
     /**
-     * Verifica que el número decimal esté bien introducido
+     * Verifica que el nÃºmero decimal estÃ© bien introducido
      * 
-     * @param cadena: Entrada de un supuesto número decimal
-     * @return devolverá falso en el caso de que sea un número decimal
+     * @param cadena Entrada de un supuesto nÃºmero decimal
+     * @return devolverÃ¡ falso en el caso de que sea un nÃºmero decimal
      */
     public boolean correctoDouble(String cadena) {
 		try {
@@ -46,24 +49,24 @@ public class VerificacionDeDatos {
     
     
     /**
-     * Evita que se le introduzcan carácteres extraños.
-     * Sólo permite la entrada de caracteres anglosajones y acentos.
+     * Evita que se le introduzcan carÃ¡cteres extraÃ±os.
+     * SÃ³lo permite la entrada de caracteres anglosajones y acentos.
      * 
-     * @param cadena: Entrada de un String.
-     * @return devolverá falso en el caso de que solo haya caracteres anglosajones y acentos.
+     * @param cadena Entrada de un String.
+     * @return devolverÃ¡ falso en el caso de que solo haya caracteres anglosajones y acentos.
      */
-    public boolean correctoString(String cadena) {	//evia caracteres extraños y números
+    public boolean correctoString(String cadena) {	//evia caracteres extraÃ±os y nÃºmeros
         for (int i = 0; i < cadena.length(); i++){
             char caracter = cadena.toUpperCase().charAt(i);
             int valorASCII = (int)caracter;
             if (valorASCII != 32 //espacio en blanco
-                    && valorASCII != 209 //caracter Ñ
-                    && valorASCII != 193 //caracter Á
-                    && valorASCII != 201 //caracter É
-                    && valorASCII != 205 //caracter Í
-                    && valorASCII != 211 //caracter Ó
-                    && valorASCII != 218 //caracter Ú
-                    && valorASCII != 220 //caracter Ü
+                    && valorASCII != 209 //caracter Ã‘
+                    && valorASCII != 193 //caracter Ã
+                    && valorASCII != 201 //caracter Ã‰
+                    && valorASCII != 205 //caracter Ã
+                    && valorASCII != 211 //caracter Ã“
+                    && valorASCII != 218 //caracter Ãš
+                    && valorASCII != 220 //caracter Ãœ
                     &&(valorASCII < 65 || valorASCII > 90))	//mayusculas normales
             	return true; //Se ha encontrado un caracter que no es letra
         } 
@@ -72,10 +75,10 @@ public class VerificacionDeDatos {
     
     
     /**
-     * Verifica que se haya introducido algún valor
+     * Verifica que se haya introducido algÃºn valor
      * 
-     * @param cadena: entrada del dato a verificar si está relleno
-     * @return devolverá false en caso de estar rellenado
+     * @param cadena Entrada del dato a verificar si estÃ¡ relleno
+     * @return devolverÃ¡ false en caso de estar rellenado
      */
     public boolean campoRelleno(String cadena) {
         return cadena.equals("") || cadena.equals(" ");
@@ -85,24 +88,24 @@ public class VerificacionDeDatos {
     /**
      * Verifica si la longitud de la cadena es mayor a 50
      * 
-     * @param cadena: entrada del String a verificar si es mayor a 50
-     * @return devolverá false en caso de que sea menor a 50 caracteres
+     * @param cadena Entrada del String a verificar si es mayor a 50
+     * @return devolverÃ¡ false en caso de que sea menor a 50 caracteres
      */
     public boolean longitudString(String cadena) {
         if(cadena.length()>50){
-            return true;	//se ha superado el límite de caracteres
+            return true;	//se ha superado el lÃ­mite de caracteres
         }
-        return false;	//está dentro de rango
+        return false;	//estÃ¡ dentro de rango
     }
     
     
     /**
      * Calcula si la cantidad de respues son las correctas
      * 
-     * @param respuestasCorrectas: cantidad de respuestas correstas en el test
-     * @param respuestasIncorrectas: cantidad de respuestas incorrestas en el test
-     * @param respuestasSinContestar: cantidad de respuestas sin contestar en el test
-     * @return devolverá false en caso de no ser la cantidad correcta de respuestas.
+     * @param respuestasCorrectas Cantidad de respuestas correstas en el test
+     * @param respuestasIncorrectas Cantidad de respuestas incorrestas en el test
+     * @param respuestasSinContestar Cantidad de respuestas sin contestar en el test
+     * @return devolverÃ¡ false en caso de no ser la cantidad correcta de respuestas.
      */
     public boolean cantidadRespuestasTest(String respuestasCorrectas, String respuestasIncorrectas, String respuestasSinContestar) {
         int correctas = Integer.valueOf(respuestasCorrectas);
@@ -113,20 +116,20 @@ public class VerificacionDeDatos {
             return true;	//no hay un total de 30 preguntas
         }
         
-        return false;	//está dentro de rango
+        return false;	//estÃ¡ dentro de rango
     }
     
     
     /**
-     * Verifica que la nota esté entre 0 y 10
+     * Verifica que la nota estÃ© entre 0 y 10
      * 
-     * @param sNota: String con la nota a verificar
-     * @return devolverá false en el caso de que la nota esté dentro de rango
+     * @param sNota String con la nota a verificar
+     * @return devolverÃ¡ false en el caso de que la nota estÃ© dentro de rango
      */
     public boolean rangoNotaEx(String sNota) {
         double nota = Double.valueOf(sNota);
         if(nota < 0 || 10 < nota) {
-            return true;	//el valor introducido no está dentro de rango
+            return true;	//el valor introducido no estÃ¡ dentro de rango
         }
         return false;
     }
