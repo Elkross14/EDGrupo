@@ -1,13 +1,13 @@
 /** 
  *<h2> Clase VentanaTabla </h2> 
  *
- * Ventana gr·fica para visualizar los datos de la base de datos.
+ * Ventana gr√°fica para visualizar los datos de la base de datos.
  * 
- * ˙ltima actualizaciÛn: 
- * -CreaciÛn de una ventana de confirmaciÛn de borrado de alumno
+ * √öltima actualizaci√≥n: 
+ * -Correci√≥n de los comentarios
  * 
- * @author Pablo Dur·n, HÈctor GarcÌa
- * @version 0.1.1
+ * @author Pablo Dur√°n, H√©ctor Garc√≠a
+ * @version 0.1.2
  */
 
 package interfazGrafica;
@@ -67,13 +67,13 @@ public class VentanaTabla extends JFrame {
 		iniciarComponentes();
 		
 		setLocationRelativeTo(null);	//vista centrada
-        setTitle("Notas");	//pondr· titulo a la ventanag
+        setTitle("Notas");	//pondr√° titulo a la ventanag
         setMinimumSize(new Dimension(500, 300));
 	}
 	
 	
 	/**
-	 * Inicia las caracteristicas gr·ficas b·sicas de la ventana
+	 * Inicia las caracteristicas gr√°ficas b√°sicas de la ventana
 	 */
 	public void iniciarComponentes() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -150,9 +150,9 @@ public class VentanaTabla extends JFrame {
 
 	
 	/**
-	 * EnvÌa el comando de borrado al servidor y reinicia la ventana
+	 * Env√≠a el comando de borrado al servidor y reinicia la ventana
 	 * 
-	 * @param evt  evt click izquierzo en el botÛn Borrar alumno
+	 * @param evt Click izquierzo en el bot√≥n Borrar alumno
 	 */
 	private void btnBorrarAlumnoActionPerformed(ActionEvent evt) {
 		if (mensaje.preguntaAtras() == 0) {
@@ -166,9 +166,9 @@ public class VentanaTabla extends JFrame {
 	
 	
 	/**
-	 * Vuelve a la pantalla de Men˙.
+	 * Vuelve a la pantalla de Men√∫.
 	 * 
-	 * @param evt click izquierzo en el botÛn Atr·s
+	 * @param evt Click izquierzo en el bot√≥n Atr√°s
 	 */
 	private void btnAtrasActionPerformed(ActionEvent evt) {
 		Menu pasar = new Menu();
@@ -180,7 +180,7 @@ public class VentanaTabla extends JFrame {
 	/**
 	 * Recoge el id de la fila seleccionada de la tabla
 	 * 
-	 * @param e click izquierdo en la tabla
+	 * @param e Click izquierdo en la tabla
 	 */
 	private void tableMouseClicked(MouseEvent e) {
 		idSeleccionado = (String) table.getValueAt(table.getSelectedRow(), 0);
