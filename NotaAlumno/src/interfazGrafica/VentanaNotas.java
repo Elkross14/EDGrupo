@@ -4,12 +4,17 @@
  * Ventana gráfica para introducir las notas y otros
  * datos necesarios.
  * 
- * última actualización: 
- * -Correción de los cometarios
+ * Última actualización: 
+ * - 0 días de retraso base para la entrega de trabajos
+ * - Maximo de 30 respuestas para los examenes tipo test
+ * - Comprobación de la nota de los examenes clasicos
+ *
+ * Nota: Mirar las comprobaciones para ponerlas en el orden optimo
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.1.2
+ * @version 0.1.3
  */
+
 package interfazGrafica;
 
 import javax.swing.JFrame;
@@ -224,6 +229,7 @@ public class VentanaNotas extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				fieldRetrasos1.setEditable(true);
+				fieldRetrasos1.setText("0"); //Poner días de retraso automaticamente -- Prueba 1: funciona.
 			}
 		});
 		rdbtnEntregadoTrabajo1.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -250,6 +256,7 @@ public class VentanaNotas extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				fieldRetrasos2.setEditable(true);
+				fieldRetrasos2.setText("0"); //Poner días de retraso automaticamente -- Prueba 1: funciona.
 			}
 		});
 		rdbtnEntregadoTrabajo2.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -276,6 +283,7 @@ public class VentanaNotas extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				fieldRetrasos3.setEditable(true);
+				fieldRetrasos3.setText("0"); //Poner días de retraso automaticamente -- Prueba 1: funciona.
 			}
 		});
 		rdbtnEntregadoTrabajo3.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -315,6 +323,7 @@ public class VentanaNotas extends JFrame {
 		lblNewLabel_2.setBounds(387, 306, 91, 14);
 		
 		fieldRetrasos1 = new JTextField();
+		fieldRetrasos1.setText("0");
 		fieldRetrasos1.setBounds(488, 305, 34, 20);
 		fieldRetrasos1.setColumns(10);
 		
@@ -323,6 +332,7 @@ public class VentanaNotas extends JFrame {
 		lblDasDeRetraso.setBounds(387, 347, 91, 14);
 		
 		fieldRetrasos2 = new JTextField();
+		fieldRetrasos2.setText("0");
 		fieldRetrasos2.setBounds(488, 346, 34, 20);
 		fieldRetrasos2.setColumns(10);
 		
@@ -331,6 +341,7 @@ public class VentanaNotas extends JFrame {
 		lblDasDeRetraso_1.setBounds(387, 388, 91, 14);
 		
 		fieldRetrasos3 = new JTextField();
+		fieldRetrasos3.setText("0");
 		fieldRetrasos3.setBounds(488, 387, 34, 20);
 		fieldRetrasos3.setColumns(10);
 		contentPane.setLayout(null);
@@ -572,24 +583,55 @@ public class VentanaNotas extends JFrame {
 	 * @return devolverá false en el caso de estar todo correcto
 	 */
 	public boolean verificarEntradaExTest() {
-		if(verificarEntradaInt(fieldCorrectasTest1.getText(), "Correctas Test 1")) {
+		
+		int correctasExamenTestUno = Integer.parseInt(fieldCorrectasTest1.getText());
+		int falladasExamenTestUno = Integer.parseInt(fieldFalladasTest1.getText());
+		int sinContestarExamenTestUno = Integer.parseInt(fieldSinContestarTest1.getText());
+		
+		int correctasExamenTestDos = Integer.parseInt(fieldCorrectasTest2.getText());
+		int falladasExamenTestDos = Integer.parseInt(fieldFalladasTest2.getText());
+		int sinContestarExamenTestDos = Integer.parseInt(fieldSinContestarTest2.getText());
+		
+		int total1 = correctasExamenTestUno + falladasExamenTestUno + sinContestarExamenTestUno;
+		int total2 = correctasExamenTestDos + falladasExamenTestDos + sinContestarExamenTestDos;
+		
+		if (total1 <= 30 && total2 <= 30) {
+			
+			if(verificarEntradaInt(fieldCorrectasTest1.getText(), "Correctas Test 1")) {
+				return true;
+			} 
+			else if(verificarEntradaInt(fieldFalladasTest1.getText(), "Falladas Test 1")){
+				return true;
+			} 
+			else if(verificarEntradaInt(fieldSinContestarTest1.getText(), "Sin Contestar Test 1")) {
+				return true;
+			}
+			else if(verificarEntradaInt(fieldCorrectasTest2.getText(), "Correctas Test 2")) {
+				return true;
+			}
+			else if(verificarEntradaInt(fieldFalladasTest2.getText(), "Falladas Test 2")){
+				return true;
+			}
+			else if(verificarEntradaInt(fieldSinContestarTest2.getText(), "Sin Contestar Test 2")) {
+				return true;
+			}	
+			
+		} else {
+			
+			if (total1 > 30) {
+				
+				mensaje.sumaTotal("Examen test 1");
+			
+			} else {
+				
+				mensaje.sumaTotal("Examen test 2");
+				
+			}
+			
 			return true;
-		} 
-		else if(verificarEntradaInt(fieldFalladasTest1.getText(), "Falladas Test 1")){
-			return true;
-		} 
-		else if(verificarEntradaInt(fieldSinContestarTest1.getText(), "Sin Contestar Test 1")) {
-			return true;
+			
 		}
-		else if(verificarEntradaInt(fieldCorrectasTest2.getText(), "Correctas Test 2")) {
-			return true;
-		}
-		else if(verificarEntradaInt(fieldFalladasTest2.getText(), "Falladas Test 2")){
-			return true;
-		}
-		else if(verificarEntradaInt(fieldSinContestarTest2.getText(), "Sin Contestar Test 2")) {
-			return true;
-		}
+		
 		return false;
 	}
 	
@@ -597,18 +639,45 @@ public class VentanaNotas extends JFrame {
 	/**
 	 * Verifica todas las entradas de datos de los examenes clásicos
 	 * 
-	 * @returndevolverá false en el caso de que estar todo correcto
+	 * @return devolverá false en el caso de que estar todo correcto
 	 */
 	public boolean verificarEntradaExClasico() {
-		if(verificarEntradaDouble(fieldClasico1.getText(), "Examen clásico 1")) {
-			return true;
-		} 
-		else if(verificarEntradaDouble(fieldClasico2.getText(), "Examen clásico 2")) {
-			return true;
-		} 
-		else if(verificarEntradaDouble(fieldClasico3.getText(), "Examen clásico 3")) {
-			return true;
-		}
+		
+		Double notaExamenClasicoUno = Double.parseDouble(fieldClasico1.getText());
+		Double notaExamenClasicoDos = Double.parseDouble(fieldClasico2.getText());
+		Double notaExamenClasicoTres = Double.parseDouble(fieldClasico3.getText());
+
+			
+			if (verificarEntradaDouble(fieldClasico1.getText(), "Examen clásico 1")) {
+				
+				return true;
+				
+			} else if(verificarEntradaDouble(fieldClasico2.getText(), "Examen clásico 2")) {
+				
+				return true;
+				
+			} else if (verificarEntradaDouble(fieldClasico3.getText(), "Examen clásico 3")) {
+				
+				return true;
+			}
+			
+			if (notaExamenClasicoUno < 0 || notaExamenClasicoUno > 10) {
+				
+				mensaje.notaIncorrecta("Examen clasico 1");
+				return true;
+				
+			} else if (notaExamenClasicoDos < 0 || notaExamenClasicoDos > 10) {
+				
+				mensaje.notaIncorrecta("Examen clasico 2");
+				return true;
+			} else if (notaExamenClasicoTres < 0 || notaExamenClasicoTres > 10) {
+				
+				mensaje.notaIncorrecta("Examen clasico 3");
+				return true;
+		
+			}
+		
+		
 		return false;
 	}
 	
@@ -663,7 +732,7 @@ public class VentanaNotas extends JFrame {
 	 * 
 	 * @param cadena El texto que ha introducido el usuario
 	 * @param campo Que campo se está verificando 
-	 * @return devolverá false en caso de estar todo correcto
+	 * @return Devolverá false en caso de estar todo correcto
 	 */
 	public boolean verificarEntradaDouble(String cadena, String campo) {
 		if(verifica.campoRelleno(cadena)) {

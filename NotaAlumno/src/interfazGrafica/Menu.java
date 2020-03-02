@@ -3,7 +3,7 @@
  *
  * Ventana gráfica para elegir entre varias funciones.
  * 
- * última actualización: 
+ * Última actualización: 
  * -Corrección de los comentarios
  * 
  * @author Pablo Durán, Héctor García

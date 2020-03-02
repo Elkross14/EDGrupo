@@ -4,10 +4,11 @@
  * Contiene todos los mensajes de error que usará el programa
  * 
  * Última actualización:
- * -Correción de los comentarios
+ * - Añadido el mensaje de error sumaTotal
+ * - Añadido el mensaje de error notaIncorrecta
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.1.3
+ * @version 0.1.4
  */
 
 package clases;
@@ -151,6 +152,32 @@ public class MensajeError extends javax.swing.JFrame {
             "Ha surgido un error en el borrado del dato.",
             "Error de borrado",
             JOptionPane.ERROR_MESSAGE);
+    }
+    
+    
+    /**
+	 * Saltará un WARNING_MESSAGE en el caso de que la suma total de las preguntas contestadas supera el limite.
+	 * 
+	 * @param exam Nombre del examen con preguntas de más.
+	 */
+    public void sumaTotal(String exam) {
+        JOptionPane.showMessageDialog(this,
+            "El total de preguntas del " + exam + " colocadas es superior al máximo.",
+            "Preguntas de mas",
+            JOptionPane.WARNING_MESSAGE);
+    }
+    
+    
+    /**
+	 * Saltará un WARNING_MESSAGE en caso de que alguna nota de un examen clasico este mal puesta.
+	 * 
+	 * @param exam Nombre del examen con la nota que no sea valida.
+	 */
+    public void notaIncorrecta(String exam) {
+        JOptionPane.showMessageDialog(this,
+            "La nota del " + exam + " no es valida.",
+            "Nota incorrecta",
+            JOptionPane.WARNING_MESSAGE);
     }
 }
 
