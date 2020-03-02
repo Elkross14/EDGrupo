@@ -5,14 +5,14 @@
  * datos necesarios.
  * 
  * Última actualización: 
- * - 0 días de retraso base para la entrega de trabajos
- * - Maximo de 30 respuestas para los examenes tipo test
- * - Comprobación de la nota de los examenes clasicos
+ * - Modificado el método verificarEntradaExClasico para mayor escalabilidad
+ * - Ahora se muestran todos los datos por pantalla
+ * - Cuando se entra en un flied se selecciona automaticamente todo su interior
  *
  * Nota: Mirar las comprobaciones para ponerlas en el orden optimo
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.1.3
+ * @version 0.1.4
  */
 
 package interfazGrafica;
@@ -21,6 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import clases.FullSelectorListener;
 import clases.MensajeError;
 import clases.MySQL;
 import clases.VerificacionDeDatos;
@@ -92,6 +93,9 @@ public class VentanaNotas extends JFrame {
 		
 		this.persona = new Persona(persona);
 		this.notaTotal = new NotaTotal(notaTotal);
+		
+		mostarDatos();
+		ordenarTabulacion();
 	}
 	
 	
@@ -130,6 +134,107 @@ public class VentanaNotas extends JFrame {
 
 	
 	/**
+	 * Mostrará los datos que ha escrito la persona cada uno en su celda cuando cambia
+	 * de ventana por si quiere modificar alguno.
+	 */
+	public void mostarDatos() {
+		mostrarDatosExamenesTest();
+		mostrarDatosExamenesClasicos();
+		mostrarDatosTrabajos();
+	}
+	
+	
+	/**
+	 * Mostrará los resultados de los examenes tipo test por pantalla
+	 */
+	public void mostrarDatosExamenesTest() {
+		int[][] respuestasTest = new int [notaTotal.getNUM_EXAMENES_TEST()][3];
+		
+		respuestasTest = notaTotal.getRespuestasExamenTest();
+		
+		fieldCorrectasTest1.setText(String.valueOf(respuestasTest [0][0]));
+		fieldFalladasTest1.setText(String.valueOf(respuestasTest [0][1]));
+		fieldSinContestarTest1.setText(String.valueOf(respuestasTest [0][2]));
+			
+		fieldCorrectasTest2.setText(String.valueOf(respuestasTest [1][0]));
+		fieldFalladasTest2.setText(String.valueOf(respuestasTest [1][1]));
+		fieldSinContestarTest2.setText(String.valueOf(respuestasTest [1][2]));
+	}
+	
+	
+	/**
+	 * Mostrará las notas de los examenes clasicos por pantalla
+	 */
+	public void mostrarDatosExamenesClasicos() {
+		double[] notaExamenClasico = new double[notaTotal.getNUM_EXAMENES_CLASICOS()];
+		
+		notaExamenClasico = notaTotal.getNotaExamenClasico();
+		
+		fieldClasico1.setText(String.valueOf(notaExamenClasico[0]));
+		fieldClasico2.setText(String.valueOf(notaExamenClasico[1]));
+		fieldClasico3.setText(String.valueOf(notaExamenClasico[2]));
+	}
+	
+	
+	/**
+	 * Mostrará por pantalla el jradio que se había seleccionado 
+	 * y los dias de retraso si es necesario 
+	 */
+	public void mostrarDatosTrabajos() {
+		int[][] trabajo = new int [notaTotal.getNUM_TRABAJOS()][2];
+		
+		trabajo = notaTotal.getTrabajos();
+		
+		//primer trabajo
+		if (trabajo[0][0] == 1) {
+			rdbtnEntregadoTrabajo1.setSelected(true);
+			fieldRetrasos1.setText(String.valueOf(trabajo[0][1]));
+		}
+		else rdbtnEntregadoTrabajo1.setSelected(false);
+		
+		//segndo trabajo
+		if (trabajo[1][0] == 1) {
+			rdbtnEntregadoTrabajo2.setSelected(true);
+			fieldRetrasos2.setText(String.valueOf(trabajo[1][1]));
+		}
+		else rdbtnEntregadoTrabajo2.setSelected(false);
+		
+		//tercer trabajo
+		if (trabajo[2][0] == 1) {
+			rdbtnEntregadoTrabajo3.setSelected(true);
+			fieldRetrasos3.setText(String.valueOf(trabajo[2][1]));
+		}
+		else rdbtnEntregadoTrabajo3.setSelected(false);
+	}
+	
+
+	/**
+	 * Crea el orden de tabulación que queremos.
+	 * Utilizamos este sistema debido a que el windows builder está bugeado y no deja hacerlo
+	 * por los métodos tradiciones.
+	 */
+	@SuppressWarnings("deprecation")
+	public void ordenarTabulacion() {
+		fieldCorrectasTest1.setNextFocusableComponent(fieldFalladasTest1);
+		fieldFalladasTest1.setNextFocusableComponent(fieldSinContestarTest1);
+		fieldSinContestarTest1.setNextFocusableComponent(fieldCorrectasTest2);
+		fieldCorrectasTest2.setNextFocusableComponent(fieldFalladasTest2);
+		fieldFalladasTest2.setNextFocusableComponent(fieldSinContestarTest2);
+		fieldSinContestarTest2.setNextFocusableComponent(fieldClasico1);
+		fieldClasico1.setNextFocusableComponent(fieldClasico2);
+		fieldClasico2.setNextFocusableComponent(fieldClasico3);
+		fieldClasico3.setNextFocusableComponent(rdbtnEntregadoTrabajo1);
+		rdbtnEntregadoTrabajo1.setNextFocusableComponent(fieldRetrasos1);
+		fieldRetrasos1.setNextFocusableComponent(rdbtnEntregadoTrabajo2);
+		rdbtnEntregadoTrabajo2.setNextFocusableComponent(fieldRetrasos2);
+		fieldRetrasos2.setNextFocusableComponent(rdbtnEntregadoTrabajo3);
+		rdbtnEntregadoTrabajo3.setNextFocusableComponent(fieldRetrasos3);
+		fieldRetrasos3.setNextFocusableComponent(btnAtras);
+		btnAtras.setNextFocusableComponent(btnFinalizar);
+		btnFinalizar.setNextFocusableComponent(fieldCorrectasTest1);
+	}
+	
+	/**
 	 * Inicia las caracteristicas gráficas básicas de la ventana
 	 */
 	public void iniciarComponentes() {
@@ -146,6 +251,7 @@ public class VentanaNotas extends JFrame {
 		fieldClasico1 = new JTextField();
 		fieldClasico1.setBounds(145, 181, 86, 20);
 		fieldClasico1.setColumns(10);
+		fieldClasico1.addFocusListener(new FullSelectorListener());
 		
 		JLabel lblClasico2 = new JLabel("NotaTotal Cl\u00E1sico 2:");
 		lblClasico2.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -154,6 +260,7 @@ public class VentanaNotas extends JFrame {
 		fieldClasico2 = new JTextField();
 		fieldClasico2.setBounds(145, 212, 86, 20);
 		fieldClasico2.setColumns(10);
+		fieldClasico2.addFocusListener(new FullSelectorListener());
 		
 		JLabel lblClasico3 = new JLabel("NotaTotal Cl\u00E1sico 3:");
 		lblClasico3.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -162,6 +269,7 @@ public class VentanaNotas extends JFrame {
 		fieldClasico3 = new JTextField();
 		fieldClasico3.setBounds(145, 243, 86, 20);
 		fieldClasico3.setColumns(10);
+		fieldClasico3.addFocusListener(new FullSelectorListener());
 		
 		JLabel lblTest1 = new JLabel("Ex. Test 1: (total max. "+notaTotal.getNUM_PREGUNTAS_TEST()+")");
 		lblTest1.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -174,6 +282,7 @@ public class VentanaNotas extends JFrame {
 		fieldCorrectasTest1 = new JTextField();
 		fieldCorrectasTest1.setBounds(105, 41, 110, 20);
 		fieldCorrectasTest1.setColumns(10);
+		fieldCorrectasTest1.addFocusListener(new FullSelectorListener());
 		
 		JLabel lblNewLabel_1 = new JLabel("Falladas:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -182,6 +291,7 @@ public class VentanaNotas extends JFrame {
 		fieldFalladasTest1 = new JTextField();
 		fieldFalladasTest1.setBounds(105, 72, 110, 20);
 		fieldFalladasTest1.setColumns(10);
+		fieldFalladasTest1.addFocusListener(new FullSelectorListener());
 		
 		JLabel lblSinContestar = new JLabel("Sin contestar:");
 		lblSinContestar.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -190,10 +300,12 @@ public class VentanaNotas extends JFrame {
 		fieldSinContestarTest1 = new JTextField();
 		fieldSinContestarTest1.setBounds(105, 103, 110, 20);
 		fieldSinContestarTest1.setColumns(10);
+		fieldSinContestarTest1.addFocusListener(new FullSelectorListener());
 		
 		fieldSinContestarTest2 = new JTextField();
 		fieldSinContestarTest2.setBounds(389, 103, 107, 20);
 		fieldSinContestarTest2.setColumns(10);
+		fieldSinContestarTest2.addFocusListener(new FullSelectorListener());
 		
 		JLabel label = new JLabel("Sin contestar:");
 		label.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -206,10 +318,12 @@ public class VentanaNotas extends JFrame {
 		fieldFalladasTest2 = new JTextField();
 		fieldFalladasTest2.setBounds(389, 72, 107, 20);
 		fieldFalladasTest2.setColumns(10);
+		fieldFalladasTest2.addFocusListener(new FullSelectorListener());
 		
 		fieldCorrectasTest2 = new JTextField();
 		fieldCorrectasTest2.setBounds(389, 41, 107, 20);
 		fieldCorrectasTest2.setColumns(10);
+		fieldCorrectasTest2.addFocusListener(new FullSelectorListener());
 		
 		JLabel label_2 = new JLabel("Correctas:");
 		label_2.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -326,6 +440,7 @@ public class VentanaNotas extends JFrame {
 		fieldRetrasos1.setText("0");
 		fieldRetrasos1.setBounds(488, 305, 34, 20);
 		fieldRetrasos1.setColumns(10);
+		fieldRetrasos1.addFocusListener(new FullSelectorListener());
 		
 		JLabel lblDasDeRetraso = new JLabel("D\u00EDas de retraso:");
 		lblDasDeRetraso.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -335,15 +450,18 @@ public class VentanaNotas extends JFrame {
 		fieldRetrasos2.setText("0");
 		fieldRetrasos2.setBounds(488, 346, 34, 20);
 		fieldRetrasos2.setColumns(10);
+		fieldRetrasos2.addFocusListener(new FullSelectorListener());
 		
 		JLabel lblDasDeRetraso_1 = new JLabel("D\u00EDas de retraso:");
 		lblDasDeRetraso_1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblDasDeRetraso_1.setBounds(387, 388, 91, 14);
-		
+				
 		fieldRetrasos3 = new JTextField();
 		fieldRetrasos3.setText("0");
 		fieldRetrasos3.setBounds(488, 387, 34, 20);
 		fieldRetrasos3.setColumns(10);
+		fieldRetrasos3.addFocusListener(new FullSelectorListener());
+		
 		contentPane.setLayout(null);
 		contentPane.add(lblTest1);
 		contentPane.add(lblSinContestar);
@@ -384,57 +502,6 @@ public class VentanaNotas extends JFrame {
 		contentPane.add(fieldRetrasos3);
 	}
 	
-	
-	/**
-	 * Mostrará los datos que ha escrito la persona cada uno en su celda cuando cambia
-	 * de ventana por si quiere modificar alguno.
-	 */
-	public void mostarDatos() {
-		mostrarDatosExamenesTest();
-		mostrarDatosExamenesClasicos();
-		mostrarDatosTrabajos();
-	}
-	
-	
-	/**
-	 * Mostrará los resultados de los examenes tipo test por pantalla
-	 */
-	public void mostrarDatosExamenesTest() {
-		int[][] respuestasTest = new int [notaTotal.getNUM_EXAMENES_TEST()][3];
-		
-		respuestasTest = notaTotal.getRespuestasExamenTest();
-		
-		fieldCorrectasTest1.setText(String.valueOf(respuestasTest [0][0]));
-		fieldFalladasTest1.setText(String.valueOf(respuestasTest [0][1]));
-		fieldSinContestarTest1.setText(String.valueOf(respuestasTest [0][2]));
-			
-		fieldCorrectasTest2.setText(String.valueOf(respuestasTest [1][0]));
-		fieldFalladasTest2.setText(String.valueOf(respuestasTest [1][1]));
-		fieldSinContestarTest2.setText(String.valueOf(respuestasTest [1][2]));
-	}
-	
-	
-	/**
-	 * Mostrará las notas de los examenes clasicos por pantalla
-	 */
-	public void mostrarDatosExamenesClasicos() {
-		double[] notaExamenClasico = new double[notaTotal.getNUM_EXAMENES_CLASICOS()];
-		
-		notaExamenClasico = notaTotal.getNotaExamenClasico();
-		
-		fieldClasico1.setText(String.valueOf(notaExamenClasico[0]));
-		fieldClasico2.setText(String.valueOf(notaExamenClasico[1]));
-		fieldClasico3.setText(String.valueOf(notaExamenClasico[2]));
-	}
-	
-	
-	/**
-	 * Mostrará por pantalla el jradio que se había seleccionado 
-	 * y los dias de retraso si es necesario 
-	 */
-	public void mostrarDatosTrabajos() {
-		
-	}
 	
 	
 	/**
@@ -583,55 +650,53 @@ public class VentanaNotas extends JFrame {
 	 * @return devolverá false en el caso de estar todo correcto
 	 */
 	public boolean verificarEntradaExTest() {
-		
-		int correctasExamenTestUno = Integer.parseInt(fieldCorrectasTest1.getText());
-		int falladasExamenTestUno = Integer.parseInt(fieldFalladasTest1.getText());
-		int sinContestarExamenTestUno = Integer.parseInt(fieldSinContestarTest1.getText());
-		
-		int correctasExamenTestDos = Integer.parseInt(fieldCorrectasTest2.getText());
-		int falladasExamenTestDos = Integer.parseInt(fieldFalladasTest2.getText());
-		int sinContestarExamenTestDos = Integer.parseInt(fieldSinContestarTest2.getText());
-		
-		int total1 = correctasExamenTestUno + falladasExamenTestUno + sinContestarExamenTestUno;
-		int total2 = correctasExamenTestDos + falladasExamenTestDos + sinContestarExamenTestDos;
-		
-		if (total1 <= 30 && total2 <= 30) {
-			
-			if(verificarEntradaInt(fieldCorrectasTest1.getText(), "Correctas Test 1")) {
-				return true;
-			} 
-			else if(verificarEntradaInt(fieldFalladasTest1.getText(), "Falladas Test 1")){
-				return true;
-			} 
-			else if(verificarEntradaInt(fieldSinContestarTest1.getText(), "Sin Contestar Test 1")) {
-				return true;
-			}
-			else if(verificarEntradaInt(fieldCorrectasTest2.getText(), "Correctas Test 2")) {
-				return true;
-			}
-			else if(verificarEntradaInt(fieldFalladasTest2.getText(), "Falladas Test 2")){
-				return true;
-			}
-			else if(verificarEntradaInt(fieldSinContestarTest2.getText(), "Sin Contestar Test 2")) {
-				return true;
-			}	
-			
-		} else {
-			
-			if (total1 > 30) {
-				
-				mensaje.sumaTotal("Examen test 1");
-			
-			} else {
-				
-				mensaje.sumaTotal("Examen test 2");
-				
-			}
-			
+		if(verificarEntradaInt(fieldCorrectasTest1.getText(), "Correctas Test 1")) {
 			return true;
-			
+		} 
+		else if(verificarEntradaInt(fieldFalladasTest1.getText(), "Falladas Test 1")){
+			return true;
+		} 
+		else if(verificarEntradaInt(fieldSinContestarTest1.getText(), "Sin Contestar Test 1")) {
+			return true;
 		}
+		else if (verifica.cantidadRespuestasTest(fieldCorrectasTest1.getText(), fieldFalladasTest1.getText(), 
+				fieldSinContestarTest1.getText())) {
+			
+			mensaje.errorSumaTotal("Examen test 1");
+			return true;
+		}
+		else if(verificarEntradaInt(fieldCorrectasTest2.getText(), "Correctas Test 2")) {
+			return true;
+		}
+		else if(verificarEntradaInt(fieldFalladasTest2.getText(), "Falladas Test 2")){
+			return true;
+		}
+		else if(verificarEntradaInt(fieldSinContestarTest2.getText(), "Sin Contestar Test 2")) {
+			return true;
+		}
+		else if (verifica.cantidadRespuestasTest(fieldCorrectasTest2.getText(), fieldFalladasTest2.getText(), 
+				fieldSinContestarTest2.getText())) {
+			
+			mensaje.errorSumaTotal("Examen test 2");
+			return true;
+		}
+		return false;
+	}
+	
+	
+	public boolean verificarRespuestasTotalesTest(String sCorrectas, String sFalladas, 
+			String sSinContestar, String campo) {
 		
+		int correctas = Integer.parseInt(sCorrectas);
+		int falladas = Integer.parseInt(sFalladas);
+		int sinContestar = Integer.parseInt(sSinContestar);
+		
+		int respuestasTotales = correctas + falladas + sinContestar;
+		
+		if (respuestasTotales == 30) {
+			mensaje.errorSumaTotal(campo);
+			return true;
+		}
 		return false;
 	}
 	
@@ -643,41 +708,19 @@ public class VentanaNotas extends JFrame {
 	 */
 	public boolean verificarEntradaExClasico() {
 		
-		Double notaExamenClasicoUno = Double.parseDouble(fieldClasico1.getText());
-		Double notaExamenClasicoDos = Double.parseDouble(fieldClasico2.getText());
-		Double notaExamenClasicoTres = Double.parseDouble(fieldClasico3.getText());
-
+			if (verificarNotaExClasico(fieldClasico1.getText(), "Examen clásico 1")) {
+				
+				return true;
+				
+			} else if(verificarNotaExClasico(fieldClasico2.getText(), "Examen clásico 2")) {
+				
+				return true;
+				
+			} else if (verificarNotaExClasico(fieldClasico3.getText(), "Examen clásico 3")) {
+				
+				return true;
+			}	
 			
-			if (verificarEntradaDouble(fieldClasico1.getText(), "Examen clásico 1")) {
-				
-				return true;
-				
-			} else if(verificarEntradaDouble(fieldClasico2.getText(), "Examen clásico 2")) {
-				
-				return true;
-				
-			} else if (verificarEntradaDouble(fieldClasico3.getText(), "Examen clásico 3")) {
-				
-				return true;
-			}
-			
-			if (notaExamenClasicoUno < 0 || notaExamenClasicoUno > 10) {
-				
-				mensaje.notaIncorrecta("Examen clasico 1");
-				return true;
-				
-			} else if (notaExamenClasicoDos < 0 || notaExamenClasicoDos > 10) {
-				
-				mensaje.notaIncorrecta("Examen clasico 2");
-				return true;
-			} else if (notaExamenClasicoTres < 0 || notaExamenClasicoTres > 10) {
-				
-				mensaje.notaIncorrecta("Examen clasico 3");
-				return true;
-		
-			}
-		
-		
 		return false;
 	}
 	
@@ -689,17 +732,17 @@ public class VentanaNotas extends JFrame {
 	 */
 	public boolean verificarEntradaTrabajo() {
 		if(rdbtnEntregadoTrabajo1.isSelected()) {
-			if(verificarEntradaInt(fieldRetrasos1.getText(), "Días de retraso (Trabajo de la evaluación 1")) {
+			if(verificarEntradaInt(fieldRetrasos1.getText(), "Días de retraso (Trabajo de la evaluación 1)")) {
 				return true;
 			}
 		} 
 		else if(rdbtnEntregadoTrabajo2.isSelected()) {
-			if(verificarEntradaInt(fieldRetrasos2.getText(), "Días de retraso (Trabajo de la evaluación 2")) {
+			if(verificarEntradaInt(fieldRetrasos2.getText(), "Días de retraso (Trabajo de la evaluación 2)")) {
 				return true;
 			}
 		} 
 		else if(rdbtnEntregadoTrabajo3.isSelected()) {
-			if(verificarEntradaInt(fieldRetrasos3.getText(), "Días de retraso (Trabajo de la evaluación 3")) {
+			if(verificarEntradaInt(fieldRetrasos3.getText(), "Días de retraso (Trabajo de la evaluación 3)")) {
 				return true;
 			}
 		}
@@ -728,24 +771,29 @@ public class VentanaNotas extends JFrame {
 	
 	
 	/**
-	 * Verifica que cualquier dato de tipo double que se introduzca cumpla las condiciones que queremos
+	 * Hace todas las verificaciones necesárias para la nota de examen clásico.
+	 * 	-No debe de estár vacío el campo
+	 *  -Que sea de tipo numérico
+	 *  -Que esté entre el 0 y el 10. Estos incluidos
 	 * 
-	 * @param cadena El texto que ha introducido el usuario
-	 * @param campo Que campo se está verificando 
+	 * @param nota El texto que ha introducido el usuario
+	 * @param examen Que campo se está verificando 
 	 * @return Devolverá false en caso de estar todo correcto
 	 */
-	public boolean verificarEntradaDouble(String cadena, String campo) {
-		if(verifica.campoRelleno(cadena)) {
-			mensaje.vacioCampo(campo);
+	public boolean verificarNotaExClasico (String nota, String examen) {
+		if(verifica.campoRelleno(nota)) {
+			mensaje.vacioCampo(examen);
 			return true;
 		}
-		else if(verifica.correctoDouble(cadena)) {
-			mensaje.errorNumDouble(campo);
+		else if(verifica.correctoDouble(nota)) {
+			mensaje.errorNumDouble(examen);
+			return true;
+		}
+		else if (verifica.rangoNotaEx(nota)) {
+			mensaje.errorNotaIncorrecta(examen);
 			return true;
 		}
 		return false;
 	}
-	
 }
-
 

@@ -3,11 +3,11 @@
  *
  * Almacena todos los datos necesarios de las notas.
  * 
- * Última actualización:
- * - Añadido el método getRespuestasExamenTest
+ *Ãšltima actualizaciÃ³n:
+ * - AÃ±adido el mÃ©todo getTrabajos
  * 
- * @author Pablo Durán, Héctor García
- * @version 0.2.2
+ * @author Pablo DurÃ¡n, HÃ©ctor GarcÃ­a
+ * @version 0.2.3
  */
 package registroDeValores;
 
@@ -98,7 +98,7 @@ public class NotaTotal extends Trabajo {
 
 	
 	/**
-	 * @return devuelve la cantidad de examenes clásicos que hace cada persona
+	 * @return devuelve la cantidad de examenes clÃ¡sicos que hace cada persona
 	 */
 	public int getNUM_EXAMENES_CLASICOS() {
 		return NUM_EXAMENES_CLASICOS;
@@ -114,7 +114,7 @@ public class NotaTotal extends Trabajo {
 
 	
 	/**
-	 * @return devuelve el número de trabajos
+	 * @return devuelve el nÃºmero de trabajos
 	 */
 	public int getNUM_TRABAJOS() {
 		return NUM_TRABAJOS;
@@ -123,7 +123,7 @@ public class NotaTotal extends Trabajo {
 	
 	/**
 	 * 
-	 * @return devuelve el número de preguntas que tiene cada examen tipo test
+	 * @return devuelve el nï¿½nÃºmero de preguntas que tiene cada examen tipo test
 	 */
 	public int getNUM_PREGUNTAS_TEST() {
 		return NUM_PREGUNTAS_TEST;
@@ -154,7 +154,7 @@ public class NotaTotal extends Trabajo {
 
 	
 	/**
-	 * @return devuelve un array double con las notas de los examenes clásicos
+	 * @return devuelve un array double con las notas de los examenes clÃ¡sicos
 	 */
 	public double[] getNotaExamenClasico() {
 		double[] notaExamenClasico = new double [NUM_EXAMENES_CLASICOS];
@@ -163,6 +163,27 @@ public class NotaTotal extends Trabajo {
 			notaExamenClasico[i] = examenClasicoArray[i].getNota();
 		}
 		return notaExamenClasico;
+	}
+	
+	
+	/**
+	 * @return devuelve una matroz con todos los datos de los trabajos
+	 */
+	public int[][] getTrabajos() {
+		int[][] trabajos = new int [NUM_TRABAJOS][2];
+		
+		for (int i = 0; i < NUM_TRABAJOS; i++) {
+			
+			trabajos[i][1] = trabajoArray[i].getDiasDeRetraso();
+			
+			if (trabajoArray[i].isEntregado()) {
+				trabajos[i][0] = 1;
+			}
+			else {
+				trabajos[i][0] = 0;
+			}
+		}
+		return trabajos;
 	}
 
 
@@ -191,9 +212,9 @@ public class NotaTotal extends Trabajo {
 	
 	
 	/**
-	 * pasamos los valores de las notas del examen clásico al array de tipo ExamenClasico
+	 * pasamos los valores de las notas del examen clÃ¡sico al array de tipo ExamenClasico
 	 * 
-	 * @param NotaExamenClasico: Array double con las notas de todos los examenes clásicos
+	 * @param NotaExamenClasico: Array double con las notas de todos los examenes clÃ¡sicos
 	 */
 	public void setNotaExamenClasico(double [] NotaExamenClasico) {
 		for (int i = 0; i < NUM_EXAMENES_CLASICOS; i++) {
@@ -223,7 +244,7 @@ public class NotaTotal extends Trabajo {
 	 * Pasamos los valores de los trabajos al array de tipo Trabajo
 	 * 
 	 * @param entregado: es de tipo boolean. true equivale a que se ha entregado el trabajo
-	 * @param diasDeRetraso: es la cantidad de días que se tarda en entregar el trabajo
+	 * @param diasDeRetraso: es la cantidad de dï¿½as que se tarda en entregar el trabajo
 	 */
 	public void setTrabajoArray(boolean [] entregado, int [] diasDeRetraso) {
 		for (int i = 0; i < NUM_TRABAJOS; i++) {
@@ -236,7 +257,7 @@ public class NotaTotal extends Trabajo {
 	/**
 	 * Calcula la nota global
 	 * 
-	 * @return devolverá la nota global
+	 * @return devolverÃ¡ la nota global
 	 */
 	public void calcularNotaGlobal() {
 		double notaExamenes;
@@ -254,7 +275,7 @@ public class NotaTotal extends Trabajo {
 	 * Calcula la nota total que se consigue juntando todos los examenes tipo test
 	 * y su porcentaje de peso en la nota final
 	 * 
-	 * @return devolverá la nota de los examenes tipo test con decimales
+	 * @return devolverÃ¡ la nota de los examenes tipo test con decimales
 	 */
 	public double calcularNotaTotalExText() {
 		double notaTotalExText = 0.0;
@@ -295,7 +316,7 @@ public class NotaTotal extends Trabajo {
 	 * Calcula la nota total que se consigue juntando todos los examenes clasicos
 	 * y su porcentaje de peso en la nota final
 	 * 
-	 * @return devolverá la nota de los examenes clásicos con decimales
+	 * @return devolverÃ¡ la nota de los examenes clï¿½sicos con decimales
 	 */
 	public double calcularNotaTotalExClasico() {
 		double notaTotalExClasico = 0.0;
@@ -314,10 +335,10 @@ public class NotaTotal extends Trabajo {
 	
 	
 	/**
-	 * Nos dirá si todos los trabajos han sido entregado y si ha sido dentro del plazo
-	 * de 5 dias como máximo de retraso
+	 * Nos dirÃ¡ si todos los trabajos han sido entregado y si ha sido dentro del plazo
+	 * de 5 dias como mÃ¡ximo de retraso
 	 * 
-	 * @return devolverá false en caso de que se hayan entregado todos los trabajos a tiempo
+	 * @return devolverÃ¡ false en caso de que se hayan entregado todos los trabajos a tiempo
 	 */
 	public boolean getTrabajosEntregadosATiempo() {
 		for (int i = 0; i < NUM_TRABAJOS; i++) {
@@ -330,9 +351,9 @@ public class NotaTotal extends Trabajo {
 	
 	
 	/**
-	 * Sumará la cantidad total de dias de retraso en la entraga de los trabajos
+	 * SumarÃ¡ la cantidad total de dias de retraso en la entraga de los trabajos
 	 * 
-	 * @return devolverá la cantidad total de dias de retraso de todos los tabajos 
+	 * @return devolverÃ¡ la cantidad total de dias de retraso de todos los tabajos 
 	 */
 	public int getTotalDiasRetraso() {
 		int diasDeRetraso = 0;

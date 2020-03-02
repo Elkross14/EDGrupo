@@ -4,10 +4,10 @@
  * Verifica todos los datos de entrada del usuario
  *
  * Última actualización:
- * -Corrección de los comentarios
+ * -Corrección de bug en cantidadRespuestasTest
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.1.2
+ * @version 0.1.3
  */
 package clases;
 
@@ -107,12 +107,15 @@ public class VerificacionDeDatos {
      * @param respuestasSinContestar Cantidad de respuestas sin contestar en el test
      * @return devolverá false en caso de no ser la cantidad correcta de respuestas.
      */
-    public boolean cantidadRespuestasTest(String respuestasCorrectas, String respuestasIncorrectas, String respuestasSinContestar) {
+    public boolean cantidadRespuestasTest(String respuestasCorrectas, String respuestasFalladas, String respuestasSinContestar) {
+    	
         int correctas = Integer.valueOf(respuestasCorrectas);
-        int incorrectas = Integer.valueOf(respuestasIncorrectas);
+        int falladas = Integer.valueOf(respuestasFalladas);
         int SinContestar = Integer.valueOf(respuestasSinContestar);
-        int total = correctas + incorrectas + SinContestar;
-        if(total == 30) {
+        
+        int total = correctas + falladas + SinContestar;
+        
+        if(total != 30) {
             return true;	//no hay un total de 30 preguntas
         }
         

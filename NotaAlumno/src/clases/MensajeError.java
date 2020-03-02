@@ -4,11 +4,11 @@
  * Contiene todos los mensajes de error que usará el programa
  * 
  * Última actualización:
- * - Añadido el mensaje de error sumaTotal
- * - Añadido el mensaje de error notaIncorrecta
+ * - Cambiado notaIncorrecta de warning a error
+ * - Cambiado sumaTotal de warning a error
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.1.4
+ * @version 0.1.5
  */
 
 package clases;
@@ -16,8 +16,12 @@ package clases;
 
 import javax.swing.JOptionPane;
 
+import registroDeValores.NotaTotal;
+
 
 public class MensajeError extends javax.swing.JFrame {
+	
+	NotaTotal notaTotal = new NotaTotal();
     
 	
 	/**
@@ -160,11 +164,11 @@ public class MensajeError extends javax.swing.JFrame {
 	 * 
 	 * @param exam Nombre del examen con preguntas de más.
 	 */
-    public void sumaTotal(String exam) {
+    public void errorSumaTotal(String exam) {
         JOptionPane.showMessageDialog(this,
-            "El total de preguntas del " + exam + " colocadas es superior al máximo.",
+            "El total de preguntas del " + exam + " colocadas\n no son un total del "+notaTotal.getNUM_PREGUNTAS_TEST()+".",
             "Preguntas de mas",
-            JOptionPane.WARNING_MESSAGE);
+            JOptionPane.ERROR_MESSAGE);
     }
     
     
@@ -173,11 +177,11 @@ public class MensajeError extends javax.swing.JFrame {
 	 * 
 	 * @param exam Nombre del examen con la nota que no sea valida.
 	 */
-    public void notaIncorrecta(String exam) {
+    public void errorNotaIncorrecta(String exam) {
         JOptionPane.showMessageDialog(this,
             "La nota del " + exam + " no es valida.",
             "Nota incorrecta",
-            JOptionPane.WARNING_MESSAGE);
+            JOptionPane.ERROR_MESSAGE);
     }
 }
 
