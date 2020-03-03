@@ -4,11 +4,10 @@
  * Contiene todos los mensajes de error que usará el programa
  * 
  * Última actualización:
- * - Cambiado notaIncorrecta de warning a error
- * - Cambiado sumaTotal de warning a error
+ * - Eliminado los mensajes de número entero y double
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.1.5
+ * @version 0.1.6
  */
 
 package clases;
@@ -60,32 +59,6 @@ public class MensajeError extends javax.swing.JFrame {
                 "Se ha superado el maximo de caracteres en el campo " + campo + ".",
                 "Campo excedido",
                 JOptionPane.WARNING_MESSAGE);
-    }
-
-    
-    /**
-     * Saltará un ERROR_MESSAGE en caso de que no sea un número entero
-     * 
-     * @param campo Nombre del campo con el error de entrada de número entero
-     */
-    public void errorNumEnt(String campo) {
-        JOptionPane.showMessageDialog(this,
-            "No es valido nada que no sea numeros enteros en " + campo,
-            "Error numerico Entero",
-            JOptionPane.ERROR_MESSAGE);
-    }
-    
-    
-    /**
-     * Saltará un ERROR_MESSAGE en caso de que no sea un número decimal
-     * 
-     * @param campo Nombre del campo con el error de entrada de número decimal
-     */
-    public void errorNumDouble(String campo) {
-        JOptionPane.showMessageDialog(this,
-                "No es valido nada que no sea numeros en el campo " + campo + ".",
-                "Error numerico",
-                JOptionPane.ERROR_MESSAGE);
     }
     
     

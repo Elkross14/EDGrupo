@@ -5,14 +5,12 @@
  * datos necesarios.
  * 
  * Última actualización: 
- * - Modificado el método verificarEntradaExClasico para mayor escalabilidad
- * - Ahora se muestran todos los datos por pantalla
- * - Cuando se entra en un flied se selecciona automaticamente todo su interior
+ * - Modificado el sistema de verificación de datos
  *
  * Nota: Mirar las comprobaciones para ponerlas en el orden optimo
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.1.4
+ * @version 0.1.5
  */
 
 package interfazGrafica;
@@ -39,6 +37,8 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class VentanaNotas extends JFrame {
 
@@ -249,6 +249,12 @@ public class VentanaNotas extends JFrame {
 		lblClasico1.setBounds(15, 181, 114, 14);
 		
 		fieldClasico1 = new JTextField();
+		fieldClasico1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				limitarEntradaNumerosDecimales(e, fieldClasico1.getText());
+			}
+		});
 		fieldClasico1.setBounds(145, 181, 86, 20);
 		fieldClasico1.setColumns(10);
 		fieldClasico1.addFocusListener(new FullSelectorListener());
@@ -258,6 +264,12 @@ public class VentanaNotas extends JFrame {
 		lblClasico2.setBounds(15, 212, 114, 14);
 		
 		fieldClasico2 = new JTextField();
+		fieldClasico2.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				limitarEntradaNumerosDecimales(e, fieldClasico2.getText());
+			}
+		});
 		fieldClasico2.setBounds(145, 212, 86, 20);
 		fieldClasico2.setColumns(10);
 		fieldClasico2.addFocusListener(new FullSelectorListener());
@@ -267,6 +279,12 @@ public class VentanaNotas extends JFrame {
 		lblClasico3.setBounds(15, 243, 114, 14);
 		
 		fieldClasico3 = new JTextField();
+		fieldClasico3.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				limitarEntradaNumerosDecimales(e, fieldClasico3.getText());
+			}
+		});
 		fieldClasico3.setBounds(145, 243, 86, 20);
 		fieldClasico3.setColumns(10);
 		fieldClasico3.addFocusListener(new FullSelectorListener());
@@ -280,6 +298,12 @@ public class VentanaNotas extends JFrame {
 		lblNewLabel.setBounds(15, 44, 86, 14);
 		
 		fieldCorrectasTest1 = new JTextField();
+		fieldCorrectasTest1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				limitarEntradaNumeros(e);
+			}
+		});
 		fieldCorrectasTest1.setBounds(105, 41, 110, 20);
 		fieldCorrectasTest1.setColumns(10);
 		fieldCorrectasTest1.addFocusListener(new FullSelectorListener());
@@ -289,6 +313,12 @@ public class VentanaNotas extends JFrame {
 		lblNewLabel_1.setBounds(15, 75, 86, 14);
 		
 		fieldFalladasTest1 = new JTextField();
+		fieldFalladasTest1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				limitarEntradaNumeros(e);
+			}
+		});
 		fieldFalladasTest1.setBounds(105, 72, 110, 20);
 		fieldFalladasTest1.setColumns(10);
 		fieldFalladasTest1.addFocusListener(new FullSelectorListener());
@@ -298,11 +328,23 @@ public class VentanaNotas extends JFrame {
 		lblSinContestar.setBounds(15, 106, 86, 14);
 		
 		fieldSinContestarTest1 = new JTextField();
+		fieldSinContestarTest1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				limitarEntradaNumeros(e);
+			}
+		});
 		fieldSinContestarTest1.setBounds(105, 103, 110, 20);
 		fieldSinContestarTest1.setColumns(10);
 		fieldSinContestarTest1.addFocusListener(new FullSelectorListener());
 		
 		fieldSinContestarTest2 = new JTextField();
+		fieldSinContestarTest2.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				limitarEntradaNumeros(e);
+			}
+		});
 		fieldSinContestarTest2.setBounds(389, 103, 107, 20);
 		fieldSinContestarTest2.setColumns(10);
 		fieldSinContestarTest2.addFocusListener(new FullSelectorListener());
@@ -316,11 +358,23 @@ public class VentanaNotas extends JFrame {
 		lblFalladas.setBounds(294, 75, 86, 14);
 		
 		fieldFalladasTest2 = new JTextField();
+		fieldFalladasTest2.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				limitarEntradaNumeros(e);
+			}
+		});
 		fieldFalladasTest2.setBounds(389, 72, 107, 20);
 		fieldFalladasTest2.setColumns(10);
 		fieldFalladasTest2.addFocusListener(new FullSelectorListener());
 		
 		fieldCorrectasTest2 = new JTextField();
+		fieldCorrectasTest2.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				limitarEntradaNumeros(e);
+			}
+		});
 		fieldCorrectasTest2.setBounds(389, 41, 107, 20);
 		fieldCorrectasTest2.setColumns(10);
 		fieldCorrectasTest2.addFocusListener(new FullSelectorListener());
@@ -437,6 +491,12 @@ public class VentanaNotas extends JFrame {
 		lblNewLabel_2.setBounds(387, 306, 91, 14);
 		
 		fieldRetrasos1 = new JTextField();
+		fieldRetrasos1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				limitarEntradaNumeros(e);
+			}
+		});
 		fieldRetrasos1.setText("0");
 		fieldRetrasos1.setBounds(488, 305, 34, 20);
 		fieldRetrasos1.setColumns(10);
@@ -447,6 +507,12 @@ public class VentanaNotas extends JFrame {
 		lblDasDeRetraso.setBounds(387, 347, 91, 14);
 		
 		fieldRetrasos2 = new JTextField();
+		fieldRetrasos2.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				limitarEntradaNumeros(e);
+			}
+		});
 		fieldRetrasos2.setText("0");
 		fieldRetrasos2.setBounds(488, 346, 34, 20);
 		fieldRetrasos2.setColumns(10);
@@ -457,6 +523,12 @@ public class VentanaNotas extends JFrame {
 		lblDasDeRetraso_1.setBounds(387, 388, 91, 14);
 				
 		fieldRetrasos3 = new JTextField();
+		fieldRetrasos3.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				limitarEntradaNumeros(e);
+			}
+		});
 		fieldRetrasos3.setText("0");
 		fieldRetrasos3.setBounds(488, 387, 34, 20);
 		fieldRetrasos3.setColumns(10);
@@ -503,6 +575,37 @@ public class VentanaNotas extends JFrame {
 	}
 	
 	
+	/**
+	 * Restringe cualquier entrada de datos que no sean números enteros
+	 * 
+	 * @param evt Entrada de cualquier valor 
+	 */
+	public void limitarEntradaNumeros (KeyEvent evt) {
+		char c = evt.getKeyChar();
+		
+		if (c < '0' || c > '9') {
+			evt.consume();
+		}
+	}
+	
+	
+	/**
+	 * Restringe cualquier entrada de datos que no sea un 
+	 * 
+	 * @param evt Entrada de cualquier valor 
+	 * @param valor Número a revisar si es de tipo double
+	 */
+	public void limitarEntradaNumerosDecimales (KeyEvent evt, String valor) {
+		char c = evt.getKeyChar();
+		
+		if (!Character.isDigit(c) && c!='.') {
+			evt.consume();
+		}
+		if (c == '.' && valor.contains(".")) {
+			evt.consume();
+		}
+	}
+	
 	
 	/**
 	 * Inicia todo el proceso para pasar los datos al servidor
@@ -520,9 +623,6 @@ public class VentanaNotas extends JFrame {
 			pasar.setVisible(true);
 			dispose();
 		}
-		else {
-			mensaje.envioIncorrecto();
-		}
 	}
 	
 	
@@ -533,9 +633,14 @@ public class VentanaNotas extends JFrame {
 	 * @param evt Click izquierzo en el botón Atrás
 	 */
 	private void btnAtrasActionPerformed(ActionEvent evt) {
-		VentanaNombre pasar = new VentanaNombre(persona, notaTotal);
-		pasar.setVisible(true);
-		dispose();
+			
+
+			recogerEntradaDatos();
+			
+			VentanaNombre pasar = new VentanaNombre(persona, notaTotal);
+			pasar.setVisible(true);
+			dispose();
+
 	}
 	
 	
@@ -650,13 +755,16 @@ public class VentanaNotas extends JFrame {
 	 * @return devolverá false en el caso de estar todo correcto
 	 */
 	public boolean verificarEntradaExTest() {
-		if(verificarEntradaInt(fieldCorrectasTest1.getText(), "Correctas Test 1")) {
+		if(verifica.campoRelleno(fieldCorrectasTest1.getText())) {
+			mensaje.vacioCampo("Correctas Test 1");
 			return true;
 		} 
-		else if(verificarEntradaInt(fieldFalladasTest1.getText(), "Falladas Test 1")){
+		else if(verifica.campoRelleno(fieldFalladasTest1.getText())){
+			mensaje.vacioCampo("Falladas Test 1");
 			return true;
 		} 
-		else if(verificarEntradaInt(fieldSinContestarTest1.getText(), "Sin Contestar Test 1")) {
+		else if(verifica.campoRelleno(fieldSinContestarTest1.getText())) {
+			mensaje.vacioCampo("Sin Contestar Test 1");
 			return true;
 		}
 		else if (verifica.cantidadRespuestasTest(fieldCorrectasTest1.getText(), fieldFalladasTest1.getText(), 
@@ -665,13 +773,16 @@ public class VentanaNotas extends JFrame {
 			mensaje.errorSumaTotal("Examen test 1");
 			return true;
 		}
-		else if(verificarEntradaInt(fieldCorrectasTest2.getText(), "Correctas Test 2")) {
+		else if(verifica.campoRelleno(fieldCorrectasTest2.getText())) {
+			mensaje.vacioCampo("Correctas Test 2");
 			return true;
 		}
-		else if(verificarEntradaInt(fieldFalladasTest2.getText(), "Falladas Test 2")){
+		else if(verifica.campoRelleno(fieldFalladasTest2.getText())){
+			mensaje.vacioCampo("Falladas Test 2");
 			return true;
 		}
-		else if(verificarEntradaInt(fieldSinContestarTest2.getText(), "Sin Contestar Test 2")) {
+		else if(verifica.campoRelleno(fieldSinContestarTest2.getText())) {
+			mensaje.vacioCampo("Sin Contestar Test 2");
 			return true;
 		}
 		else if (verifica.cantidadRespuestasTest(fieldCorrectasTest2.getText(), fieldFalladasTest2.getText(), 
@@ -732,39 +843,22 @@ public class VentanaNotas extends JFrame {
 	 */
 	public boolean verificarEntradaTrabajo() {
 		if(rdbtnEntregadoTrabajo1.isSelected()) {
-			if(verificarEntradaInt(fieldRetrasos1.getText(), "Días de retraso (Trabajo de la evaluación 1)")) {
+			if(verifica.campoRelleno(fieldRetrasos1.getText())) {
+				mensaje.vacioCampo("Días de retraso (Trabajo de la evaluación 1)");
 				return true;
 			}
 		} 
 		else if(rdbtnEntregadoTrabajo2.isSelected()) {
-			if(verificarEntradaInt(fieldRetrasos2.getText(), "Días de retraso (Trabajo de la evaluación 2)")) {
+			if(verifica.campoRelleno(fieldRetrasos2.getText())) {
+				mensaje.vacioCampo("Días de retraso (Trabajo de la evaluación 2)");
 				return true;
 			}
 		} 
 		else if(rdbtnEntregadoTrabajo3.isSelected()) {
-			if(verificarEntradaInt(fieldRetrasos3.getText(), "Días de retraso (Trabajo de la evaluación 3)")) {
+			if(verifica.campoRelleno(fieldRetrasos3.getText())) {
+				mensaje.vacioCampo("Días de retraso (Trabajo de la evaluación 3)");
 				return true;
 			}
-		}
-		return false;
-	}
-	
-	
-	/**
-	 * Verifica que cualquier dato de tipo int que se introduzca cumpla las condiciones que queremos
-	 * 
-	 * @param cadena El texto que ha introducido el usuario
-	 * @param campo Que campo se está verificando 
-	 * @return devolverá false en caso de estar todo correcto
-	 */
-	public boolean verificarEntradaInt(String cadena, String campo) {
-		if(verifica.campoRelleno(cadena)) {
-			mensaje.vacioCampo(campo);
-			return true;
-		}
-		else if(verifica.correctoInt(cadena)) {
-			mensaje.errorNumEnt(campo);
-			return true;
 		}
 		return false;
 	}
@@ -773,7 +867,6 @@ public class VentanaNotas extends JFrame {
 	/**
 	 * Hace todas las verificaciones necesárias para la nota de examen clásico.
 	 * 	-No debe de estár vacío el campo
-	 *  -Que sea de tipo numérico
 	 *  -Que esté entre el 0 y el 10. Estos incluidos
 	 * 
 	 * @param nota El texto que ha introducido el usuario
@@ -783,10 +876,6 @@ public class VentanaNotas extends JFrame {
 	public boolean verificarNotaExClasico (String nota, String examen) {
 		if(verifica.campoRelleno(nota)) {
 			mensaje.vacioCampo(examen);
-			return true;
-		}
-		else if(verifica.correctoDouble(nota)) {
-			mensaje.errorNumDouble(examen);
 			return true;
 		}
 		else if (verifica.rangoNotaEx(nota)) {

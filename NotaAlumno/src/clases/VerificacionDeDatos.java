@@ -4,48 +4,14 @@
  * Verifica todos los datos de entrada del usuario
  *
  * Última actualización:
- * -Corrección de bug en cantidadRespuestasTest
+ * -Eliminado los verificadores de int y double
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.1.3
+ * @version 0.1.4
  */
 package clases;
 
 public class VerificacionDeDatos {
-	
-	
-	/**
-	 * Verifica que el número entero esté bien introducido
-	 * 
-	 * @param cadena Entrada de un supuesto número entero
-	 * @return devolverá falso en el caso de que sea un número entero
-	 */
-    public boolean correctoInt(String cadena) {
-		try {
-			Integer.parseInt(cadena);
-			return false;	//todo correcto
-		} 
-		catch (NumberFormatException nfe){
-			return true;
-		}
-    }  
-    
-    
-    /**
-     * Verifica que el número decimal esté bien introducido
-     * 
-     * @param cadena Entrada de un supuesto número decimal
-     * @return devolverá falso en el caso de que sea un número decimal
-     */
-    public boolean correctoDouble(String cadena) {
-		try {
-			Double.parseDouble(cadena);
-			return false;	//todo correcto
-			
-		} catch (NumberFormatException nfe) {
-			return true;
-		}
-    } 
     
     
     /**
