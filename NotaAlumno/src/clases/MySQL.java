@@ -150,14 +150,14 @@ public class MySQL {
     
     
     /**
-     * Le pedimos al servidor que nos diga la cantidad total de filas que tiene una determinada tabla
+     * Le pedimos al servidor que nos diga la cantidad total de filas que tiene una determinada tabla.
      * 
      *  Comando ejemplo:  SELECT * FROM Alumnos
      * 
      * @param table_name Tabla de la que se quiere saber la cantidad de lineas
      * @return devolverá un número entero con la cantidad de lineas
      */
-    public int totalRows(String table_name) {
+    public int getTotalRows(String table_name) {
     	MySQLConnection();
     	
         int totalRows = 0;
@@ -183,7 +183,7 @@ public class MySQL {
 
     
     /**
-     * Elimina una linea de la tabla Alumno de la base de datos 
+     * Elimina una linea de la tabla Alumno de la base de datos. 
      * 
      * @param ID Identificador de la persona que se quiere eliminar
      */

@@ -4,10 +4,10 @@
  * Ventana gráfica para elegir entre varias funciones.
  * 
  * Última actualización: 
- * -Corrección de los comentarios
+ * -Limitada la entrada de alumnos a 10
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.1.2
+ * @version 0.1.3
  */
 
 package interfazGrafica;
@@ -17,6 +17,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import clases.MySQL;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -29,6 +31,8 @@ public class Menu extends JFrame {
 	private JPanel contentPane;
 	private JButton btnAñadirAlumno;
 	private JButton btnVerTabla;
+	
+	MySQL conexion = new MySQL();
 
 	/**
 	 * Launch the application.
@@ -64,6 +68,11 @@ public class Menu extends JFrame {
 		setLocationRelativeTo(null);	//vista centrada
         setResizable(false);	//evita que se pueda cambiar el tamaño de la ventana
         setTitle("Menu");	//pondrá titulo a la ventana
+        
+        //bloqueará el botón añadir alumno en caso de llegar a 10
+        if (conexion.getTotalRows("Alumnos")>=10){
+        	btnAñadirAlumno.setEnabled(false);
+        }
 	}
 	
 	
