@@ -3,11 +3,11 @@
  *
  * Almacena todos los datos necesarios de las notas.
  * 
- *Última actualización:
- * - Añadido el método getTrabajos
+ * Última actualización:
+ * - Arreglo nota negativa
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.2.3
+ * @version 0.2.4
  */
 package registroDeValores;
 
@@ -287,9 +287,16 @@ public class NotaTotal extends Trabajo {
 		for (int i = 0; i < NUM_EXAMENES_TEST; i++) {
 			
 			notaExTest = examenTestArray[i].getNota();
+			
+			if (notaExTest < 0) {
+				notaExTest = 0;
+			}
+			
 			porcentajeNotaGlobal = examenTestArray[i].getPorcNotaGlobal();
 			
 			notaTotalExText += notaExTest * (porcentajeNotaGlobal / 100);
+			
+			
 		}
 		return notaTotalExText;
 	}
