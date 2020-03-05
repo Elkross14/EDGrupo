@@ -3,11 +3,11 @@
  *
  * Almacena todos los datos necesarios de las notas.
  * 
- *Última actualización:
- * - Añadido el método getTrabajos
+ * Última actualización:
+ * - Arreglo nota negativa
  * 
  * @author Pablo Durán, Héctor García
- * @version 0.2.3
+ * @version 0.2.4
  */
 package registroDeValores;
 
@@ -22,7 +22,9 @@ public class NotaTotal extends Trabajo {
 	private final int NUM_EXAMENES_CLASICOS = 3;
 	private final int NUM_EXAMENES_TEST = 2;
 	private final int NUM_TRABAJOS = 3;
-	private final int NUM_PREGUNTAS_TEST=30;
+	private final int NUM_PREGUNTAS_TEST = 30;
+	
+	private final int MAL_POR_BIEN = 3; //numero de preguntas que tienen que estar mal para quitar una bien
 	
 	private ExamenClasico examenClasicoArray[] = new ExamenClasico[NUM_EXAMENES_CLASICOS];
 	private ExamenTest examenTestArray[] = new ExamenTest[NUM_EXAMENES_TEST];
@@ -287,9 +289,16 @@ public class NotaTotal extends Trabajo {
 		for (int i = 0; i < NUM_EXAMENES_TEST; i++) {
 			
 			notaExTest = examenTestArray[i].getNota();
+			
+			if (notaExTest < 0) {
+				notaExTest = 0;
+			}
+			
 			porcentajeNotaGlobal = examenTestArray[i].getPorcNotaGlobal();
 			
 			notaTotalExText += notaExTest * (porcentajeNotaGlobal / 100);
+			
+			
 		}
 		return notaTotalExText;
 	}
@@ -305,7 +314,7 @@ public class NotaTotal extends Trabajo {
 		
 		for (int i = 0; i < NUM_EXAMENES_TEST; i++) {
 			 puntuacion = examenTestArray[i].getCorrectas() - 
-					 (examenTestArray[i].getFalladas() / 3);
+					 (examenTestArray[i].getFalladas() / MAL_POR_BIEN);
 			 notaTest = (puntuacion * 10) / NUM_PREGUNTAS_TEST;
 			 examenTestArray[i].setNota(notaTest);
 		}
