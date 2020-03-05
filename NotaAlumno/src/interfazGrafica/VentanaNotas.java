@@ -19,7 +19,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import clases.FullSelectorListener;
+import clases.SeleccionadorCompleto;
 import clases.MensajeError;
 import clases.MySQL;
 import clases.VerificacionDeDatos;
@@ -257,7 +257,7 @@ public class VentanaNotas extends JFrame {
 		});
 		fieldClasico1.setBounds(145, 181, 86, 20);
 		fieldClasico1.setColumns(10);
-		fieldClasico1.addFocusListener(new FullSelectorListener());
+		fieldClasico1.addFocusListener(new SeleccionadorCompleto());
 		
 		JLabel lblClasico2 = new JLabel("NotaTotal Cl\u00E1sico 2:");
 		lblClasico2.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -272,7 +272,7 @@ public class VentanaNotas extends JFrame {
 		});
 		fieldClasico2.setBounds(145, 212, 86, 20);
 		fieldClasico2.setColumns(10);
-		fieldClasico2.addFocusListener(new FullSelectorListener());
+		fieldClasico2.addFocusListener(new SeleccionadorCompleto());
 		
 		JLabel lblClasico3 = new JLabel("NotaTotal Cl\u00E1sico 3:");
 		lblClasico3.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -287,7 +287,7 @@ public class VentanaNotas extends JFrame {
 		});
 		fieldClasico3.setBounds(145, 243, 86, 20);
 		fieldClasico3.setColumns(10);
-		fieldClasico3.addFocusListener(new FullSelectorListener());
+		fieldClasico3.addFocusListener(new SeleccionadorCompleto());
 		
 		JLabel lblTest1 = new JLabel("Ex. Test 1: (total max. "+notaTotal.getNUM_PREGUNTAS_TEST()+")");
 		lblTest1.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -306,7 +306,7 @@ public class VentanaNotas extends JFrame {
 		});
 		fieldCorrectasTest1.setBounds(105, 41, 110, 20);
 		fieldCorrectasTest1.setColumns(10);
-		fieldCorrectasTest1.addFocusListener(new FullSelectorListener());
+		fieldCorrectasTest1.addFocusListener(new SeleccionadorCompleto());
 		
 		JLabel lblNewLabel_1 = new JLabel("Falladas:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -321,7 +321,7 @@ public class VentanaNotas extends JFrame {
 		});
 		fieldFalladasTest1.setBounds(105, 72, 110, 20);
 		fieldFalladasTest1.setColumns(10);
-		fieldFalladasTest1.addFocusListener(new FullSelectorListener());
+		fieldFalladasTest1.addFocusListener(new SeleccionadorCompleto());
 		
 		JLabel lblSinContestar = new JLabel("Sin contestar:");
 		lblSinContestar.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -336,7 +336,7 @@ public class VentanaNotas extends JFrame {
 		});
 		fieldSinContestarTest1.setBounds(105, 103, 110, 20);
 		fieldSinContestarTest1.setColumns(10);
-		fieldSinContestarTest1.addFocusListener(new FullSelectorListener());
+		fieldSinContestarTest1.addFocusListener(new SeleccionadorCompleto());
 		
 		fieldSinContestarTest2 = new JTextField();
 		fieldSinContestarTest2.addKeyListener(new KeyAdapter() {
@@ -347,7 +347,7 @@ public class VentanaNotas extends JFrame {
 		});
 		fieldSinContestarTest2.setBounds(389, 103, 107, 20);
 		fieldSinContestarTest2.setColumns(10);
-		fieldSinContestarTest2.addFocusListener(new FullSelectorListener());
+		fieldSinContestarTest2.addFocusListener(new SeleccionadorCompleto());
 		
 		JLabel label = new JLabel("Sin contestar:");
 		label.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -366,7 +366,7 @@ public class VentanaNotas extends JFrame {
 		});
 		fieldFalladasTest2.setBounds(389, 72, 107, 20);
 		fieldFalladasTest2.setColumns(10);
-		fieldFalladasTest2.addFocusListener(new FullSelectorListener());
+		fieldFalladasTest2.addFocusListener(new SeleccionadorCompleto());
 		
 		fieldCorrectasTest2 = new JTextField();
 		fieldCorrectasTest2.addKeyListener(new KeyAdapter() {
@@ -377,7 +377,7 @@ public class VentanaNotas extends JFrame {
 		});
 		fieldCorrectasTest2.setBounds(389, 41, 107, 20);
 		fieldCorrectasTest2.setColumns(10);
-		fieldCorrectasTest2.addFocusListener(new FullSelectorListener());
+		fieldCorrectasTest2.addFocusListener(new SeleccionadorCompleto());
 		
 		JLabel label_2 = new JLabel("Correctas:");
 		label_2.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -500,7 +500,7 @@ public class VentanaNotas extends JFrame {
 		fieldRetrasos1.setText("0");
 		fieldRetrasos1.setBounds(488, 305, 34, 20);
 		fieldRetrasos1.setColumns(10);
-		fieldRetrasos1.addFocusListener(new FullSelectorListener());
+		fieldRetrasos1.addFocusListener(new SeleccionadorCompleto());
 		
 		JLabel lblDasDeRetraso = new JLabel("D\u00EDas de retraso:");
 		lblDasDeRetraso.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -516,7 +516,7 @@ public class VentanaNotas extends JFrame {
 		fieldRetrasos2.setText("0");
 		fieldRetrasos2.setBounds(488, 346, 34, 20);
 		fieldRetrasos2.setColumns(10);
-		fieldRetrasos2.addFocusListener(new FullSelectorListener());
+		fieldRetrasos2.addFocusListener(new SeleccionadorCompleto());
 		
 		JLabel lblDasDeRetraso_1 = new JLabel("D\u00EDas de retraso:");
 		lblDasDeRetraso_1.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -532,7 +532,7 @@ public class VentanaNotas extends JFrame {
 		fieldRetrasos3.setText("0");
 		fieldRetrasos3.setBounds(488, 387, 34, 20);
 		fieldRetrasos3.setColumns(10);
-		fieldRetrasos3.addFocusListener(new FullSelectorListener());
+		fieldRetrasos3.addFocusListener(new SeleccionadorCompleto());
 		
 		contentPane.setLayout(null);
 		contentPane.add(lblTest1);

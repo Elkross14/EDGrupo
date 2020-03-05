@@ -1,11 +1,11 @@
 /** 
- *<h2> Clase FullSelectorListener </h2> 
+ *<h2> Clase SeleccionadorCompleto </h2> 
  *
  * Clase que nos seleccionará automaticamente todo el texto de un jfield
  * cuando entremos a editarlo
  * 
  * Última actualización: 
- * - Clase Añadida
+ * - Nombre de clase pasada al español
  * 
  * @author Pablo Durán, Héctor García
  * @version 0.1
@@ -13,8 +13,8 @@
 
 package clases;
 
-public class FullSelectorListener extends java.awt.event.FocusAdapter {
-    public FullSelectorListener() {
+public class SeleccionadorCompleto extends java.awt.event.FocusAdapter {
+    public SeleccionadorCompleto() {
     }
     @Override
     public void focusLost(java.awt.event.FocusEvent evt) {
